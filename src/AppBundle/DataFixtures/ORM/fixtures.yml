@@ -1,0 +1,66 @@
+AppBundle\Entity\Cliente:
+    cliente_{1..25}:
+      nombreCliente: <es_ES:firstName()>
+      direccion: <es_ES:streetAddress()>
+      telefono: <es_ES:phoneNumber()>
+      email: <es_ES:email()>
+
+AppBundle\Entity\ConfiRed:
+    confired_{1..15}:
+      dominio: <domainName()>
+      mascaraRed: <randomElement($array = array('255.0.0.0', '255.255.0.0', '255.255.255.0'))>
+      ipFijaExt: <ipv4()>
+      dns1: dns1
+      dns2: '25%? dns2'
+      empresa: '@empresa*'
+
+AppBundle\Entity\Software:
+    software_{1..15}:
+      nombre: <word()>
+      usuario: <es_ES:username()>
+      password: <word()>
+      notas: <paragraph()>
+      fechaRenovacion: '<dateTimeBetween("-1 year", "+1 year")>'
+      tipo: '@tipo*'
+      empresa: '@empresa*'
+
+AppBundle\Entity\Tipo:
+    tipo_{1..5}:
+      nombre (unique): <word()>
+
+AppBundle\Entity\Router:
+    router_{1..15}:
+      ip: <ipv4()>
+      usuario: <userName()>
+      password: <password()>
+      wep: <word()>
+      empresa: '@empresa*'
+
+AppBundle\Entity\Empresa:
+    empresa_{1..25}:
+      nombre (unique): <es_ES:company()>
+      cif (unique): <regexify('[ABCDEFGHJKLMNPQRSUVW]\d{7}[0-9A-J]')>
+
+AppBundle\Entity\Servidor:
+    servidor_{1..15}:
+      nombre: <word()>
+      ip: <ipv4()>
+      detalles: <paragraph()>
+      empresa: '@empresa*'
+
+AppBundle\Entity\Usuario:
+    usuario_{1..20}:
+      nombreUsuario: <es_ES:userName()>
+      password: <password()>
+      admin: <boolean(25)>
+      tecnico: <boolean(25)>
+      servidor: '@servidor*'
+
+AppBundle\Entity\PuntoAcceso:
+    puntoacceso_{1..20}:
+      ip: <ipv4()>
+      usuario: <es_ES:userName()>
+      password: <password()>
+      wep: <word()>
+      router: '@router*'
+

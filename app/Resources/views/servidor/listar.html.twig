@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Servidor{% endblock %}
+
+{% block content %}
+    <h1>Listado de servidores</h1>
+
+    {% if servidores is not empty %}
+    <table class="table table-bordered table-hover table-striped table-responsive-sm">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>IP</th>
+                <th>Detalles</th>
+                <th>Empresa</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for servidor in servidores %}
+            <tr>
+                <td>{{ servidor.nombre }}</td>
+                <td>{{ servidor.ip }}</td>
+                <td>{{ servidor.detalles }}</td>
+                <td>{{ servidor.empresa }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No hay servidores que mostrar</p>
+    {% endif %}
+{% endblock %}

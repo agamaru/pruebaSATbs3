@@ -1,0 +1,43 @@
+// Variables
+//
+// Variables should follow the `$component-state-property-size` formula for
+// consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
+
+
+//
+// Colores
+//
+
+$azuloscuro:  #00585E !default;
+$azul:        #009494 !default;
+$amarillo:    #F5F2DC !default;
+$gris:        #454445 !default;
+$naranja:     #FF5729 !default;
+
+$colors: () !default;
+$colors: map-merge((
+  "azuloscuro": $azuloscuro,
+  "azul":       $azul,
+  "amarillo":   $amarillo,
+  "gris":       $gris,
+  "naranja":    $naranja
+), $colors);
+
+$principal:     $azul !default;
+$oscuro:        $azuloscuro !default;
+//$dark:          $azuloscuro !default;
+
+$theme-colors: () !default;
+$theme-colors: map-merge((
+  "principal":  $principal,
+  "oscuro":     $azuloscuro,
+//  "dark":       $dark
+), $theme-colors);
+
+// Fuentes
+//
+// Font, line-height, and color for body text, headings, and more.
+
+// stylelint-disable value-keyword-case
+$font-family-sans-serif:      'Fabrica';
+$font-family-base:            $font-family-sans-serif !default;

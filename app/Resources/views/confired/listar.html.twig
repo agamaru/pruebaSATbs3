@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Configuraciones de red{% endblock %}
+
+{% block content %}
+    <h1>Listado de configuraciones de redes</h1>
+
+    {% if confiRedes is not empty %}
+    <table class="table table-bordered table-hover table-striped table-responsive-sm">
+        <thead>
+            <tr>
+                <th>Dominio</th>
+                <th>Máscara de red</th>
+                <th>IP fija externa</th>
+                <th>DNS1</th>
+                <th>DNS2</th>
+                <th>Empresa</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for confi in confiRedes %}
+            <tr>
+                <td>{{ confi.dominio }}</td>
+                <td>{{ confi.mascaraRed }}</td>
+                <td>{{ confi.ipFijaExt }}</td>
+                <td>{{ confi.dns1 }}</td>
+                <td>{% if confi.dns2 %}{{ confi.dns2 }}{% endif %}</td>
+                <td>{{ confi.empresa }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No hay configuraciones que mostrar</p>
+    {% endif %}
+{% endblock %}

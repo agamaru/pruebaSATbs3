@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <header class="navbar navbar-fixed-top navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('inicio') }}">Mantresde</a>
+            </div>
+            <nav id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="{% if app.request.attributes.get('_route') starts with 'cliente' %}active{% endif %}">
+                        <a href="{{ path('cliente_listar') }}">Clientes</a>
+                    </li>
+                    <li class="{% if app.request.attributes.get('_route') starts with 'empresa' %}active{% endif %}">
+                        <a href="{{ path('empresa_listar') }}">Empresas</a>
+                    </li>
+                    <li class="{% if app.request.attributes.get('_route') starts with 'confired' %}active{% endif %}">
+                        <a href="{{ path('confired_listar') }}">ConfiRedes</a>
+                    </li>
+                    <li class="{% if app.request.attributes.get('_route') starts with 'software' %}active{% endif %}">
+                        <a href="{{ path('software_listar') }}">Softwares</a>
+                    </li>
+                    <li class="{% if app.request.attributes.get('_route') starts with 'router' %}active{% endif %}">
+                        <a href="{{ path('router_listar') }}">Routers</a>
+                    </li>
+                    <li class="{% if app.request.attributes.get('_route') starts with 'servidor' %}active{% endif %}">
+                        <a href="{{ path('servidor_listar') }}">Servidores</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            {% for mensaje in app.flashes('info') %}
+                <div class="alert alert-info">
+                    {{ mensaje }}
+                </div>
+            {% endfor %}
+            {% for mensaje in app.flashes('error') %}
+                <div class="alert alert-danger">
+                    {{ mensaje }}
+                </div>
+            {% endfor %}
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+{% endblock %}

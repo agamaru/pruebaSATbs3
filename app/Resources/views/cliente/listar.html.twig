@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Listado de clientes{% endblock %}
+
+{% block content %}
+    <h1>Listado de clientes</h1>
+
+    {% if clientes is not empty %}
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+            <tr>
+                <td>{{ cliente.nombreCliente }}</td>
+                <td>{{ cliente.direccion }}</td>
+                <td>{{ cliente.telefono }}</td>
+                <td>{{ cliente.email }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No hay clientes que mostrar</p>
+    {% endif %}
+{% endblock %}

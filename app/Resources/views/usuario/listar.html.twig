@@ -1,0 +1,40 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Usuario{% endblock %}
+
+{% block content %}
+    <h1>Listado de usuarios de servidores</h1>
+
+    {% if usuarios is not empty %}
+    <table class="table table-bordered table-hover table-striped table-responsive-sm">
+        <thead>
+            <tr>
+                <th>Nombre de usuario</th>
+                <th>Contraseña</th>
+                <th>Tipo</th>
+                <th>Servidor</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.nombreUsuario }}</td>
+                <td>{{ usuario.password }}</td>
+                <td>
+                    {% if usuario.admin %}
+                        Administrador
+                    {% elseif usuario.tecnico %}
+                        Técnico
+                    {% else %}
+                        Otro
+                    {% endif %}
+                </td>
+                <td>{{ usuario.servidor }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No hay usuarios que mostrar</p>
+    {% endif %}
+{% endblock %}

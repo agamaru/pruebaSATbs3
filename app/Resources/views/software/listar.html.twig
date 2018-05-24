@@ -1,0 +1,38 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Software{% endblock %}
+
+{% block content %}
+    <h1>Listado de softwares</h1>
+
+    {% if softwares is not empty %}
+    <table class="table table-bordered table-hover table-striped table-responsive-sm">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Usuario</th>
+                <th>Contraseña</th>
+                <th>Tipo</th>
+                <th>Fecha de renovación</th>
+                <th>Notas</th>
+                <th>Empresa</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for software in softwares %}
+            <tr>
+                <td>{{ software.nombre }}</td>
+                <td>{{ software.usuario }}</td>
+                <td>{{ software.password }}</td>
+                <td>{{ software.tipo }}</td>
+                <td>{{ software.fechaRenovacion|date('d/m/Y') }}</td>
+                <td>{% if software.notas %} {{ software.notas }} {% endif %}</td>
+                <td>{{ software.empresa }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No hay softwares que mostrar</p>
+    {% endif %}
+{% endblock %}

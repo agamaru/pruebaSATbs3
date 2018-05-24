@@ -1,0 +1,34 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Listado de empresas{% endblock %}
+
+{% block content %}
+    <h1>Listado de empresas</h1>
+
+    <a href="{{ path('empresa_nueva') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nueva empresa</a>
+
+    {% if empresas is not empty %}
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Editar</th>
+                <th>Nombre</th>
+                <th>CIF</th>
+                <th>Servicios</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for empresa in empresas %}
+            <tr>
+                <td><a href="{{ path('empresa_probar', {'id': empresa.id}) }}" title="Editar datos de la empresa"><i class="fas fa-pencil-alt"></i></a></td>
+                <td>{{ empresa.nombre }}</td>
+                <td>{{ empresa.cif }}</td>
+                <td><a href="{{ path('empresa_servicios_mostrar', {'id': empresa.id}) }}" title="Ver servicios contratados"><i class="far fa-eye"></i> </a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No hay empresas que mostrar</p>
+    {% endif %}
+{% endblock %}
