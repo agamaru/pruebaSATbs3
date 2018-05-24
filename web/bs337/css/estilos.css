@@ -5823,4 +5823,9 @@ button.close {
 main {
   padding-top: 80px; }
 
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+
 /*# sourceMappingURL=estilos.css.map */

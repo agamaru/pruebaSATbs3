@@ -3,9 +3,10 @@
 {% block title %}Listado de empresas{% endblock %}
 
 {% block content %}
-    <h1>Listado de empresas</h1>
-
-    <a href="{{ path('empresa_nueva') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nueva empresa</a>
+    <div class="encabezado">
+        <h1>Listado de empresas</h1>
+        <a href="{{ path('empresa_nueva') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nueva empresa</a>
+    </div>
 
     {% if empresas is not empty %}
     <table class="table table-bordered table-hover table-striped">
