@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\ConfiRed;
 use AppBundle\Entity\Empresa;
 use AppBundle\Form\Type\ConfiRedType;
+use AppBundle\Form\Type\EmpresaType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,25 +27,45 @@ class ConfiRedController extends Controller
     /**
      * @Route("/confired/nueva/{id}", name="confired_crear")
      */
-    public function crearAction(Request $request, Empresa $empresa)
+    public function crearAction(Request $request, Empresa $empresa = null)
     {
         $em = $this->getDoctrine()->getManager();
 
+        $tengoEmpresa = false;
+
         $confired = new ConfiRed();
+
+        if (null !== $empresa) { // si tengo la empresa, se la asigno
+            $tengoEmpresa = true;
+            $confired->setEmpresa($empresa);
+        }
+
         $em->persist($confired);
 
-        $form = $this->createForm(ConfiRedType::class, $confired, $empresa);
+        $form = $this->createForm(ConfiRedType::class, $confired, [
+            'tengoEmpresa' => $tengoEmpresa
+        ]);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             try {
                 $em->flush();
-                $this->addFlash('info', 'Cambios realizados');
-                return $this->redirectToRoute('empresa_servicios_mostrar', $empresa);
+                $this->addFlash('info', 'Cambios guardados');
+                // Esto en caso de que empresa no sea null, tendré que poner la condición después
+                //return $this->redirectToRoute('empresa_servicios_mostrar', [
+                //    'empresa' => $empresa
+                //]);
+                return $this->redirectToRoute('confired_listar');
             } catch (\Exception $e) {
                 $this->addFlash('error', 'No se han podido guardar los cambios');
             }
         }
+
+        return $this->render('confired/form.html.twig', [
+            'confired' => $confired,
+            'empresa' => $empresa,
+            'formulario' => $form->createView()
+        ]);
     }
 }

@@ -10,7 +10,8 @@ namespace AppBundle\Form\Type;
 
 
 use AppBundle\Entity\ConfiRed;
-//use AppBundle\Entity\Empresa;
+use AppBundle\Entity\Empresa;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,6 +20,13 @@ class ConfiRedType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        if (false !== $options['tengoEmpresa']) {
+            $builder
+                ->add('empresa', null, [
+                    'label' => 'Empresa',
+                    'disabled' => true
+                ]);
+        }
         $builder
             ->add('dominio', null, [
                 'label' => 'Dominio'
@@ -40,7 +48,8 @@ class ConfiRedType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => ConfiRed::class
+            'data_class' => ConfiRed::class,
+            'tengoEmpresa' => false
         ]);
     }
 }
