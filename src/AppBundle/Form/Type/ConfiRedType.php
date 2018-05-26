@@ -26,7 +26,13 @@ class ConfiRedType extends AbstractType
                     'label' => 'Empresa',
                     'disabled' => true
                 ]);
+        } else {
+            $builder
+                ->add('empresa', null, [
+                    'label' => 'Empresa'
+                ]);
         }
+
         $builder
             ->add('dominio', null, [
                 'label' => 'Dominio'

@@ -25,7 +25,8 @@ class ConfiRedController extends Controller
     }
 
     /**
-     * @Route("/confired/nueva/{id}", name="confired_crear")
+     * @Route("/confired/nueva/{id}", name="confired_nueva")
+     * @Route("/confired/nueva", name="confired_crear")
      */
     public function crearAction(Request $request, Empresa $empresa = null)
     {

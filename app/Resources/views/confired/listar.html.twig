@@ -3,7 +3,10 @@
 {% block title %}Configuraciones de red{% endblock %}
 
 {% block content %}
-    <h1>Listado de configuraciones de redes</h1>
+    <div class="encabezado">
+        <h1>Listado de configuraciones de redes</h1>
+        <a href="{{ path('confired_crear') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nueva configuración de red</a>
+    </div>
 
     {% if confiRedes is not empty %}
     <table class="table table-bordered table-hover table-striped table-responsive-sm">
