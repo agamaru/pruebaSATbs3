@@ -71,4 +71,37 @@ class ConfiRedController extends Controller
             'formulario' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/confired/editar/{id}", name="confired_editar")
+     */
+    public function editarAction(Request $request, ConfiRed $confiRed)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $tengoEmpresa = true;
+
+        $em->persist($confiRed);
+
+        $form = $this->createForm(ConfiRedType::class, $confiRed, [
+            'tengoEmpresa' => $tengoEmpresa
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                $em->flush();
+                $this->addFlash('info', 'Cambios guardados');
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'No se han podido guardar los cambios');
+            }
+            return $this->redirectToRoute('confired_listar');
+        }
+
+        return $this->render('confired/form.html.twig', [
+            'confired' => $confiRed,
+            'formulario' => $form->createView()
+        ]);
+    }
 }
