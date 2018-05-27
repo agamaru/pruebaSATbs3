@@ -59,4 +59,26 @@ class SoftwareController extends Controller
             'formulario' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/software/eliminar/{id}", name="software_eliminar")
+     */
+    public function eliminarAction(Request $request, Software $software)
+    {
+        if ($request->isMethod('POST')) {
+            $em = $this->getDoctrine()->getManager();
+            try {
+                $em->remove($software);
+                $em->flush();
+                $this->addFlash('info', 'El software ha sido eliminado');
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'No se ha podido eliminar el software');
+            }
+            return $this->redirectToRoute('software_listar');
+        }
+
+        return $this->render('software/eliminar.html.twig', [
+            'software' => $software
+        ]);
+    }
 }
