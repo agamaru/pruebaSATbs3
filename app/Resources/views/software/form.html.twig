@@ -1,0 +1,37 @@
+{% extends 'layout.html.twig' %}
+
+{% form_theme formulario 'form/form_row.html.twig' %}
+
+{% block title %}Software{% endblock %}
+
+{% block content %}
+    {#<h1>{{ software.id ? 'Datos del software ' software.nombre : 'Nuevo software' }}</h1>#}
+    {% if software.id %}
+        <h1>Datos del software {{ software.nombre }}</h1>
+    {% else %}
+        <h1>Nuevo software</h1>
+    {% endif %}
+    {# Pendiente solucionar el tema del encabezado #}
+
+    {{ form_start(formulario) }}
+    {{ form_widget(formulario) }}
+
+    <div class="form-group row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9">
+            <p>* Los campos marcados son obligatorios</p>
+            {# Lo dejo por si consigo solucionar mi problema #}
+            {% if empresa is defined and empresa is not null %}
+            <a href="{{ path('empresa_servicios_mostrar', {'id': empresa.id}) }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado de servicios de la empresa</a>
+            {% else %}
+                <a href="{{ path('software_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado de softwares</a>
+            {% endif %}
+            <button type="submit" class="btn btn-success">Guardar cambios</button>
+            {#{% if software.id %}
+                <a href="{{ path('software_eliminar', {'id': software.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
+            {% endif %}#}
+        </div>
+    </div>
+    {{ form_end(formulario) }}
+
+{% endblock %}
