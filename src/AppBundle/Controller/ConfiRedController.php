@@ -33,16 +33,16 @@ class ConfiRedController extends Controller
 
         $tengoEmpresa = false;
 
-        $confired = new ConfiRed();
+        $confiRed = new ConfiRed();
 
         if (null !== $empresa) { // si tengo la empresa, se la asigno
             $tengoEmpresa = true;
-            $confired->setEmpresa($empresa);
+            $confiRed->setEmpresa($empresa);
         }
 
-        $em->persist($confired);
+        $em->persist($confiRed);
 
-        $form = $this->createForm(ConfiRedType::class, $confired, [
+        $form = $this->createForm(ConfiRedType::class, $confiRed, [
             'tengoEmpresa' => $tengoEmpresa
         ]);
 
@@ -66,9 +66,31 @@ class ConfiRedController extends Controller
         }
 
         return $this->render('confired/form.html.twig', [
-            'confired' => $confired,
+            'confiRed' => $confiRed,
             'empresa' => $empresa,
             'formulario' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/confired/eliminar/{id}", name="confired_eliminar")
+     */
+    public function eliminarAction(Request $request, ConfiRed $confiRed)
+    {
+        if ($request->isMethod('POST')) {
+            $em = $this->getDoctrine()->getManager();
+            try {
+                $em->remove($confiRed);
+                $em->flush();
+                $this->addFlash('info', 'Configuración eliminada');
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'No se ha podido eliminar la configuración');
+            }
+            return $this->redirectToRoute('confired_listar');
+        }
+
+        return $this->render('confired/eliminar.html.twig', [
+            'confiRed' => $confiRed
         ]);
     }
 
@@ -100,8 +122,10 @@ class ConfiRedController extends Controller
         }
 
         return $this->render('confired/form.html.twig', [
-            'confired' => $confiRed,
+            'confiRed' => $confiRed,
             'formulario' => $form->createView()
         ]);
     }
+
+
 }
