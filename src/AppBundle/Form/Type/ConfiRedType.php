@@ -11,6 +11,7 @@ namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\ConfiRed;
 use AppBundle\Entity\Empresa;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,7 +29,12 @@ class ConfiRedType extends AbstractType
                 ]);
         } else {
             $builder
-                ->add('empresa', null, [
+                ->add('empresa', EntityType::class, [
+                    'class' => Empresa::class,
+                    'query_builder' => function (EntityRepository $er) {
+                        return $er->createQueryBuilder('e')
+                            ->orderBy('e.nombre');
+                    },
                     'label' => 'Empresa'
                 ]);
         }

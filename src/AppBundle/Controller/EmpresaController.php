@@ -25,7 +25,7 @@ class EmpresaController extends Controller
     /**
      * @Route("/empresa/servicios/{id}", name="empresa_servicios_mostrar")
      */
-    public function MostrarAction(Empresa $empresa)
+    public function mostrarAction(Empresa $empresa)
     {
         $softwares = $this->getDoctrine()->getRepository('AppBundle:Software')->findByEmpresa($empresa);
 

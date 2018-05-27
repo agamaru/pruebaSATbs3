@@ -5,7 +5,6 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\ConfiRed;
 use AppBundle\Entity\Empresa;
 use AppBundle\Form\Type\ConfiRedType;
-use AppBundle\Form\Type\EmpresaType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,7 +56,15 @@ class ConfiRedController extends Controller
                 //return $this->redirectToRoute('empresa_servicios_mostrar', [
                 //    'empresa' => $empresa
                 //]);
-                return $this->redirectToRoute('confired_listar');
+                if (true === $tengoEmpresa){
+                    return $this->redirectToRoute('empresa_servicios_mostrar', array(
+                        'empresa' => $empresa
+                    ));
+                } else {
+                    return $this->redirectToRoute('confired_listar');
+                    // redirige a esta y con errores, pero en realidad se guardan
+                }
+
             } catch (\Exception $e) {
                 $this->addFlash('error', 'No se han podido guardar los cambios');
             }
