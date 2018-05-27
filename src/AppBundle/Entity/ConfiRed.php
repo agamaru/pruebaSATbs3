@@ -55,7 +55,7 @@ class ConfiRed
     private $dns1;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      *
      * @var string
      */

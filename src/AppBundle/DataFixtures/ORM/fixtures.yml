@@ -11,7 +11,7 @@ AppBundle\Entity\ConfiRed:
       mascaraRed: <randomElement($array = array('255.0.0.0', '255.255.0.0', '255.255.255.0'))>
       ipFijaExt: <ipv4()>
       dns1: dns1
-      dns2: '25%? dns2'
+      dns2: dns2
       empresa: '@empresa*'
 
 AppBundle\Entity\Software:
