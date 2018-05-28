@@ -57,16 +57,17 @@
 
     <div class="panel panel-default">
         <div class="panel-heading encabezado">
-            <h3>Routers</h3>
-            <a href="{{ path('empresa_nueva') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo router</a>
+            <h3>Dispositivos de red</h3>
+            <a href="{{ path('empresa_nueva') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo dispositivo de red</a>
         </div>
         <div class="panel-body">
-            {% if routers is not empty %}
-                {% for router in routers %}
-                    <p><strong>IP del router: </strong>{{ router.ip }}</p>
+            {% if dispositivos is not empty %}
+                {% for dispositivo in dispositivos %}
+                    <p><strong>Tipo de dispositivo: </strong>{{ dispositivo.tipo }}</p>
+                    <p><strong>IP: </strong>{{ dispositivo.ip }}</p>
                 {% endfor %}
             {% else %}
-                <p>No dispone de routers.</p>
+                <p>No dispone de dispositivos de red.</p>
             {% endif %}
         </div>
     </div>

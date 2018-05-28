@@ -14,9 +14,6 @@
             </div>
             <nav id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="{% if app.request.attributes.get('_route') starts with 'cliente' %}active{% endif %}">
-                        <a href="{{ path('cliente_listar') }}">Clientes</a>
-                    </li>
                     <li class="{% if app.request.attributes.get('_route') starts with 'empresa' %}active{% endif %}">
                         <a href="{{ path('empresa_listar') }}">Empresas</a>
                     </li>
@@ -26,8 +23,8 @@
                     <li class="{% if app.request.attributes.get('_route') starts with 'software' %}active{% endif %}">
                         <a href="{{ path('software_listar') }}">Softwares</a>
                     </li>
-                    <li class="{% if app.request.attributes.get('_route') starts with 'router' %}active{% endif %}">
-                        <a href="{{ path('router_listar') }}">Routers</a>
+                    <li class="{% if app.request.attributes.get('_route') starts with 'dispositivo' %}active{% endif %}">
+                        <a href="{{ path('dispositivo_listar') }}">Dispositivos</a>
                     </li>
                     <li class="{% if app.request.attributes.get('_route') starts with 'servidor' %}active{% endif %}">
                         <a href="{{ path('servidor_listar') }}">Servidores</a>

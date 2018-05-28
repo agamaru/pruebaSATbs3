@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Router{% endblock %}
+
+{% block content %}
+    <h1>Listado de dispositivos de red</h1>
+
+    {% if dispositivos is not empty %}
+    <table class="table table-bordered table-hover table-striped table-responsive-sm">
+        <thead>
+            <tr>
+                <th>Tipo</th>
+                <th>IP</th>
+                <th>Usuario</th>
+                <th>Contraseña</th>
+                <th>WEP</th>
+                <th>Empresa</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dispositivo in dispositivos %}
+            <tr>
+                <td>{{ dispositivo.tipo }}</td>
+                <td>{{ dispositivo.ip }}</td>
+                <td>{{ dispositivo.usuario }}</td>
+                <td>{{ dispositivo.password }}</td>
+                <td>{{ dispositivo.wep }}</td>
+                <td>{{ dispositivo.empresa }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No hay dispositivos que mostrar</p>
+    {% endif %}
+{% endblock %}

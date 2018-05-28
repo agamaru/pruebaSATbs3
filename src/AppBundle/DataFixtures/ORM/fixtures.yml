@@ -68,3 +68,12 @@ AppBundle\Entity\TipoDispositivo:
     tipoDispositivo_{1..5}:
       nombre (unique): <word()>
 
+AppBundle\Entity\DispositivoRed:
+    dispositivoRed_{1..15}:
+      ip: <ipv4()>
+      usuario: <userName()>
+      password: <password()>
+      wep: <word()>
+      tipo: '@tipoDispositivo*'
+      empresa: '@empresa*'
+

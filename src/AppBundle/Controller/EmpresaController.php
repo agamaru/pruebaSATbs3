@@ -31,7 +31,7 @@ class EmpresaController extends Controller
 
         $confiRedes = $this->getDoctrine()->getRepository('AppBundle:ConfiRed')->findByEmpresa($empresa);
 
-        $routers = $this->getDoctrine()->getRepository('AppBundle:Router')->findByEmpresa($empresa);
+        $dispositivos = $this->getDoctrine()->getRepository('AppBundle:DispositivoRed')->findByEmpresa($empresa);
 
         $servidores = $this->getDoctrine()->getRepository('AppBundle:Servidor')->findByEmpresa($empresa);
 
@@ -39,7 +39,7 @@ class EmpresaController extends Controller
             'empresa' => $empresa,
             'softwares' => $softwares,
             'confiRedes' => $confiRedes,
-            'routers' => $routers,
+            'dispositivos' => $dispositivos,
             'servidores' => $servidores
         ]);
     }
