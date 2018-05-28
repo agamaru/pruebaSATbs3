@@ -21,11 +21,11 @@ AppBundle\Entity\Software:
       password: <word()>
       notas: <paragraph()>
       fechaRenovacion: '<dateTimeBetween("-1 year", "+1 year")>'
-      tipo: '@tipo*'
+      tipo: '@tipoSoftware*'
       empresa: '@empresa*'
 
-AppBundle\Entity\Tipo:
-    tipo_{1..5}:
+AppBundle\Entity\TipoSoftware:
+    tipoSoftware_{1..5}:
       nombre (unique): <word()>
 
 AppBundle\Entity\Router:

@@ -62,10 +62,10 @@ class Software
     private $notas;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tipo")
+     * @ORM\ManyToOne(targetEntity="TipoSoftware")
      * @ORM\JoinColumn(nullable=false)
      *
-     * @var Tipo
+     * @var TipoSoftware
      */
     private $tipo;
 
@@ -178,7 +178,7 @@ class Software
     }
 
     /**
-     * @return Tipo
+     * @return TipoSoftware
      */
     public function getTipo()
     {
@@ -186,7 +186,7 @@ class Software
     }
 
     /**
-     * @param Tipo $tipo
+     * @param TipoSoftware $tipo
      * @return Software
      */
     public function setTipo($tipo)

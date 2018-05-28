@@ -13,9 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="tipo")
+ * @ORM\Table(name="tipo_software")
  */
-class Tipo
+class TipoSoftware
 {
     /**
      * @ORM\Id
@@ -58,7 +58,7 @@ class Tipo
 
     /**
      * @param string $nombre
-     * @return Tipo
+     * @return TipoSoftware
      */
     public function setNombre($nombre)
     {
