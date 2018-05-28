@@ -64,3 +64,7 @@ AppBundle\Entity\PuntoAcceso:
       wep: <word()>
       router: '@router*'
 
+AppBundle\Entity\TipoDispositivo:
+    tipoDispositivo_{1..5}:
+      nombre (unique): <word()>
+
