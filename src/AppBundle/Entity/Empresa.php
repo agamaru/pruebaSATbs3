@@ -29,6 +29,12 @@ class Empresa
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotNull(
+     *     message = "El campo es obligatorio"
+     * )
+     * @Assert\NotBlank(
+     *     message = "El campo es obligatorio"
+     * )
      * @Assert\Length(
      *     min = 3,
      *     minMessage = "El nombre debe tener al menos {{ limit }} caracteres"
@@ -41,6 +47,9 @@ class Empresa
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message = "El campo es obligatorio"
+     * )
      * @Assert\Regex(
      *     pattern = "/^([ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9A-J])$/",
      *     message = "El cif introducido no tiene el formato adecuado"

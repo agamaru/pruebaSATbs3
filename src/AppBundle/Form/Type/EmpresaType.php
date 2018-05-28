@@ -20,10 +20,10 @@ class EmpresaType extends AbstractType
     {
         $builder
             ->add('nombre', null, [
-                'label' => 'Nombre de la empresa'
+                'label' => 'Nombre de la empresa *'
             ])
             ->add('cif', null, [
-                'label' => 'CIF'
+                'label' => 'CIF *'
             ]);
     }
 
