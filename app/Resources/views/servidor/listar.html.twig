@@ -3,12 +3,16 @@
 {% block title %}Servidores{% endblock %}
 
 {% block content %}
-    <h1>Listado de servidores</h1>
+    <div class="encabezado">
+        <h1>Listado de servidores</h1>
+        <a href="{{ path('servidor_nuevo') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo servidor</a>
+    </div>
 
     {% if servidores is not empty %}
     <table class="table table-bordered table-hover table-striped table-responsive-sm">
         <thead>
             <tr>
+                <th></th>
                 <th>Nombre</th>
                 <th>IP</th>
                 <th>Usuario</th>
@@ -20,6 +24,7 @@
         <tbody>
             {% for servidor in servidores %}
             <tr>
+                <th><a href="{{ path('servidor_editar', {'id': servidor.id}) }}" title="Editar servidor"><i class="fas fa-pencil-alt"></i></a></th>
                 <td>{{ servidor.nombre }}</td>
                 <td>{{ servidor.ip }}</td>
                 <td>{{ servidor.usuario }}</td>
