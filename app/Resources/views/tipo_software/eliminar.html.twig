@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Eliminar{% endblock %}
+
+{% block content %}
+    <h1>Tipo de software {{ tipoSoftware.nombre }}</h1>
+
+    <div class="alert alert-warning">
+            ¿Seguro que desea eliminar este tipo? La operación no se podrá deshacer.
+    </div>
+    <form method="post">
+        <a href="{{ path('tipo_software_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado de tipos de software</a>
+        <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar tipo</button>
+    </form>
+{% endblock %}
+

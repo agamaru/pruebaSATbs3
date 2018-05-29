@@ -1,0 +1,20 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Tipo de software{% endblock %}
+
+{% block content %}
+    <div class="encabezado">
+        <h1>Tipos de software</h1>
+        <a href="{{ path('tipo_software_nuevo') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo tipo</a>
+    </div>
+
+    {% if tipos is not empty %}
+        <div class="list-group col-sm-3">
+            {% for tipo in tipos %}
+                <li class="list-group-item"><a href="{{ path('tipo_software_editar', {'id': tipo.id}) }}" title="Editar tipo"><i class="fas fa-pencil-alt"></i></a> {{ tipo.nombre }}</li>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No hay tipos que mostrar</p>
+    {% endif %}
+{% endblock %}

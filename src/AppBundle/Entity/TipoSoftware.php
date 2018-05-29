@@ -12,7 +12,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TipoSoftwareRepository")
  * @ORM\Table(name="tipo_software")
  */
 class TipoSoftware

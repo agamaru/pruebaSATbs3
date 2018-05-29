@@ -1,0 +1,35 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Tipo de software{% endblock %}
+
+{% block content %}
+    {#<h1>{{ software.id ? 'Datos del software ' software.nombre : 'Nuevo software' }}</h1>#}
+    {% if tipoSoftware.id %}
+        <h1>Datos del tipo de software</h1>
+    {% else %}
+        <h1>Nuevo tipo de software</h1>
+    {% endif %}
+    {# Pendiente solucionar el tema del encabezado #}
+
+    {{ form_start(formulario) }}
+    {{ form_widget(formulario) }}
+
+    <div class="form-group row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+            <p>* Los campos marcados son obligatorios</p>
+            {# Lo dejo por si consigo solucionar mi problema #}
+            {% if empresa is defined and empresa is not null %}
+            <a href="{{ path('empresa_servicios_mostrar', {'id': empresa.id}) }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado de servicios de la empresa</a>
+            {% else %}
+                <a href="{{ path('tipo_software_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado tipos de software</a>
+            {% endif %}
+            <button type="submit" class="btn btn-success">Guardar cambios</button>
+            {% if tipoSoftware.id %}
+                <a href="{{ path('tipo_software_eliminar', {'id': tipoSoftware.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
+            {% endif %}
+        </div>
+    </div>
+    {{ form_end(formulario) }}
+
+{% endblock %}
