@@ -1,11 +1,12 @@
-{% extends 'layout.html.twig' %}
+{% extends 'tipo_software/listar.html.twig' %}
 
-{% block title %}Mostrar{% endblock %}
-
-{% block content %}
+{% block section %}
+    <div class="encabezado">
     <h3>Softwares de tipo {{ tipoSoftware.nombre }}</h3>
 
     <a href="{{ path('tipo_software_editar', {'id': tipoSoftware.id}) }}" title="Editar tipo" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
+    {# Pendiente de solucionar el atributo title cuando le añades al enlace la clase btn #}
+    </div>
 
     {% if softwares is not empty %}
         <table class="table table-bordered table-hover table-striped table-responsive-sm">

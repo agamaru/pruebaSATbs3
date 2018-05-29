@@ -5,6 +5,11 @@
   src: url("../fonts/Fabrica/Fabrica.otf"); }
 
 /* end font */
+.list-group-center {
+  margin-bottom: 20px;
+  padding-left: 0;
+  text-align: center; }
+
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.

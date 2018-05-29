@@ -8,17 +8,19 @@
         <a href="{{ path('tipo_software_nuevo') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo tipo</a>
     </div>
 
+
     {% if tipos is not empty %}
-        <div class="list-group col-sm-3">
+        <div class="list-group-center col-sm-3">
             {% for tipo in tipos %}
-                <li class="list-group-item"><a href="{{ path('tipo_software_editar', {'id': tipo.id}) }}" title="Editar tipo"><i class="fas fa-pencil-alt"></i></a> {{ tipo.nombre }}</li>
+                <a class="list-group-item" href="{{ path('tipo_software_mostrar', {'id': tipo.id}) }}">{{ tipo.nombre }}</a>
             {% endfor %}
         </div>
-        <div class="col-sm9">
+        <div class="col-sm-9">
             {% block section %}{% endblock %}
         </div>
     {% else %}
         <p>No hay tipos que mostrar</p>
     {% endif %}
+
 
 {% endblock %}

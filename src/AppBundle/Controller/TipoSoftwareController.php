@@ -27,13 +27,14 @@ class TipoSoftwareController extends Controller
      */
     public function mostrarAction(TipoSoftware $tipoSoftware)
     {
-        //$tipos = $this->getDoctrine()->getRepository('AppBundle:TipoSoftware')->findAllOrderedByNombre();
+        $tipos = $this->getDoctrine()->getRepository('AppBundle:TipoSoftware')->findAllOrderedByNombre();
 
         $softwares = $this->getDoctrine()->getRepository('AppBundle:Software')->findByTipo($tipoSoftware);
 
         return $this->render('tipo_software/mostrar.html.twig', [
             'tipoSoftware' => $tipoSoftware,
-            'softwares' => $softwares
+            'softwares' => $softwares,
+            'tipos' => $tipos
         ]);
     }
 
