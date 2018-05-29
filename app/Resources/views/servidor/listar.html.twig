@@ -1,6 +1,6 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Servidor{% endblock %}
+{% block title %}Servidores{% endblock %}
 
 {% block content %}
     <h1>Listado de servidores</h1>
@@ -11,6 +11,8 @@
             <tr>
                 <th>Nombre</th>
                 <th>IP</th>
+                <th>Usuario</th>
+                <th>Contraseña</th>
                 <th>Detalles</th>
                 <th>Empresa</th>
             </tr>
@@ -20,6 +22,8 @@
             <tr>
                 <td>{{ servidor.nombre }}</td>
                 <td>{{ servidor.ip }}</td>
+                <td>{{ servidor.usuario }}</td>
+                <td>{{ servidor.pass }}</td>
                 <td>{{ servidor.detalles }}</td>
                 <td>{{ servidor.empresa }}</td>
             </tr>

@@ -5,6 +5,27 @@ AppBundle\Entity\Cliente:
       telefono: <es_ES:phoneNumber()>
       email: <es_ES:email()>
 
+AppBundle\Entity\PuntoAcceso:
+    puntoacceso_{1..20}:
+      ip: <ipv4()>
+      usuario: <es_ES:userName()>
+      password: <password()>
+      wep: <word()>
+      router: '@router*'
+
+AppBundle\Entity\Router:
+    router_{1..15}:
+      ip: <ipv4()>
+      usuario: <userName()>
+      password: <password()>
+      wep: <word()>
+      empresa: '@empresa*'
+
+AppBundle\Entity\Empresa:
+    empresa_{1..25}:
+      nombre (unique): <es_ES:company()>
+      cif (unique): <regexify('[ABCDEFGHJKLMNPQRSUVW]\d{7}[0-9A-J]')>
+
 AppBundle\Entity\ConfiRed:
     confired_{1..15}:
       dominio: <domainName()>
@@ -28,41 +49,14 @@ AppBundle\Entity\TipoSoftware:
     tipoSoftware_{1..5}:
       nombre (unique): <word()>
 
-AppBundle\Entity\Router:
-    router_{1..15}:
-      ip: <ipv4()>
-      usuario: <userName()>
-      password: <password()>
-      wep: <word()>
-      empresa: '@empresa*'
-
-AppBundle\Entity\Empresa:
-    empresa_{1..25}:
-      nombre (unique): <es_ES:company()>
-      cif (unique): <regexify('[ABCDEFGHJKLMNPQRSUVW]\d{7}[0-9A-J]')>
-
 AppBundle\Entity\Servidor:
     servidor_{1..15}:
       nombre: <word()>
       ip: <ipv4()>
+      usuario: <es_ES:userName()>
+      pass: <password()>
       detalles: <paragraph()>
       empresa: '@empresa*'
-
-AppBundle\Entity\Usuario:
-    usuario_{1..20}:
-      nombreUsuario: <es_ES:userName()>
-      password: <password()>
-      admin: <boolean(25)>
-      tecnico: <boolean(25)>
-      servidor: '@servidor*'
-
-AppBundle\Entity\PuntoAcceso:
-    puntoacceso_{1..20}:
-      ip: <ipv4()>
-      usuario: <es_ES:userName()>
-      password: <password()>
-      wep: <word()>
-      router: '@router*'
 
 AppBundle\Entity\TipoDispositivo:
     tipoDispositivo_{1..5}:

@@ -41,6 +41,20 @@ class Servidor
     private $ip;
 
     /**
+     * @ORM\Column(type="string")
+     *
+     * @var string
+     */
+    private $usuario;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @var string
+     */
+    private $pass;
+
+    /**
      * @ORM\Column(type="text")
      *
      * @var string
@@ -103,6 +117,42 @@ class Servidor
     public function setIp($ip)
     {
         $this->ip = $ip;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * @param string $usuario
+     * @return Servidor
+     */
+    public function setUsuario($usuario)
+    {
+        $this->usuario = $usuario;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPass()
+    {
+        return $this->pass;
+    }
+
+    /**
+     * @param string $pass
+     * @return Servidor
+     */
+    public function setPass($pass)
+    {
+        $this->pass = $pass;
         return $this;
     }
 
