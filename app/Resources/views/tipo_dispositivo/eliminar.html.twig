@@ -1,0 +1,13 @@
+{% extends 'tipo_dispositivo/listar.html.twig' %}
+
+{% block section %}
+    <h3>Eliminar el tipo de dispositivo {{ tipoDispositivo.nombre }}</h3>
+
+    <div class="alert alert-warning">
+            ¿Seguro que desea eliminar este tipo? La operación no se podrá deshacer.
+    </div>
+    <form method="post">
+        <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar tipo</button>
+    </form>
+{% endblock %}
+

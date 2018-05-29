@@ -1,0 +1,30 @@
+{% extends 'tipo_dispositivo/listar.html.twig' %}
+
+{% block section %}
+    <div class="encabezado">
+        <h3>Dispositivos de tipo {{ tipoDispositivo.nombre }}</h3>
+
+        <a href="{{ path('tipo_dispositivo_editar', {'id': tipoDispositivo.id}) }}" title="Editar tipo" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
+    </div>
+
+    {% if dispositivos is not empty %}
+        <table class="table table-bordered table-hover table-striped table-responsive-sm">
+            <thead>
+            <tr>
+                <th>IP</th>
+                <th>Empresa</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for dispositivo in dispositivos %}
+                <tr>
+                    <td>{{ dispositivo.ip }}</td>
+                    <td>{{ dispositivo.empresa }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No se han encontrado dispositivos de este tipo</p>
+    {% endif %}
+{% endblock %}

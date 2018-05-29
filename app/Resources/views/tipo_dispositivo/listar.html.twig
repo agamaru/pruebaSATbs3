@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Tipo de dispositivo{% endblock %}
+
+{% block content %}
+    <div class="encabezado">
+        <h1>Tipos de dispositivo</h1>
+        <a href="{{ path('tipo_dispositivo_nuevo') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo tipo</a>
+    </div>
+
+
+    {% if tipos is not empty %}
+        <div class="list-group-center col-sm-3">
+            {% for tipo in tipos %}
+                <a class="list-group-item" href="{{ path('tipo_dispositivo_mostrar', {'id': tipo.id}) }}">{{ tipo.nombre }}</a>
+            {% endfor %}
+        </div>
+        <div class="col-sm-9">
+            {% block section %}{% endblock %}
+        </div>
+    {% else %}
+        <p>No hay tipos que mostrar</p>
+    {% endif %}
+
+
+{% endblock %}
