@@ -1,13 +1,11 @@
-{% extends 'layout.html.twig' %}
+{% extends 'tipo_software/listar.html.twig' %}
 
-{% block title %}Tipo de software{% endblock %}
-
-{% block content %}
+{% block section %}
     {#<h1>{{ software.id ? 'Datos del software ' software.nombre : 'Nuevo software' }}</h1>#}
     {% if tipoSoftware.id %}
-        <h1>Datos del tipo de software</h1>
+        <h3>Datos del tipo de software</h3>
     {% else %}
-        <h1>Nuevo tipo de software</h1>
+        <h3>Nuevo tipo de software</h3>
     {% endif %}
     {# Pendiente solucionar el tema del encabezado #}
 

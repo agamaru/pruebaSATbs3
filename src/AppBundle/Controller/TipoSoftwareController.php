@@ -44,6 +44,8 @@ class TipoSoftwareController extends Controller
      */
     public function crearAction(Request $request, TipoSoftware $tipoSoftware = null)
     {
+        $tipos = $this->getDoctrine()->getRepository('AppBundle:TipoSoftware')->findAllOrderedByNombre();
+
         $em = $this->getDoctrine()->getManager();
 
         if (null === $tipoSoftware) {
@@ -66,6 +68,7 @@ class TipoSoftwareController extends Controller
         }
 
         return $this->render('tipo_software/form.html.twig', [
+            'tipos' => $tipos,
             'tipoSoftware' => $tipoSoftware,
             'formulario' => $form->createView()
         ]);
