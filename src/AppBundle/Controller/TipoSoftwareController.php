@@ -11,25 +11,30 @@ use Symfony\Component\HttpFoundation\Request;
 class TipoSoftwareController extends Controller
 {
     /**
-     * @Route("/tipos/software/listado", name="tipo_software_listar")
-     * @Route("/tipos/software/{id}", name="tipo_software_mostrar")
+     * @Route("/tipos/software", name="tipo_software_listar")
      */
-    public function listarAction(TipoSoftware $tipoSoftware = null)
+    public function listarAction()
     {
         $tipos = $this->getDoctrine()->getRepository('AppBundle:TipoSoftware')->findAllOrderedByNombre();
 
-        if (null === $tipoSoftware) {
             return $this->render('tipo_software/listar.html.twig', [
                 'tipos' => $tipos
             ]);
-        } else {
-            $softwares = $this->getDoctrine()->getRepository('AppBundle:Software')->findByTipo($tipoSoftware);
+    }
 
-            return $this->render('tipo_software/mostrar.html.twig', [
-                'tipoSoftware' => $tipoSoftware,
-                'softwares' => $softwares
-            ]);
-        }
+    /**
+     * @Route("/tipo/software/{id}", name="tipo_software_mostrar")
+     */
+    public function mostrarAction(TipoSoftware $tipoSoftware)
+    {
+        //$tipos = $this->getDoctrine()->getRepository('AppBundle:TipoSoftware')->findAllOrderedByNombre();
+
+        $softwares = $this->getDoctrine()->getRepository('AppBundle:Software')->findByTipo($tipoSoftware);
+
+        return $this->render('tipo_software/mostrar.html.twig', [
+            'tipoSoftware' => $tipoSoftware,
+            'softwares' => $softwares
+        ]);
     }
 
     /**
