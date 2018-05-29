@@ -14,7 +14,11 @@
                 <li class="list-group-item"><a href="{{ path('tipo_software_editar', {'id': tipo.id}) }}" title="Editar tipo"><i class="fas fa-pencil-alt"></i></a> {{ tipo.nombre }}</li>
             {% endfor %}
         </div>
+        <div class="col-sm9">
+            {% block section %}{% endblock %}
+        </div>
     {% else %}
         <p>No hay tipos que mostrar</p>
     {% endif %}
+
 {% endblock %}

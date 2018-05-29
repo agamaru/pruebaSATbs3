@@ -10,6 +10,7 @@ namespace AppBundle\Repository;
 
 
 use AppBundle\Entity\Empresa;
+use AppBundle\Entity\TipoSoftware;
 use Doctrine\ORM\EntityRepository;
 
 class SoftwareRepository extends EntityRepository
@@ -19,6 +20,15 @@ class SoftwareRepository extends EntityRepository
         return $this->createQueryBuilder('s')
             ->where('s.empresa = :empresa')
             ->setParameter('empresa', $empresa)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByTipo(TipoSoftware $tipoSoftware)
+    {
+        return $this->createQueryBuilder('s')
+            ->where('s.tipo = :tipo')
+            ->setParameter('tipo', $tipoSoftware)
             ->getQuery()
             ->getResult();
     }

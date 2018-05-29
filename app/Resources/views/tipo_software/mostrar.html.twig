@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Mostrar{% endblock %}
+
+{% block content %}
+    <h3>Softwares de tipo {{ tipoSoftware.nombre }}</h3>
+
+    <a href="{{ path('tipo_software_editar', {'id': tipoSoftware.id}) }}" title="Editar tipo" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
+
+    {% if softwares is not empty %}
+        <table class="table table-bordered table-hover table-striped table-responsive-sm">
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Fecha de renovación</th>
+                <th>Empresa</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for software in softwares %}
+                <tr>
+                    <td>{{ software.nombre }}</td>
+                    <td>{{ software.fechaRenovacion|date('d/m/Y') }}</td>
+                    <td>{{ software.empresa }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hay softwares que mostrar</p>
+    {% endif %}
+{% endblock %}
