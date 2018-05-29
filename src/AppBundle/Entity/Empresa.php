@@ -29,9 +29,6 @@ class Empresa
 
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotNull(
-     *     message = "El campo es obligatorio"
-     * )
      * @Assert\NotBlank(
      *     message = "El campo es obligatorio"
      * )
@@ -39,7 +36,6 @@ class Empresa
      *     min = 3,
      *     minMessage = "El nombre debe tener al menos {{ limit }} caracteres"
      * )
-     * @Assert\NotNull()
      *
      * @var string
      */

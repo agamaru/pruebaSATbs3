@@ -3,12 +3,16 @@
 {% block title %}Router{% endblock %}
 
 {% block content %}
-    <h1>Listado de dispositivos de red</h1>
+    <div class="encabezado">
+        <h1>Listado de dispositivos de red</h1>
+        <a href="{{ path('dispositivo_nuevo') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo dispositivo</a>
+    </div>
 
     {% if dispositivos is not empty %}
     <table class="table table-bordered table-hover table-striped table-responsive-sm">
         <thead>
             <tr>
+                <th></th>
                 <th>Tipo</th>
                 <th>IP</th>
                 <th>Usuario</th>
@@ -20,6 +24,7 @@
         <tbody>
             {% for dispositivo in dispositivos %}
             <tr>
+                <td><a href="{{ path('dispositivo_editar', {'id': dispositivo.id}) }}" title="Editar dispositivo"><i class="fas fa-pencil-alt"></i></a></td>
                 <td>{{ dispositivo.tipo }}</td>
                 <td>{{ dispositivo.ip }}</td>
                 <td>{{ dispositivo.usuario }}</td>
