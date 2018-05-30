@@ -1,16 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: elsiore
- * Date: 20/05/18
- * Time: 14:15
- */
 
 namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraints as MyAssert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\EmpresaRepository")
@@ -46,6 +41,8 @@ class Empresa
      * @Assert\NotBlank(
      *     message = "El campo es obligatorio"
      * )
+     *
+     * @MyAssert\Cif
      *
      * @var string
      */
