@@ -36,7 +36,5 @@ class EmpresaRepository extends EntityRepository
             ->setParameter('empresa', $empresa)
             ->execute();
 
-        $this->getEntityManager()->remove($empresa);
-
     }
 }

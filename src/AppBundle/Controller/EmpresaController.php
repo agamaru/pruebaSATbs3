@@ -109,8 +109,12 @@ class EmpresaController extends Controller
     public function eliminarAction(Request $request, Empresa $empresa)
     {
         if ($request->isMethod('POST')) {
+            $em = $this->getDoctrine()->getManager();
             try {
                 $this->getDoctrine()->getRepository('AppBundle:Empresa')->delete($empresa);
+
+                $em->remove($empresa);
+                $em->flush();
 
                 // primero hay que eliminar el servicio en otras tablas con las que esté relacionada la entidad
                // foreach($valoraciones as $valoracion) {

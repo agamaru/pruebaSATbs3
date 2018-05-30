@@ -3,7 +3,10 @@
 {% block title %}Servicios{% endblock %}
 
 {% block content %}
-    <h1>Servicios de la empresa {{ empresa.nombre }} </h1>
+    <div class="encabezado">
+        <h1>Servicios de la empresa {{ empresa.nombre }} </h1>
+        <a href="{{ path('empresa_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado de empresas</a>
+    </div>
 
     <div class="panel panel-default">
         <div class="panel-heading encabezado">
