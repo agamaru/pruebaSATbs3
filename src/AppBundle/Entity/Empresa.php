@@ -46,10 +46,6 @@ class Empresa
      * @Assert\NotBlank(
      *     message = "El campo es obligatorio"
      * )
-     * @Assert\Regex(
-     *     pattern = "/^([ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9A-J])$/",
-     *     message = "El cif introducido no tiene el formato adecuado"
-     * )
      *
      * @var string
      */
@@ -102,7 +98,7 @@ class Empresa
      */
     public function setCif($cif)
     {
-        $this->cif = $cif;
+        $this->cif = strtoupper($cif);
         return $this;
     }
 
