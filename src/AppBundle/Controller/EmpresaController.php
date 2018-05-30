@@ -103,5 +103,37 @@ class EmpresaController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/empresa/eliminar/{id}", name="empresa_eliminar")
+     */
+    public function eliminarAction(Request $request, Empresa $empresa)
+    {
+        if ($request->isMethod('POST')) {
+            try {
+                $this->getDoctrine()->getRepository('AppBundle:Empresa')->delete($empresa);
+
+                // primero hay que eliminar el servicio en otras tablas con las que esté relacionada la entidad
+               // foreach($valoraciones as $valoracion) {
+               //     $em->remove($valoracion);
+               // };
+               // foreach($solicitudes as $solicitud) {
+               //     $em->remove($solicitud);
+               // };
+
+                // ya podemos eliminar la entidad
+               // $em->remove($servicio);
+               // $em->flush();
+                $this->addFlash('info', 'Empresa eliminada');
+                return $this->redirectToRoute('empresa_listar');
+            }
+            catch (\Exception $e) {
+                $this->addFlash('error', 'No se ha podido eliminar la empresa');
+            }
+        }
+
+        return $this->render('empresa/eliminar.html.twig', [
+            'empresa' => $empresa
+        ]);
+    }
 
 }
