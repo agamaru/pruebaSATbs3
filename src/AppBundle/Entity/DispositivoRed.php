@@ -1,15 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: elsiore
- * Date: 28/05/18
- * Time: 19:16
- */
 
 namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\DispositivoRedRepository")
@@ -28,6 +23,13 @@ class DispositivoRed
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message = "Rellene este campo"
+     * )
+     * @Assert\Ip(
+     *     version="all",
+     *     message="La ip introducida no es válida"
+     * )
      *
      * @var string
      */
@@ -35,6 +37,15 @@ class DispositivoRed
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message = "Rellene este campo"
+     * )
+     * @Assert\Length(
+     *     min = 3,
+     *     max = 30,
+     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres",
+     *     maxMessage = "El campo no puede tener más de {{ limit }} caracteres"
+     * )
      *
      * @var string
      */
@@ -42,6 +53,15 @@ class DispositivoRed
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message = "Rellene este campo"
+     * )
+     * @Assert\Length(
+     *     min = 6,
+     *     max = 30,
+     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres",
+     *     maxMessage = "El campo no puede tener más de {{ limit }} caracteres"
+     * )
      *
      * @var string
      */
@@ -49,6 +69,15 @@ class DispositivoRed
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message = "Rellene este campo"
+     * )
+     * @Assert\Length(
+     *     min = 6,
+     *     max = 30,
+     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres",
+     *     maxMessage = "El campo no puede tener más de {{ limit }} caracteres"
+     * )
      *
      * @var string
      */
@@ -57,6 +86,9 @@ class DispositivoRed
     /**
      * @ORM\ManyToOne(targetEntity="TipoDispositivo")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull(
+     *     message = "Rellene este campo"
+     * )
      *
      * @var TipoDispositivo
      */
@@ -65,6 +97,9 @@ class DispositivoRed
     /**
      * @ORM\ManyToOne(targetEntity="Empresa")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull(
+     *     message = "Rellene este campo"
+     * )
      *
      * @var Empresa
      */
