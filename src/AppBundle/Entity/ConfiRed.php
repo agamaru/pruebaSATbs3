@@ -1,19 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: elsiore
- * Date: 17/05/18
- * Time: 19:56
- */
 
 namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ConfiRedRepository")
  * @ORM\Table(name="confi_red")
+ *
  */
 class ConfiRed
 {
@@ -28,6 +24,19 @@ class ConfiRed
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message = "Rellene este campo"
+     * )
+     * @Assert\Length(
+     *     min = 4,
+     *     max = 60,
+     *     minMessage = "El dominio debe tener al menos {{ limit }} caracteres",
+     *     maxMessage = "El dominio no puede tener más de {{ limit }} caracteres"
+     * )
+     * @Assert\Regex(
+     *     pattern = "/^([a-z]){1}([a-z0-9]{3,}).([a-z]{2,4})/",
+     *     message = "El dominio introducido no tiene el formato adecuado"
+     * )
      *
      * @var string
      */
@@ -35,6 +44,13 @@ class ConfiRed
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message = "Rellene este campo"
+     * )
+     * @Assert\Ip(
+     *     version="all",
+     *     message="La máscara de red introducida no es válida"
+     * )
      *
      * @var string
      */
@@ -42,6 +58,13 @@ class ConfiRed
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message = "Rellene este campo"
+     * )
+     * @Assert\Ip(
+     *     version="all",
+     *     message="La ip introducida no es válida"
+     * )
      *
      * @var string
      */
@@ -49,6 +72,13 @@ class ConfiRed
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message = "Rellene este campo"
+     * )
+     * @Assert\Ip(
+     *     version="all",
+     *     message="El dns introducido no es válido"
+     * )
      *
      * @var string
      */
@@ -56,6 +86,13 @@ class ConfiRed
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message = "Rellene este campo"
+     * )
+     * @Assert\Ip(
+     *     version="all",
+     *     message="El dns introducido no es válido"
+     * )
      *
      * @var string
      */
@@ -64,6 +101,9 @@ class ConfiRed
     /**
      * @ORM\ManyToOne(targetEntity="Empresa")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull(
+     *     message="Rellene este campo"
+     * )
      *
      * @var Empresa
      */

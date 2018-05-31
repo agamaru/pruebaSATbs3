@@ -35,7 +35,7 @@ class TipoSoftware
      *     maxMessage = "El nombre no puede tener más de {{ limit }} caracteres"
      * )
      * @Assert\Regex(
-     *     pattern = "/^([a-zA-Z]){3,}/",
+     *     pattern = "/^([a-zA-Z]){2,}/",
      *     message = "El nombre introducido no tiene el formato adecuado"
      * )
      *

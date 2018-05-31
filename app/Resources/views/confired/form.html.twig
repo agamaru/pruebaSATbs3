@@ -6,7 +6,7 @@
     <h1>{{ confiRed.id ? confiRed.dominio : 'Nueva configuración de red' }}</h1>
     {# Pendiente solucionar el tema del encabezado #}
 
-    {{ form_start(formulario) }}
+    {{ form_start(formulario, {'attr': {'novalidate': 'novalidate'}}) }}
     {{ form_widget(formulario) }}
 
     <div class="form-group row">
