@@ -1,15 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: elsiore
- * Date: 19/05/18
- * Time: 18:46
- */
 
 namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\SoftwareRepository")
@@ -28,6 +23,15 @@ class Software
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message = "Rellene este campo"
+     * )
+     * @Assert\Length(
+     *     min = 3,
+     *     max = 50,
+     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres",
+     *     maxMessage = "El campo no puede tener más de {{ limit }} caracteres"
+     * )
      *
      * @var string
      */
@@ -35,6 +39,15 @@ class Software
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message = "Rellene este campo"
+     * )
+     * @Assert\Length(
+     *     min = 3,
+     *     max = 30,
+     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres",
+     *     maxMessage = "El campo no puede tener más de {{ limit }} caracteres"
+     * )
      *
      * @var string
      */
@@ -42,6 +55,15 @@ class Software
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message = "Rellene este campo"
+     * )
+     * @Assert\Length(
+     *     min = 6,
+     *     max = 30,
+     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres",
+     *     maxMessage = "El campo no puede tener más de {{ limit }} caracteres"
+     * )
      *
      * @var string
      */
@@ -49,6 +71,13 @@ class Software
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank(
+     *     message = "Rellene este campo"
+     * )
+     * @Assert\GreaterThan(
+     *     "today",
+     *     message="La fecha de renovación no puede ser inferior a la fecha actual"
+     * )
      *
      * @var \DateTime
      */
@@ -64,6 +93,9 @@ class Software
     /**
      * @ORM\ManyToOne(targetEntity="TipoSoftware")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull(
+     *     message = "Rellene este campo"
+     * )
      *
      * @var TipoSoftware
      */
@@ -72,6 +104,9 @@ class Software
     /**
      * @ORM\ManyToOne(targetEntity="Empresa")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull(
+     *     message = "Rellene este campo"
+     * )
      *
      * @var Empresa
      */
