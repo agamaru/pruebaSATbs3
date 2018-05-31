@@ -26,23 +26,54 @@ class CifValidator extends ConstraintValidator
 
     }
 
-    public function validarFomatoCif($cif)
+    private function validarFomatoCif($cif)
     {
-        //$resultado = false;
+        $resultado = false;
 
-        //if (1 === preg_match("/^([ABCDEFGHJKLMNPQRSUVW]{1})(\d{7})([0-9A-J]{1})$/", $cif)) {
+        if (1 === preg_match("/^([ABCDEFGHJKLMNPQRSUVW]{1})(\d{7})([0-9A-J]{1})$/", $cif)) {
+            $resultado = $this->comprobarCaracterControl($cif);
+        }
 
-        //}
+        return $resultado;
 
-        //return $resultado;
+        //return 1 === preg_match("/^([ABCDEFGHJKLMNPQRSUVW]{1})(\d{7})([0-9A-J]{1})$/", $cif);
 
-        return 1 === preg_match("/^([ABCDEFGHJKLMNPQRSUVW]{1})(\d{7})([0-9A-J]{1})$/", $cif);
+    }
 
+    private function comprobarCaracterControl($cif)
+    {
+        $cadenaControl = 'JABCDEFGHI';
+        $caracter = substr($cif, 8, 1);
+        $n = $this->calcularModulo($cif);
+        $control = substr($cadenaControl, $n, 1);
+        $coincide = false;
+
+        switch (true) {
+            case (1 === preg_match("/^([NPQSW])$/", $cif) || (substr($cif, 1, 1)) == 0 && substr($cif, 2, 1) == 0):
+                // $caracter tiene que ser una letra y corresponderse con la de la posición obtenida en el cálculo del módulo
+                if ($caracter === $control) {
+                    $coincide = true;
+                }
+                break;
+            case (1 === preg_match("/^([ABEH])$/", $cif)):
+                // Si empieza por ABEH tiene que ser un número y corresponderse con el obtenido en el cálculo del módulo
+                if ($caracter == $n) {
+                    $coincide = true;
+                }
+                break;
+            default:
+                // En cualquier otro caso, puede ser un número o una letra, pero corresponderse con el control o con n
+                if ($caracter == $control || $caracter == $n) {
+                    $coincide = true;
+                }
+
+        }
+
+        return $coincide;
     }
 
     private function calcularModulo($cif)
     {
-        $arrayControl = 'JABCDEFGHI';
         $par = 0;
         $impar = 0;
         $sumatoria = 0;
@@ -63,6 +94,6 @@ class CifValidator extends ConstraintValidator
         if ($modulo != 0) {
             $modulo = 10 - $modulo;
         }
-        return array("$modulo", substr($arrayControl, $modulo, 1));
+        return $modulo;
     }
 }
