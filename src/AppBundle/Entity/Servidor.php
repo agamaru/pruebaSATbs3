@@ -1,15 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: elsiore
- * Date: 20/05/18
- * Time: 15:08
- */
 
 namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ServidorRepository")
@@ -28,6 +23,15 @@ class Servidor
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message = "Rellene este campo"
+     * )
+     * @Assert\Length(
+     *     min = 3,
+     *     max = 30,
+     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres",
+     *     maxMessage = "El campo no puede tener más de {{ limit }} caracteres"
+     * )
      *
      * @var string
      */
@@ -35,6 +39,13 @@ class Servidor
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message = "Rellene este campo"
+     * )
+     * @Assert\Ip(
+     *     version="all",
+     *     message="La ip introducida no es válida"
+     * )
      *
      * @var string
      */
@@ -42,6 +53,15 @@ class Servidor
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message = "Rellene este campo"
+     * )
+     * @Assert\Length(
+     *     min = 3,
+     *     max = 30,
+     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres",
+     *     maxMessage = "El campo no puede tener más de {{ limit }} caracteres"
+     * )
      *
      * @var string
      */
@@ -49,6 +69,15 @@ class Servidor
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message = "Rellene este campo"
+     * )
+     * @Assert\Length(
+     *     min = 6,
+     *     max = 30,
+     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres",
+     *     maxMessage = "El campo no puede tener más de {{ limit }} caracteres"
+     * )
      *
      * @var string
      */
@@ -56,6 +85,13 @@ class Servidor
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(
+     *     message = "Rellene este campo"
+     * )
+     * @Assert\Length(
+     *     min = 3,
+     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres"
+     * )
      *
      * @var string
      */
@@ -64,6 +100,9 @@ class Servidor
     /**
      * @ORM\ManyToOne(targetEntity="Empresa")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull(
+     *     message = "Rellene este campo"
+     * )
      *
      * @var Empresa
      */
