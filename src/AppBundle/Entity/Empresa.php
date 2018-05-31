@@ -4,12 +4,15 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as MyAssert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\EmpresaRepository")
  * @ORM\Table(name="empresa")
+ * @UniqueEntity("nombre", message="Ya existe una empresa con ese nombre")
+ * @UniqueEntity("cif", message="Ya existe una empresa con ese cif")
  */
 class Empresa
 {
@@ -25,11 +28,13 @@ class Empresa
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank(
-     *     message = "El campo es obligatorio"
+     *     message = "Rellene este campo"
      * )
      * @Assert\Length(
      *     min = 3,
-     *     minMessage = "El nombre debe tener al menos {{ limit }} caracteres"
+     *     max = 50,
+     *     minMessage = "El nombre debe tener al menos {{ limit }} caracteres",
+     *     maxMessage = "El nombre no puede tener más de {{ limit }} caracteres"
      * )
      *
      * @var string
@@ -39,9 +44,12 @@ class Empresa
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank(
-     *     message = "El campo es obligatorio"
+     *     message = "Rellene este campo"
      * )
-     *
+     * @Assert\Length(
+     *     max=9,
+     *     maxMessage = "El cif no puede tener más de {{ limit }} caracteres"
+     * )
      * @MyAssert\Cif
      *
      * @var string

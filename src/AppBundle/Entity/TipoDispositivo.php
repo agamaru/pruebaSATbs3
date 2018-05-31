@@ -1,20 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: elsiore
- * Date: 20/05/18
- * Time: 7:44
- */
 
 namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\TipoDispositivoRepository")
  * @ORM\Table(name="tipo_dispositivo")
+ * @UniqueEntity("nombre", message="Ya existe un tipo de dispositivo con ese nombre")
  */
 class TipoDispositivo
 {
@@ -29,6 +26,19 @@ class TipoDispositivo
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message = "Rellene este campo"
+     * )
+     * @Assert\Length(
+     *     min = 3,
+     *     max = 30,
+     *     minMessage = "El nombre debe tener al menos {{ limit }} caracteres",
+     *     maxMessage = "El nombre no puede tener más de {{ limit }} caracteres"
+     * )
+     * @Assert\Regex(
+     *     pattern = "/^([a-zA-Z]){3,}/",
+     *     message = "El nombre introducido no tiene el formato adecuado"
+     * )
      *
      * @var string
      */

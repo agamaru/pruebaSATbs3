@@ -1,19 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: elsiore
- * Date: 20/05/18
- * Time: 7:44
- */
 
 namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\TipoSoftwareRepository")
  * @ORM\Table(name="tipo_software")
+ * @UniqueEntity("nombre", message="Ya existe un tipo de software con ese nombre")
  */
 class TipoSoftware
 {
@@ -28,6 +25,19 @@ class TipoSoftware
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message = "Rellene este campo"
+     * )
+     * @Assert\Length(
+     *     min = 3,
+     *     max = 30,
+     *     minMessage = "El nombre debe tener al menos {{ limit }} caracteres",
+     *     maxMessage = "El nombre no puede tener más de {{ limit }} caracteres"
+     * )
+     * @Assert\Regex(
+     *     pattern = "/^([a-zA-Z]){3,}/",
+     *     message = "El nombre introducido no tiene el formato adecuado"
+     * )
      *
      * @var string
      */
