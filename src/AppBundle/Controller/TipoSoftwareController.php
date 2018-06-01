@@ -57,14 +57,19 @@ class TipoSoftwareController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            try {
-                $em->flush();
-                $this->addFlash('info', 'Cambios guardados');
-            } catch (\Exception $e) {
-                $this->addFlash('error', 'No se han podido guardar los cambios');
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                try {
+                    $em->flush();
+                    $this->addFlash('info', 'Cambios guardados');
+                } catch (\Exception $e) {
+                    $this->addFlash('error', 'No se han podido guardar los cambios');
+                }
+                return $this->redirectToRoute('tipo_software_listar');
             }
-            return $this->redirectToRoute('tipo_software_listar');
+            else {
+                $em->refresh($tipoSoftware);
+            }
         }
 
         return $this->render('tipo_software/form.html.twig', [
