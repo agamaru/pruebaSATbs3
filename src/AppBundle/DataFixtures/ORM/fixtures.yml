@@ -1,18 +1,3 @@
-AppBundle\Entity\Cliente:
-    cliente_{1..25}:
-      nombreCliente: <es_ES:firstName()>
-      direccion: <es_ES:streetAddress()>
-      telefono: <es_ES:phoneNumber()>
-      email: <es_ES:email()>
-
-AppBundle\Entity\PuntoAcceso:
-    puntoacceso_{1..20}:
-      ip: <ipv4()>
-      usuario: <es_ES:userName()>
-      password: <password()>
-      wep: <word()>
-      router: '@router*'
-
 AppBundle\Entity\Router:
     router_{1..15}:
       ip: <ipv4()>
@@ -35,6 +20,10 @@ AppBundle\Entity\ConfiRed:
       dns2: dns2
       empresa: '@empresa*'
 
+AppBundle\Entity\TipoSoftware:
+    tipoSoftware_{1..5}:
+      nombre (unique): <word()>
+
 AppBundle\Entity\Software:
     software_{1..15}:
       nombre: <word()>
@@ -44,10 +33,6 @@ AppBundle\Entity\Software:
       fechaRenovacion: '<dateTimeBetween("-1 year", "+1 year")>'
       tipo: '@tipoSoftware*'
       empresa: '@empresa*'
-
-AppBundle\Entity\TipoSoftware:
-    tipoSoftware_{1..5}:
-      nombre (unique): <word()>
 
 AppBundle\Entity\Servidor:
     servidor_{1..15}:
