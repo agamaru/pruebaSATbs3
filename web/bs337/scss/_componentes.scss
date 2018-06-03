@@ -1,0 +1,23 @@
+// List-group
+
+.list-group-center {
+    // No need to set list-style: none; since .list-group-item is block level
+    margin-bottom: 20px;
+    padding-left: 0; // reset padding because ul and ol
+    text-align: center;
+}
+
+// Panels
+
+// Buttons
+
+.my-btncolor{
+    color: $blanco;
+    background-color: $verde;
+    padding: 0.5em 1em;
+    border-style: none;
+    border: 2px solid $verde;
+    &:hover{
+        background-color: darken($verde, 10%);
+    }    
+} 

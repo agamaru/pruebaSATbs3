@@ -3,7 +3,7 @@
 {% block title %}Servicios{% endblock %}
 
 {% block content %}
-    <div class="encabezado">
+    <div class="well encabezado">
         <h1>Servicios de la empresa {{ empresa.nombre }} </h1>
         <a href="{{ path('empresa_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado de empresas</a>
     </div>
@@ -13,17 +13,32 @@
             <h3>Softwares</h3>
             <a href="{{ path('empresa_nueva') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo software</a>
         </div>
-        <div class="panel-body">
+
             {% if softwares is not empty %}
-                {% for software in softwares %}
-                    <p><strong>Nombre: </strong>{{ software.nombre }}</p>
-                    <p><strong>Tipo: </strong>{{ software.tipo }}</p>
-                    <p><strong>Fecha de renovación: </strong>{{ software.fechaRenovacion|date('d/m/Y') }}</p>
-                {% endfor %}
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Fecha de renovación</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for software in softwares %}
+                        <tr>
+                            <td>{{ software.nombre }}</td>
+                            <td>{{ software.tipo }}</td>
+                            <td>{{ software.fechaRenovacion|date('d/m/Y') }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             {% else %}
+        <div class="panel-body">
                 <p>No dispone de softwares instalados.</p>
-            {% endif %}
         </div>
+            {% endif %}
+
     </div>
 
     <div class="panel panel-default">
@@ -31,15 +46,26 @@
             <h3>Configuraciones de red</h3>
             <a href="{{ path('confired_nueva', {'id': empresa.id}) }}" class="btn btn-success"><i class="fa fa-plus"></i> Nueva configuración de red</a>
         </div>
-        <div class="panel-body">
-            {% if confiRedes is not empty %}
+        {% if confiRedes is not empty %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Dominio</th>
+                </tr>
+                </thead>
+                <tbody>
                 {% for confiRed in confiRedes %}
-                    <p><strong>Dominio: </strong>{{ confiRed.dominio }}</p>
+                    <tr>
+                        <td>{{ confiRed.dominio }}</td>
+                    </tr>
                 {% endfor %}
-            {% else %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="panel-body">
                 <p>No dispone de configuraciones de red.</p>
-            {% endif %}
-        </div>
+            </div>
+        {% endif %}
     </div>
 
     <div class="panel panel-default">
@@ -47,15 +73,27 @@
             <h3>Servidores</h3>
             <a href="{{ path('empresa_nueva') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo servidor</a>
         </div>
-        <div class="panel-body">
-            {% if servidores is not empty %}
+
+        {% if servidores is not empty %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                    </tr>
+                </thead>
+                <tbody>
                 {% for servidor in servidores %}
-                    <p><strong>Nombre del servidor: </strong>{{ servidor.nombre }}</p>
+                    <tr>
+                        <td>{{ servidor.nombre }}</td>
+                    </tr>
                 {% endfor %}
-            {% else %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="panel-body">
                 <p>No dispone de servidores.</p>
-            {% endif %}
-        </div>
+            </div>
+        {% endif %}
     </div>
 
     <div class="panel panel-default">
@@ -63,15 +101,29 @@
             <h3>Dispositivos de red</h3>
             <a href="{{ path('empresa_nueva') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo dispositivo de red</a>
         </div>
-        <div class="panel-body">
+
             {% if dispositivos is not empty %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>IP</th>
+                </tr>
+                </thead>
+                <tbody>
                 {% for dispositivo in dispositivos %}
-                    <p><strong>Tipo de dispositivo: </strong>{{ dispositivo.tipo }}</p>
-                    <p><strong>IP: </strong>{{ dispositivo.ip }}</p>
+                    <tr>
+                        <td>{{ dispositivo.tipo }}</td>
+                        <td>{{ dispositivo.ip }}</td>
+                    </tr>
                 {% endfor %}
+                </tbody>
+            </table>
             {% else %}
+        <div class="panel-body">
                 <p>No dispone de dispositivos de red.</p>
-            {% endif %}
         </div>
+            {% endif %}
+
     </div>
 {% endblock %}
