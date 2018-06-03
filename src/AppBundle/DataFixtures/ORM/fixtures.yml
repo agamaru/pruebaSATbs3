@@ -50,9 +50,18 @@ AppBundle\Entity\TipoDispositivo:
 AppBundle\Entity\DispositivoRed:
     dispositivoRed_{1..15}:
       ip: <ipv4()>
-      usuario: <userName()>
+      usuario: <es_ES:userName()>
       password: <password()>
       wep: <word()>
       tipo: '@tipoDispositivo*'
       empresa: '@empresa*'
 
+AppBundle\Entity\Usuario:
+    admin:
+      nombreUsuario: admin
+      password: admin
+      administrador: true
+    usuario_{1..9}:
+      nombreUsuario (unique): <es_ES:userName()>
+      password: <password()>
+      administrador: false

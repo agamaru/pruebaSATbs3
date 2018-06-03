@@ -1,9 +1,9 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Usuario{% endblock %}
+{% block title %}Usuarios{% endblock %}
 
 {% block content %}
-    <h1>Listado de usuarios de servidores</h1>
+    <h1>Listado de usuarios de la aplicación</h1>
 
     {% if usuarios is not empty %}
     <table class="table table-bordered table-hover table-striped table-responsive-sm">
@@ -11,8 +11,7 @@
             <tr>
                 <th>Nombre de usuario</th>
                 <th>Contraseña</th>
-                <th>Tipo</th>
-                <th>Servidor</th>
+                <th>Rol</th>
             </tr>
         </thead>
         <tbody>
@@ -21,15 +20,12 @@
                 <td>{{ usuario.nombreUsuario }}</td>
                 <td>{{ usuario.password }}</td>
                 <td>
-                    {% if usuario.admin %}
+                    {% if usuario.administrador %}
                         Administrador
-                    {% elseif usuario.tecnico %}
-                        Técnico
                     {% else %}
-                        Otro
+                        Técnico
                     {% endif %}
                 </td>
-                <td>{{ usuario.servidor }}</td>
             </tr>
             {% endfor %}
         </tbody>
