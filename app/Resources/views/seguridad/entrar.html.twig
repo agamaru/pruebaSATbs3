@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Acceso' %}
+
+{% block body %}
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3 login-form">
+            <div class="panel panel-default">
+                <div class="panel-heading-form">
+                    <h2 class="text-center">Mantresde</h2>
+                </div>
+                <div class="panel-body">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endif %}
+                    <form action="{{ path('usuario_entrar') }}" method="post" class="form" role="form">
+                        <div class="form-group">
+                            <label for="usuario">Nombre de usuario</label>
+                            <input type="text" id="usuario" name="_username" required="" class="form-control" tabindex="1"
+                                   autocorrect="off" autocapitalize="none" {% if not ultimo_usuario %}autofocus="" {% endif %}value="{{ ultimo_usuario }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <input type="password" id="password" name="_password" required="" class="form-control" tabindex="2" {% if ultimo_usuario %}autofocus="" {% endif %}>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" name="enviar" class="btn btn-primary btn-block" tabindex="3">Entrar en la aplicación</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -10,6 +10,11 @@
   padding-left: 0;
   text-align: center; }
 
+.panel-heading-form {
+  color: #FFFFFF;
+  background-color: #00585E;
+  padding: 10px 10px; }
+
 .my-btncolor {
   color: #FFFFFF;
   background-color: #689700;
@@ -5840,6 +5845,9 @@ main {
 .encabezado {
   display: flex;
   flex-direction: column; }
+
+.login-form {
+  margin-top: 2em; }
 
 @media (min-width: 992px) {
   .encabezado {

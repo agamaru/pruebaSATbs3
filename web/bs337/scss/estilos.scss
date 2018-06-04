@@ -5,6 +5,7 @@
 @import 'componentes';
 @import 'bootstrap/bootstrap';
 
+
 main{
     padding-top: 80px;
 }
@@ -12,6 +13,10 @@ main{
 .encabezado{
     display: flex;
     flex-direction: column;
+}
+
+.login-form{
+    margin-top: 2em;
 }
 
 // De 768px en adelante

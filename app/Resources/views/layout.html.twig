@@ -38,22 +38,28 @@
                         </ul>
                     </li>
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if app.user %}
+                        <p class="navbar-text">Conectado como {{ app.user }}</p>
+                        <li><a href="{{ path('usuario_salir') }}"><i class="fa fa-sign-out-alt"></i> Salir</a></li>
+                    {% else %}
+                        <li><a href="{{ path('usuario_entrar') }}"><i class="fa fa-sign-in-alt"></i> Acceder</a></li>
+                    {% endif %}
+                </ul>
             </nav>
         </div>
     </header>
-    <main>
-        <div class="container">
-            {% for mensaje in app.flashes('info') %}
-                <div class="alert alert-info">
-                    {{ mensaje }}
-                </div>
-            {% endfor %}
-            {% for mensaje in app.flashes('error') %}
-                <div class="alert alert-danger">
-                    {{ mensaje }}
-                </div>
-            {% endfor %}
-            {% block content %}{% endblock %}
-        </div>
+    <main class="container">
+        {% for mensaje in app.flashes('info') %}
+            <div class="alert alert-info">
+                {{ mensaje }}
+            </div>
+        {% endfor %}
+        {% for mensaje in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ mensaje }}
+            </div>
+        {% endfor %}
+        {% block content %}{% endblock %}
     </main>
 {% endblock %}
