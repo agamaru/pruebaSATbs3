@@ -12,6 +12,7 @@
         <link href="{{ asset('bs337/css/estilos.css') }}" rel="stylesheet">
         <link href="{{ asset('select2/dist/css/select2.min.css') }}" rel="stylesheet">
         <link href="{{ asset('select2-bootstrap-theme/dist/select2-bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('tablesorter/dist/css/theme.bootstrap_3.min.css') }}" rel="stylesheet" >
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,10 +27,12 @@
             <!-- Optional JavaScript -->
             <!-- jQuery first, then Popper.js, then Bootstrap JS -->
             <script src="{{ asset('bs337/jquery/jquery.min.js') }}"></script>
-            <script src="{{ asset('js/myjs.js') }}"></script>
             <script src="{{ asset('bs337/js/bootstrap.min.js') }}"></script>
             <script src="{{ asset('select2/dist/js/select2.js') }}"></script>
             <script src="{{ asset('select2/dist/js/i18n/es.js') }}"></script>
+            <script src="{{ asset('tablesorter/dist/js/jquery.tablesorter.min.js') }}"></script>
+            <script src="{{ asset('tablesorter/dist/js/jquery.tablesorter.widgets.min.js') }}"></script>
+            <script src="{{ asset('js/main.js') }}"></script>
         {% endblock %}
         <script type="text/javascript">
             $('select').select2({
