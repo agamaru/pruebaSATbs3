@@ -1,11 +1,72 @@
-{% extends 'layout.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}¡Bienvenido!{% endblock %}
 
 {% block content %}
-    <h1>Página principal de mi aplicación de prueba</h1>
-    <i class="fas fa-camera-retro"></i>
-    <article class="col-md-4">
+    {% block body %}
+        <header class="navbar navbar-fixed-top navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ path('inicio') }}">Mantresde</a>
+                </div>
+                <nav id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if app.user %}
+                            <li class="dropdown text-right">
+                            <a href="#"><i class="fas fa-user"></i> Conectado como {{ app.user }}</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main class="container">
+            <h1>Bienvenido</h1>
 
-    </article>
+            <article class="card">
+                <a href="{{ path('empresa_listar') }}">
+                    <div class="card-body">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="card-footer">
+                        <h4 class="text-center">Empresas</h4>
+                    </div>
+                </a>
+            </article>
+
+            <article class="card desplegable">
+                    <div class="card-body">
+                        <i class="fas fa-sitemap"></i>
+                    </div>
+                    <div class="card-footer">
+                        <h4 class="text-center">Servicios  <i id="arrow" class="fa fa-caret-down"></i></h4>
+                        <ul class="list-group text-center">
+                            <li class="list-group-item"><a href="{{ path('confired_listar') }}">Configuraciones de red</a></li>
+                            <li class="list-group-item"><a href="{{ path('dispositivo_listar') }}">Dispositivos de red</a></li>
+                            <li class="list-group-item"><a href="{{ path('servidor_listar') }}">Servidores</a></li>
+                            <li class="list-group-item"><a href="{{ path('software_listar') }}">Softwares</a></li>
+                        </ul>
+                    </div>
+            </article>
+
+            <article class="card">
+                <a href="{{ path('usuario_salir') }}">
+                    <div class="card-body">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                    <div class="card-footer">
+                        <h4 class="text-center">Salir</h4>
+                    </div>
+                </a>
+            </article>
+
+
+        </main>
+    {% endblock %}
 {% endblock %}

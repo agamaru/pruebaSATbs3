@@ -10,9 +10,9 @@
 
 
     {% if tipos is not empty %}
-        <div class="list-group-center col-sm-3">
+        <div class="list-group col-sm-3">
             {% for tipo in tipos %}
-                <a class="list-group-item" href="{{ path('tipo_dispositivo_mostrar', {'id': tipo.id}) }}">{{ tipo.nombre }}</a>
+                <a class="list-group-item text-center" href="{{ path('tipo_dispositivo_mostrar', {'id': tipo.id}) }}">{{ tipo.nombre }}</a>
             {% endfor %}
         </div>
         <div class="col-sm-9">
