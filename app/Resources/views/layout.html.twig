@@ -20,20 +20,20 @@
                     <li class="{% if app.request.attributes.get('_route') starts with 'confired' %}active{% endif %}">
                         <a href="{{ path('confired_listar') }}">ConfiRedes</a>
                     </li>
-                    <li class="{% if app.request.attributes.get('_route') starts with 'software' %}active{% endif %}">
-                        <a href="{{ path('software_listar') }}">Softwares</a>
-                    </li>
                     <li class="{% if app.request.attributes.get('_route') starts with 'dispositivo' %}active{% endif %}">
                         <a href="{{ path('dispositivo_listar') }}">Dispositivos</a>
                     </li>
                     <li class="{% if app.request.attributes.get('_route') starts with 'servidor' %}active{% endif %}">
                         <a href="{{ path('servidor_listar') }}">Servidores</a>
                     </li>
+                    <li class="{% if app.request.attributes.get('_route') starts with 'software' %}active{% endif %}">
+                        <a href="{{ path('software_listar') }}">Softwares</a>
+                    </li>
                     <li class="dropdown{% if app.request.attributes.get('_route') starts with 'tipo' %} active{% endif %}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Tipos <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ path('tipo_software_listar') }}">Tipos de software</a></li>
-                            <li role="separator" class="divider"></li>
+                            <!-- Pendiente: arreglar esto -->
                             <li><a href="{{ path('tipo_dispositivo_listar') }}">Tipos de dispositivo</a></li>
                         </ul>
                     </li>

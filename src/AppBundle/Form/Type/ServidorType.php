@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: elsiore
- * Date: 22/05/18
- * Time: 19:38
- */
 
 namespace AppBundle\Form\Type;
 
@@ -31,6 +25,7 @@ class ServidorType extends AbstractType
             $builder
                 ->add('empresa', EntityType::class, [
                     'class' => Empresa::class,
+                    'placeholder' => 'Seleccione una empresa',
                     'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('e')
                             ->orderBy('e.nombre');

@@ -3,7 +3,7 @@
 //    $(this).addClass('active');
 //});
 
-// ======== DESPLEGABLE ======= //
+/* ======== DESPLEGABLE ======= */
 
 $(".desplegable").click(function () {
     var listGroup = $(this).find(".list-group");
@@ -13,17 +13,23 @@ $(".desplegable").click(function () {
         listGroup.removeClass("open2");
         listGroup.hide();
         // cambiar el icono
-        arrowIcon.removeClass('fa-caret-up');
-        arrowIcon.addClass('fa-caret-down');
+        arrowIcon.removeClass("fa-caret-up");
+        arrowIcon.addClass("fa-caret-down");
     } else {
         // mostrar y añadir la clase open
         listGroup.addClass("open2");
         listGroup.show();
         // cambiar el icono
-        arrowIcon.removeClass('fa-caret-down');
-        arrowIcon.addClass('fa-caret-up');
+        arrowIcon.removeClass("fa-caret-down");
+        arrowIcon.addClass("fa-caret-up");
     }
 });
+
+/* ======== SELECT2 ========= */
+$("select[class!='input-sm']").select2({
+    theme: "bootstrap"
+});
+
 
 $("#myTable").tablesorter({
     widgets: ["filter"],
