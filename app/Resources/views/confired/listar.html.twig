@@ -12,25 +12,25 @@
     <table class="table table-bordered table-hover table-striped dt">
         <thead>
             <tr>
-                <th>Editar</th>
                 <th>Dominio</th>
                 <th>Máscara de red</th>
                 <th>IP fija externa</th>
                 <th>DNS1</th>
                 <th>DNS2</th>
                 <th>Empresa</th>
+                <th class="no">Editar</th>
             </tr>
         </thead>
         <tbody>
             {% for confi in confiRedes %}
             <tr>
-                <td><a href="{{ path('confired_editar', {'id': confi.id}) }}" title="Editar configuración"><i class="fas fa-pencil-alt"></i></a></td>
                 <td>{{ confi.dominio }}</td>
                 <td>{{ confi.mascaraRed }}</td>
                 <td>{{ confi.ipFijaExt }}</td>
                 <td>{{ confi.dns1 }}</td>
                 <td>{{ confi.dns2 }}</td>
                 <td>{{ confi.empresa }}</td>
+                <td><a href="{{ path('confired_editar', {'id': confi.id}) }}" title="Editar configuración"><i class="fas fa-pencil-alt"></i></a></td>
             </tr>
             {% endfor %}
         </tbody>

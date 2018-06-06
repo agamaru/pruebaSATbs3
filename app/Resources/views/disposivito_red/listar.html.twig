@@ -12,25 +12,25 @@
     <table class="table table-bordered table-hover table-striped table-responsive-sm dt">
         <thead>
             <tr>
-                <th></th>
                 <th>Tipo</th>
                 <th>IP</th>
                 <th>Usuario</th>
                 <th>Contraseña</th>
                 <th>WEP</th>
                 <th>Empresa</th>
+                <th class="no"></th>
             </tr>
         </thead>
         <tbody>
             {% for dispositivo in dispositivos %}
             <tr>
-                <td><a href="{{ path('dispositivo_editar', {'id': dispositivo.id}) }}" title="Editar dispositivo"><i class="fas fa-pencil-alt"></i></a></td>
                 <td>{{ dispositivo.tipo }}</td>
                 <td>{{ dispositivo.ip }}</td>
                 <td>{{ dispositivo.usuario }}</td>
                 <td>{{ dispositivo.password }}</td>
                 <td>{{ dispositivo.wep }}</td>
                 <td>{{ dispositivo.empresa }}</td>
+                <td><a href="{{ path('dispositivo_editar', {'id': dispositivo.id}) }}" title="Editar dispositivo"><i class="fas fa-pencil-alt"></i></a></td>
             </tr>
             {% endfor %}
         </tbody>

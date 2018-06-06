@@ -12,7 +12,6 @@
     <table class="table table-bordered table-hover table-striped table-responsive-sm dt">
         <thead>
             <tr>
-                <th></th>
                 <th>Nombre</th>
                 <th>Tipo</th>
                 <th>Usuario</th>
@@ -20,12 +19,12 @@
                 <th>Fecha de renovación</th>
                 <th>Notas</th>
                 <th>Empresa</th>
+                <th class="no"></th>
             </tr>
         </thead>
         <tbody>
             {% for software in softwares %}
             <tr>
-                <td><a href="{{ path('software_editar', {'id': software.id}) }}" title="Editar software"><i class="fas fa-pencil-alt"></i></a></td>
                 <td>{{ software.nombre }}</td>
                 <td>{{ software.tipo }}</td>
                 <td>{{ software.usuario }}</td>
@@ -33,6 +32,7 @@
                 <td>{{ software.fechaRenovacion|date('d/m/Y') }}</td>
                 <td>{% if software.notas %} {{ software.notas }} {% endif %}</td>
                 <td>{{ software.empresa }}</td>
+                <td><a href="{{ path('software_editar', {'id': software.id}) }}" title="Editar software"><i class="fas fa-pencil-alt"></i></a></td>
             </tr>
             {% endfor %}
         </tbody>

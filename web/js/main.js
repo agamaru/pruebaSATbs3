@@ -37,6 +37,13 @@ $("select[class!='input-sm']").select2({
 
 $('.dt').DataTable({
     "language": {
-        "url": "datatables/js/i18n/Spanish.lang"
-    }
+        //"url": "datatables/js/i18n/Spanish.lang" // NO funciona
+        //"url": "http://cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json" // Funciona
+        "url": "datatables/js/i18n/spanish.json"
+    },
+    "columnDefs": [ {
+        "targets": 'no',
+        "searchable": false,
+        "orderable": false
+    } ]
 });

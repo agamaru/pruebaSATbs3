@@ -12,25 +12,25 @@
     <table class="table table-bordered table-hover table-striped table-responsive-md dt">
         <thead>
             <tr>
-                <th></th>
                 <th>Nombre</th>
                 <th>IP</th>
                 <th>Usuario</th>
                 <th>Contraseña</th>
                 <th>Detalles</th>
                 <th>Empresa</th>
+                <th class="no"></th>
             </tr>
         </thead>
         <tbody>
             {% for servidor in servidores %}
             <tr>
-                <th><a href="{{ path('servidor_editar', {'id': servidor.id}) }}" title="Editar servidor"><i class="fas fa-pencil-alt"></i></a></th>
                 <td>{{ servidor.nombre }}</td>
                 <td>{{ servidor.ip }}</td>
                 <td>{{ servidor.usuario }}</td>
                 <td>{{ servidor.pass }}</td>
                 <td>{{ servidor.detalles }}</td>
                 <td>{{ servidor.empresa }}</td>
+                <th><a href="{{ path('servidor_editar', {'id': servidor.id}) }}" title="Editar servidor"><i class="fas fa-pencil-alt"></i></a></th>
             </tr>
             {% endfor %}
         </tbody>
