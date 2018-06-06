@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: elsiore
- * Date: 22/05/18
- * Time: 18:37
- */
 
 namespace AppBundle\Repository;
 
@@ -14,6 +8,14 @@ use Doctrine\ORM\EntityRepository;
 
 class EmpresaRepository extends EntityRepository
 {
+    public function findAllOrderedByNombre()
+    {
+        return $this->createQueryBuilder('e')
+            ->addOrderBy('e.nombre')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function delete(Empresa $empresa)
     {
         $this->getEntityManager()

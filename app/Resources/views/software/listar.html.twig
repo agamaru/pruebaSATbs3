@@ -8,8 +8,8 @@
         <a href="{{ path('software_nuevo') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo software</a>
     </div>
 
-    {% if softwares is not empty %}
-    <table class="table table-bordered table-hover table-striped table-responsive-sm">
+    {% if softwares is defined and softwares is not empty %}
+    <table class="table table-bordered table-hover table-striped table-responsive-sm dt">
         <thead>
             <tr>
                 <th></th>

@@ -5907,6 +5907,13 @@ button.close {
     padding-top: 60px;
     padding-bottom: 40px; } }
 
+.dropdown-menu {
+  padding-top: 0;
+  padding-bottom: 0; }
+
+.dropdown-menu > li > a {
+  padding: 3px 20px; }
+
 .panel-heading-form {
   color: #FFFFFF;
   background-color: #00585E;
@@ -5930,9 +5937,6 @@ main {
 
 .login-form {
   margin-top: 2em; }
-
-.dropdown-menu > li > a {
-  padding: 3px 20px; }
 
 @media (min-width: 992px) {
   .encabezado {

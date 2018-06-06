@@ -8,14 +8,14 @@
         <a href="{{ path('empresa_nueva') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nueva empresa</a>
     </div>
 
-    {% if empresas is not empty %}
-    <table id="myTable" class="table table-bordered table-hover table-striped tablesorter-bootstrap">
+    {% if empresas is defined and empresas is not empty %}
+    <table class="table table-bordered table-hover table-striped dt">
         <thead>
             <tr>
-                <th class="no-search"></th>
+                <th></th>
                 <th>Nombre</th>
                 <th>CIF</th>
-                <th class="no-search">Servicios</th>
+                <th>Servicios</th>
             </tr>
         </thead>
         <tbody>

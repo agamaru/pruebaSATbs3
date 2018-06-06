@@ -5,14 +5,14 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        <title>{% block title %}Base{% endblock %}</title>
+        <title>{% block title %}{% endblock %}</title>
 
         <!-- Bootstrap -->
         <link href="{{ asset('fontawesome/css/fontawesome-all.css') }}" rel="stylesheet">
         <link href="{{ asset('bs337/css/estilos.css') }}" rel="stylesheet">
         <link href="{{ asset('select2/dist/css/select2.min.css') }}" rel="stylesheet">
         <link href="{{ asset('select2-bootstrap-theme/dist/select2-bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('tablesorter/dist/css/theme.bootstrap_3.min.css') }}" rel="stylesheet" >
+        <link href="{{ asset('datatables/css/dataTables.bootstrap.css') }}" rel="stylesheet" >
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,8 +30,10 @@
             <script src="{{ asset('bs337/js/bootstrap.min.js') }}"></script>
             <script src="{{ asset('select2/dist/js/select2.js') }}"></script>
             <script src="{{ asset('select2/dist/js/i18n/es.js') }}"></script>
-            <script src="{{ asset('tablesorter/dist/js/jquery.tablesorter.min.js') }}"></script>
-            <script src="{{ asset('tablesorter/dist/js/jquery.tablesorter.widgets.min.js') }}"></script>
+            <!-- JS DataTables -->
+            <script src="{{ asset('datatables/js/jquery.dataTables.js') }}"></script>
+            <script src="{{ asset('datatables/js/dataTables.bootstrap.js') }}"></script>
+            <!--<script src="{{ asset('datatables/js/i18n/Spanish.lang') }}"></script> ERROR -->
             <script src="{{ asset('js/main.js') }}"></script>
         {% endblock %}
     </body>

@@ -8,8 +8,8 @@
         <a href="{{ path('dispositivo_nuevo') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo dispositivo</a>
     </div>
 
-    {% if dispositivos is not empty %}
-    <table class="table table-bordered table-hover table-striped table-responsive-sm">
+    {% if dispositivos is defined and dispositivos is not empty %}
+    <table class="table table-bordered table-hover table-striped table-responsive-sm dt">
         <thead>
             <tr>
                 <th></th>

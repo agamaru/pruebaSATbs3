@@ -113,6 +113,16 @@
     
 }
 
+// Dropdown
+.dropdown-menu {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.dropdown-menu > li > a {
+    padding: 3px 20px;
+}
+
 
 // List-group
 

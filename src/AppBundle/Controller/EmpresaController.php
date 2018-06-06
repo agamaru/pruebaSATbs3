@@ -15,7 +15,7 @@ class EmpresaController extends Controller
      */
     public function listarAction()
     {
-        $empresas = $this->getDoctrine()->getRepository('AppBundle:Empresa')->findAll();
+        $empresas = $this->getDoctrine()->getRepository('AppBundle:Empresa')->findAllOrderedByNombre();
 
         return $this->render('empresa/listar.html.twig', [
             'empresas' => $empresas

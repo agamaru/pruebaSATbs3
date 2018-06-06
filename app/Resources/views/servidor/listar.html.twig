@@ -8,8 +8,8 @@
         <a href="{{ path('servidor_nuevo') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo servidor</a>
     </div>
 
-    {% if servidores is not empty %}
-    <table class="table table-bordered table-hover table-striped table-responsive-sm">
+    {% if servidores is defined and servidores is not empty %}
+    <table class="table table-bordered table-hover table-striped table-responsive-md dt">
         <thead>
             <tr>
                 <th></th>

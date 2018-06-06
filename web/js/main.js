@@ -25,18 +25,18 @@ $(".desplegable").click(function () {
     }
 });
 
+
 /* ======== SELECT2 ========= */
+
 $("select[class!='input-sm']").select2({
     theme: "bootstrap"
 });
 
 
-$("#myTable").tablesorter({
-    widgets: ["filter"],
-    widgetOptions:{
-        filter_columFilters: true,
-        filter_liveSearch: {
-            '.no-search': false
-        }
+/* ======== DATATABLES ======== */
+
+$('.dt').DataTable({
+    "language": {
+        "url": "datatables/js/i18n/Spanish.lang"
     }
 });
