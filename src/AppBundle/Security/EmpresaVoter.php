@@ -12,6 +12,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class EmpresaVoter extends Voter
 {
     const VER = 'EMPRESA_VER';
+    const CREAR = 'EMPRESA_CREAR';
     const MODIFICAR = 'EMPRESA_MODIFICAR';
     const ELIMINAR = 'EMPRESA_ELIMINAR';
 
@@ -39,7 +40,7 @@ class EmpresaVoter extends Voter
         }
 
         // si el atributo no está entre los que hemos definido, devolver false
-        if (!in_array($attribute, [self::VER, self::MODIFICAR, self::ELIMINAR])) {
+        if (!in_array($attribute, [self::VER, self::CREAR, self::MODIFICAR, self::ELIMINAR])) {
             return false;
         }
 
@@ -73,6 +74,8 @@ class EmpresaVoter extends Voter
         switch ($attribute) {
             case self::VER:
                 return $this->puedeVer($subject, $token, $usuario);
+            case self::CREAR:
+                return $this->puedeCrear($token, $usuario);
             case self::MODIFICAR:
                 return $this->puedeModificar($subject, $token, $usuario);
             case self::ELIMINAR:
@@ -85,8 +88,14 @@ class EmpresaVoter extends Voter
 
     private function puedeVer(Empresa $empresa, TokenInterface $token, Usuario $usuario)
     {
-        // todos pueden ver las empresas
+        // todos (los usuarios registrados) pueden ver las empresas
         return true;
+    }
+
+    private function puedeCrear(TokenInterface $token, Usuario $usuario)
+    {
+        // sólo el administrador puede crear una empresa
+        return $this->decisionManager->decide($token, ['ROLE_ADMIN']);
     }
 
     private function puedeModificar(Empresa $empresa, TokenInterface $token, Usuario $usuario)

@@ -76,7 +76,7 @@ class EmpresaController extends Controller
 
     /**
      * @Route("/empresa/nueva", name="empresa_nueva")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('EMPRESA_CREAR')")
      */
     public function nuevaAction(Request $request)
     {

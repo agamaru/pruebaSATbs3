@@ -5,7 +5,7 @@
 {% block content %}
     <div class="well encabezado">
         <h1>Listado de empresas</h1>
-        {% if is_granted ('ROLE_ADMIN') %}
+        {% if is_granted ('EMPRESA_CREAR') %}
         <a href="{{ path('empresa_nueva') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nueva empresa</a>
         {% endif %}
     </div>
