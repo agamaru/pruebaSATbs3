@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Empresa;
 use AppBundle\Form\Type\EmpresaType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -24,6 +25,7 @@ class EmpresaController extends Controller
 
     /**
      * @Route("/empresa/servicios/{id}", name="empresa_servicios_mostrar")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function mostrarAction(Empresa $empresa)
     {
@@ -74,6 +76,7 @@ class EmpresaController extends Controller
 
     /**
      * @Route("/empresa/nueva", name="empresa_nueva")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function nuevaAction(Request $request)
     {
@@ -105,6 +108,7 @@ class EmpresaController extends Controller
 
     /**
      * @Route("/empresa/eliminar/{id}", name="empresa_eliminar")
+     * @Security("is_granted('EMPRESA_ELIMINAR', empresa)")
      */
     public function eliminarAction(Request $request, Empresa $empresa)
     {
@@ -116,17 +120,6 @@ class EmpresaController extends Controller
                 $em->remove($empresa);
                 $em->flush();
 
-                // primero hay que eliminar el servicio en otras tablas con las que esté relacionada la entidad
-               // foreach($valoraciones as $valoracion) {
-               //     $em->remove($valoracion);
-               // };
-               // foreach($solicitudes as $solicitud) {
-               //     $em->remove($solicitud);
-               // };
-
-                // ya podemos eliminar la entidad
-               // $em->remove($servicio);
-               // $em->flush();
                 $this->addFlash('info', 'Empresa eliminada');
                 return $this->redirectToRoute('empresa_listar');
             }

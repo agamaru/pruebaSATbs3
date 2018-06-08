@@ -132,9 +132,9 @@ class Usuario implements UserInterface
     {
         $roles = ['ROLE_USER'];
 
-        // si es administrador, añadimos el rol ROLE_ADMI
+        // si es administrador, añadimos el rol ROLE_ADMIN
         if ($this->isAdministrador()){
-            $roles[] = 'ROLE_AMDIN';
+            $roles[] = 'ROLE_ADMIN';
         }
 
         return $roles;

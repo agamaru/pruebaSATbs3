@@ -16,7 +16,14 @@
         <div class="col-sm-9">
             <p>* Los campos marcados son obligatorios</p>
             <a href="{{ path('empresa_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado de empresas</a>
+            {% if is_granted('EMPRESA_MODIFICAR', empresa) %}
             <button type="submit" class="btn btn-success">Guardar cambios</button>
+            {% endif %}
+            {% if empresa.id %}
+                {% if is_granted('EMPRESA_ELIMINAR', empresa)%}
+                <a href="{{ path('empresa_eliminar', {'id': empresa.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar empresa</a>
+                {% endif %}
+            {% endif %}
         </div>
     </div>
     {{ form_end(formulario) }}
