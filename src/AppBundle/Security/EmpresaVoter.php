@@ -33,9 +33,9 @@ class EmpresaVoter extends Voter
      */
     protected function supports($attribute, $subject)
     {
-        // si el sujeto no es una empresa, devolver false
+        // si el sujeto no es una empresa, devolver false solamente si no vamos a crear
         if (!$subject instanceof Empresa) {
-            return false;
+            return  $attribute === self::CREAR;
         }
 
         // si el atributo no está entre los que hemos definido, devolver false
