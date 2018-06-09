@@ -33,6 +33,8 @@ security:
             form_login:
                 login_path: usuario_entrar
                 check_path: usuario_entrar
+                always_use_default_target_path: true
+                default_target_path: inicio
 
             # Al añadir aquí el logout podemos dejar en blanco la ruta para salir de la aplicación
             logout:
