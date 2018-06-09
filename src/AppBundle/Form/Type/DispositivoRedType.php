@@ -18,8 +18,8 @@ class DispositivoRedType extends AbstractType
         if (false === $options['nuevo']) {
             $builder
                 ->add('empresa', null, [
-                    'label' => 'Empresa',
-                    'disabled' => true
+                    'label' => 'Empresa *',
+                    'disabled' => !$options['admin']
                 ]);
         } else {
             $builder
@@ -58,7 +58,8 @@ class DispositivoRedType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => DispositivoRed::class,
-            'nuevo' => false
+            'nuevo' => false,
+            'admin' => false
         ]);
     }
 }

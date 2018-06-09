@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\DispositivoRed;
 use AppBundle\Form\Type\DispositivoRedType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -12,6 +13,7 @@ class DispositivoRedController extends Controller
 {
     /**
      * @Route("/dispositivos", name="dispositivo_listar")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function listarAction()
     {
@@ -25,6 +27,7 @@ class DispositivoRedController extends Controller
     /**
      * @Route("/dispositivo/editar/nuevo", name="dispositivo_nuevo")
      * @Route("/dispositivo/editar/{id}", name="dispositivo_editar")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function crearAction(Request $request, DispositivoRed $dispositivo = null)
     {
@@ -40,6 +43,7 @@ class DispositivoRedController extends Controller
 
         $form = $this->createForm(DispositivoRedType::class, $dispositivo, [
             'nuevo' => $nuevo,
+            'admin' => $this->isGranted('ROLE_ADMIN')
         ]);
 
         $form->handleRequest($request);
@@ -62,6 +66,7 @@ class DispositivoRedController extends Controller
 
     /**
      * @Route("/dispositivo/eliminar/{id}", name="dispositivo_eliminar")
+     * @Security("is_granted('DISPOSITIVO_RED_ELIMINAR', dispositivo)")
      */
     public function eliminarAction(Request $request, DispositivoRed $dispositivo)
     {

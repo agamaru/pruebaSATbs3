@@ -5,7 +5,9 @@
 {% block content %}
     <div class="well encabezado">
         <h1>Listado de dispositivos de red</h1>
+        {% if is_granted("EMPRESA_CREAR") %}
         <a href="{{ path('dispositivo_nuevo') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo dispositivo</a>
+        {% endif %}
     </div>
 
     {% if dispositivos is defined and dispositivos is not empty %}
@@ -30,7 +32,12 @@
                 <td>{{ dispositivo.password }}</td>
                 <td>{{ dispositivo.wep }}</td>
                 <td>{{ dispositivo.empresa }}</td>
-                <td><a href="{{ path('dispositivo_editar', {'id': dispositivo.id}) }}" title="Editar dispositivo"><i class="fas fa-pencil-alt"></i></a></td>
+                <td>
+                    {% if is_granted("DISPOSITIVO_RED_EDITAR", dispositivo) %}
+                    <a href="{{ path('dispositivo_editar', {'id': dispositivo.id}) }}" title="Editar dispositivo"><i class="fas fa-pencil-alt"></i></a>
+                    {% endif %}
+                </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
