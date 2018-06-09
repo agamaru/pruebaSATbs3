@@ -18,7 +18,7 @@
                 <a href="{{ path('confired_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado de configuraciones de red</a>
             {% endif %}
             <button type="submit" class="btn btn-success">Guardar cambios</button>
-            {% if confiRed.id %}
+            {% if confiRed.id and is_granted('CONFIRED_ELIMINAR', confiRed)%}
                 <a href="{{ path('confired_eliminar', {'id': confiRed.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
             {% endif %}
         </div>

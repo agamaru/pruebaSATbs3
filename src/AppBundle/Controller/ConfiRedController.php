@@ -6,6 +6,7 @@ use AppBundle\Entity\ConfiRed;
 use AppBundle\Entity\Empresa;
 use AppBundle\Form\Type\ConfiRedType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -13,6 +14,7 @@ class ConfiRedController extends Controller
 {
     /**
      * @Route("/confiredes", name="confired_listar")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function listarAction()
     {
@@ -26,6 +28,7 @@ class ConfiRedController extends Controller
     /**
      * @Route("/confired/nueva/{id}", name="confired_nueva")
      * @Route("/confired/nueva", name="confired_crear")
+     * @Security("is_granted('CONFIRED_CREAR')")
      */
     public function crearAction(Request $request, Empresa $empresa = null)
     {
@@ -74,6 +77,7 @@ class ConfiRedController extends Controller
 
     /**
      * @Route("/confired/eliminar/{id}", name="confired_eliminar")
+     * @Security("is_granted('CONFIRED_ELIMINAR', confiRed)")
      */
     public function eliminarAction(Request $request, ConfiRed $confiRed)
     {
@@ -96,6 +100,7 @@ class ConfiRedController extends Controller
 
     /**
      * @Route("/confired/editar/{id}", name="confired_editar")
+     * @Security("is_granted('CONFIRED_EDITAR', confiRed)")
      */
     public function editarAction(Request $request, ConfiRed $confiRed)
     {
