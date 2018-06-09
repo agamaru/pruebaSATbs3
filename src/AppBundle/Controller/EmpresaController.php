@@ -13,6 +13,7 @@ class EmpresaController extends Controller
 {
     /**
      * @Route("/empresas", name="empresa_listar")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function listarAction()
     {
@@ -47,44 +48,19 @@ class EmpresaController extends Controller
     }
 
     /**
-     * @Route("/empresa/prueba/{id}", name="empresa_probar")
+     * @Route("/empresa/editar/nueva", name="empresa_nueva")
+     * @Route("/empresa/editar/{id}", name="empresa_editar")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function probarAction(Request $request, Empresa $empresa)
+    public function editarAction(Request $request, Empresa $empresa = null)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $form = $this->createForm(EmpresaType::class, $empresa);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            try {
-                $em->flush();
-                $this->addFlash('info', 'Cambios realizados');
-                return $this->redirectToRoute('empresa_listar');
-            }
-            catch (\Exception $e) {
-                $this->addFlash('error', 'No se han podido guardar los cambios');
-            }
+        if (null === $empresa) {
+            $empresa = new Empresa();
+            $em->persist($empresa);
         }
 
-        return $this->render('empresa/form.html.twig', [
-            'empresa' => $empresa,
-            'formulario' => $form->createView()
-        ]);
-    }
-
-    /**
-     * @Route("/empresa/nueva", name="empresa_nueva")
-     * @Security("is_granted('EMPRESA_CREAR')")
-     */
-    public function nuevaAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $empresa = new Empresa();
-        $em->persist($empresa);
-
         $form = $this->createForm(EmpresaType::class, $empresa);
 
         $form->handleRequest($request);
@@ -93,11 +69,11 @@ class EmpresaController extends Controller
             try {
                 $em->flush();
                 $this->addFlash('info', 'Cambios realizados');
-                return $this->redirectToRoute('empresa_listar');
             }
             catch (\Exception $e) {
                 $this->addFlash('error', 'No se han podido guardar los cambios');
             }
+            return $this->redirectToRoute('empresa_listar');
         }
 
         return $this->render('empresa/form.html.twig', [

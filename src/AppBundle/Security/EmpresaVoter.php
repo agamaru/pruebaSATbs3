@@ -13,7 +13,7 @@ class EmpresaVoter extends Voter
 {
     const VER = 'EMPRESA_VER';
     const CREAR = 'EMPRESA_CREAR';
-    const MODIFICAR = 'EMPRESA_MODIFICAR';
+    const EDITAR = 'EMPRESA_EDITAR';
     const ELIMINAR = 'EMPRESA_ELIMINAR';
 
     private $decisionManager;
@@ -40,7 +40,7 @@ class EmpresaVoter extends Voter
         }
 
         // si el atributo no está entre los que hemos definido, devolver false
-        if (!in_array($attribute, [self::VER, self::CREAR, self::MODIFICAR, self::ELIMINAR])) {
+        if (!in_array($attribute, [self::VER, self::CREAR, self::EDITAR, self::ELIMINAR])) {
             return false;
         }
 
@@ -76,8 +76,8 @@ class EmpresaVoter extends Voter
                 return $this->puedeVer($subject, $token, $usuario);
             case self::CREAR:
                 return $this->puedeCrear($token, $usuario);
-            case self::MODIFICAR:
-                return $this->puedeModificar($subject, $token, $usuario);
+            case self::EDITAR:
+                return $this->puedeEditar($subject, $token, $usuario);
             case self::ELIMINAR:
                 return $this->puedeEliminar($subject, $token, $usuario);
         }
@@ -98,7 +98,7 @@ class EmpresaVoter extends Voter
         return $this->decisionManager->decide($token, ['ROLE_ADMIN']);
     }
 
-    private function puedeModificar(Empresa $empresa, TokenInterface $token, Usuario $usuario)
+    private function puedeEditar(Empresa $empresa, TokenInterface $token, Usuario $usuario)
     {
         // sólo el administrador puede modificar una empresa
         return $this->decisionManager->decide($token, ['ROLE_ADMIN']);

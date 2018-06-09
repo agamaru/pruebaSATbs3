@@ -30,26 +30,26 @@ class ConfiRedType extends AbstractType
                         return $er->createQueryBuilder('e')
                             ->orderBy('e.nombre');
                     },
-                    'label' => 'Empresa'
+                    'label' => 'Empresa *'
 
                 ]);
         }
 
         $builder
             ->add('dominio', null, [
-                'label' => 'Dominio'
+                'label' => 'Dominio *'
             ])
             ->add('mascaraRed', null, [
-                'label' => 'Máscara de red'
+                'label' => 'Máscara de red *'
             ])
             ->add('ipFijaExt', null, [
-                'label' => 'IP fija externa'
+                'label' => 'IP fija externa *'
             ])
             ->add('dns1', null, [
-                'label' => 'DNS'
+                'label' => 'DNS1 *'
             ])
             ->add('dns2', null, [
-                'label' => 'DNS2'
+                'label' => 'DNS2 *'
             ]);
     }
 
