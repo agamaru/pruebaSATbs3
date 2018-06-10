@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Servidor;
 use AppBundle\Form\Type\ServidorType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -12,6 +13,7 @@ class ServidorController extends Controller
 {
     /**
      * @Route("/servidores", name="servidor_listar")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function listarAction()
     {
@@ -25,6 +27,7 @@ class ServidorController extends Controller
     /**
      * @Route("/servidor/editar/nuevo", name="servidor_nuevo")
      * @Route("/servidor/editar/{id}", name="servidor_editar")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function crearAction(Request $request, Servidor $servidor = null)
     {
@@ -40,6 +43,7 @@ class ServidorController extends Controller
 
         $form = $this->createForm(ServidorType::class, $servidor, [
             'nuevo' => $nuevo,
+            'admin' => $this->isGranted('ROLE_ADMIN')
         ]);
 
         $form->handleRequest($request);
@@ -62,6 +66,7 @@ class ServidorController extends Controller
 
     /**
      * @Route("/servidor/eliminar/{id}", name="servidor_eliminar")
+     * @Security("is_granted('SERVIDOR_ELIMINAR', servidor)")
      */
     public function eliminarAction(Request $request, Servidor $servidor)
     {

@@ -5,7 +5,9 @@
 {% block content %}
     <div class="well encabezado">
         <h1>Listado de servidores</h1>
+        {% if is_granted('SERVIDOR_CREAR') %}
         <a href="{{ path('servidor_nuevo') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo servidor</a>
+        {% endif %}
     </div>
 
     {% if servidores is defined and servidores is not empty %}
@@ -30,7 +32,11 @@
                 <td>{{ servidor.pass }}</td>
                 <td>{{ servidor.detalles }}</td>
                 <td>{{ servidor.empresa }}</td>
-                <th><a href="{{ path('servidor_editar', {'id': servidor.id}) }}" title="Editar servidor"><i class="fas fa-pencil-alt"></i></a></th>
+                <th>
+                    {% if is_granted('SERVIDOR_EDITAR', servidor) %}
+                    <a href="{{ path('servidor_editar', {'id': servidor.id}) }}" title="Editar servidor"><i class="fas fa-pencil-alt"></i></a>
+                    {% endif %}
+                </th>
             </tr>
             {% endfor %}
         </tbody>

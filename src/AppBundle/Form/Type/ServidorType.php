@@ -19,7 +19,7 @@ class ServidorType extends AbstractType
             $builder
                 ->add('empresa', null, [
                     'label' => 'Empresa',
-                    'disabled' => true
+                    'disabled' => !$options['admin']
                 ]);
         } else {
             $builder
@@ -57,7 +57,8 @@ class ServidorType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Servidor::class,
-            'nuevo' => false
+            'nuevo' => false,
+            'admin' => false
         ]);
     }
 }
