@@ -18,8 +18,8 @@ class SoftwareType extends AbstractType
         if (false === $options['nuevo']) {
             $builder
                 ->add('empresa', null, [
-                    'label' => 'Empresa',
-                    'disabled' => true
+                    'label' => 'Empresa *',
+                    'disabled' => !$options['admin']
                 ]);
         } else {
             $builder
@@ -61,7 +61,9 @@ class SoftwareType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Software::class,
-            'nuevo' => false
+            'nuevo' => false,
+            'admin' => false
+
         ]);
     }
 }

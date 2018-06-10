@@ -23,15 +23,23 @@ main{
     margin-top: 5px;
 }
 
-.btn {
-    display: block;
-}
+// No coge los button, aunque sean de la clase .btn
+//.btn {
+//    display: block;
+//}
+
+//button { // tampoco hace caso y ademas produce problemas
+//    display: block; 
+//}
 
 // De 768px en adelante
 @media (min-width: $screen-sm-min) {
-    .btn {
-        display: inline;
-    }
+    //.btn {
+    //    display: inline;
+    //}
+    //button {
+    //    display: inline;
+    //}
 }
 
 // De 992px en adelante

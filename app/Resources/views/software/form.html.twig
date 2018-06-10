@@ -5,20 +5,15 @@
 {% block title %}Software{% endblock %}
 
 {% block content %}
-    {#<h1>{{ software.id ? 'Datos del software ' software.nombre : 'Nuevo software' }}</h1>#}
-    {% if software.id %}
-        <h1>Datos del software {{ software.nombre }}</h1>
-    {% else %}
-        <h1>Nuevo software</h1>
-    {% endif %}
-    {# Pendiente solucionar el tema del encabezado #}
+    <div class="col-sm-9 col-sm-offset-3">
+        <h1>{{ software.id ? 'Datos del software' : 'Nuevo software' }}</h1>
+    </div>
 
     {{ form_start(formulario, {'attr': {'novalidate': 'novalidate'}}) }}
     {{ form_widget(formulario) }}
 
     <div class="form-group row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-9">
+        <div class="col-sm-9 col-sm-offset-3">
             <p>* Los campos marcados son obligatorios</p>
             {# Lo dejo por si consigo solucionar mi problema #}
             {% if empresa is defined and empresa is not null %}
@@ -26,8 +21,10 @@
             {% else %}
                 <a href="{{ path('software_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado de softwares</a>
             {% endif %}
+            {% if software.id and is_granted('SOFTWARE_EDITAR', software) %}
             <button type="submit" class="btn btn-success">Guardar cambios</button>
-            {% if software.id %}
+            {% endif %}
+            {% if software.id and is_granted('SOFTWARE_ELIMINAR', software) %}
                 <a href="{{ path('software_eliminar', {'id': software.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
             {% endif %}
         </div>

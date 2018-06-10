@@ -18,7 +18,7 @@ class ServidorType extends AbstractType
         if (false === $options['nuevo']) {
             $builder
                 ->add('empresa', null, [
-                    'label' => 'Empresa',
+                    'label' => 'Empresa *',
                     'disabled' => !$options['admin']
                 ]);
         } else {

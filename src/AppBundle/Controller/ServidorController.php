@@ -27,7 +27,7 @@ class ServidorController extends Controller
     /**
      * @Route("/servidor/editar/nuevo", name="servidor_nuevo")
      * @Route("/servidor/editar/{id}", name="servidor_editar")
-     * @Security("is_granted('ROLE_USER')")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function crearAction(Request $request, Servidor $servidor = null)
     {

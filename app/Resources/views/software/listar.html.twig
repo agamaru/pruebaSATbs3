@@ -5,7 +5,9 @@
 {% block content %}
     <div class="well encabezado">
         <h1>Listado de softwares</h1>
+        {% if is_granted('SOFTWARE_CREAR') %}
         <a href="{{ path('software_nuevo') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo software</a>
+        {% endif %}
     </div>
 
     {% if softwares is defined and softwares is not empty %}
@@ -32,7 +34,11 @@
                 <td>{{ software.fechaRenovacion|date('d/m/Y') }}</td>
                 <td>{% if software.notas %} {{ software.notas }} {% endif %}</td>
                 <td>{{ software.empresa }}</td>
-                <td><a href="{{ path('software_editar', {'id': software.id}) }}" title="Editar software"><i class="fas fa-pencil-alt"></i></a></td>
+                <td>
+                    {% if is_granted('SOFTWARE_EDITAR', software) %}
+                    <a href="{{ path('software_editar', {'id': software.id}) }}" title="Editar software"><i class="fas fa-pencil-alt"></i></a>
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
         </tbody>
