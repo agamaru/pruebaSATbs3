@@ -5,6 +5,7 @@ namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\DispositivoRed;
 use AppBundle\Entity\Empresa;
+use AppBundle\Entity\TipoDispositivo;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -35,9 +36,14 @@ class DispositivoRedType extends AbstractType
         }
 
         $builder
-            ->add('tipo', null, [
+            ->add('tipo', EntityType::class, [
+                'class' => TipoDispositivo::class,
+                'placeholder' => 'Seleccione un tipo',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('t')
+                        ->orderBy('t.nombre');
+                },
                 'label' => 'Tipo *',
-                'placeholder' => 'Seleccione un tipo'
             ])
             ->add('ip', null, [
                 'label' => 'IP *'

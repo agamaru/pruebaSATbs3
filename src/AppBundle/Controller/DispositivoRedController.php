@@ -27,7 +27,7 @@ class DispositivoRedController extends Controller
     /**
      * @Route("/dispositivo/editar/nuevo", name="dispositivo_nuevo")
      * @Route("/dispositivo/editar/{id}", name="dispositivo_editar")
-     * @Security("is_granted('ROLE_USER')")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function crearAction(Request $request, DispositivoRed $dispositivo = null)
     {

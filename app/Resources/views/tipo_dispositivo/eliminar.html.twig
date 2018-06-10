@@ -1,11 +1,19 @@
 {% extends 'tipo_dispositivo/listar.html.twig' %}
 
 {% block section %}
-    <h3>Eliminar el tipo de dispositivo {{ tipoDispositivo.nombre }}</h3>
+    <h3>Eliminar el tipo de dispositivo <strong>{{ tipoDispositivo.nombre }}</strong></h3>
 
-    <div class="alert alert-warning">
-            ¿Seguro que desea eliminar este tipo? La operación no se podrá deshacer.
-    </div>
+
+    {% if resultado > 0 %}
+        <div class="alert alert-warning">
+            <p><strong>¡Atención!</strong> Existen dispositivos de red asociados a este tipo. Por favor, asegúrese de que no existe ningún dispositivo de este tipo antes de eliminarlo.</p>
+        </div>
+    {% else %}
+        <div class="alert alert-warning">
+            <p>¿Seguro que desea eliminar este tipo de dispositivo? La operación no se podrá deshacer.</p>
+        </div>
+    {% endif %}
+
     <form method="post">
         <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar tipo</button>
     </form>

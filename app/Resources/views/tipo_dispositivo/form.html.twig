@@ -20,9 +20,8 @@
             {% if empresa is defined and empresa is not null %}
             <a href="{{ path('empresa_servicios_mostrar', {'id': empresa.id}) }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado de servicios de la empresa</a>
             {% endif %}
-
             <button type="submit" class="btn btn-success">Guardar cambios</button>
-            {% if tipoDispositivo.id %}
+            {% if tipoDispositivo.id and is_granted('TIPO_DISPOSITIVO_ELIMINAR', tipoDispositivo) %}
                 <a href="{{ path('tipo_dispositivo_eliminar', {'id': tipoDispositivo.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
             {% endif %}
         </div>

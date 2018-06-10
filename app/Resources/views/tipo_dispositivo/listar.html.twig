@@ -5,11 +5,12 @@
 {% block content %}
     <div class="encabezado">
         <h1>Tipos de dispositivo</h1>
+        {% if is_granted('TIPO_DISPOSITIVO_CREAR') %}
         <a href="{{ path('tipo_dispositivo_nuevo') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo tipo</a>
+        {% endif %}
     </div>
 
-
-    {% if tipos is not empty %}
+    {% if tipos is defined and tipos is not empty %}
         <div class="list-group col-sm-3">
             {% for tipo in tipos %}
                 <a class="list-group-item text-center" href="{{ path('tipo_dispositivo_mostrar', {'id': tipo.id}) }}">{{ tipo.nombre }}</a>

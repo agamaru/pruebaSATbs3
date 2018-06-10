@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 
+use AppBundle\Entity\TipoDispositivo;
 use Doctrine\ORM\EntityRepository;
 
 class TipoDispositivoRepository extends EntityRepository
@@ -13,5 +14,13 @@ class TipoDispositivoRepository extends EntityRepository
             ->addOrderBy('t.nombre')
             ->getQuery()
             ->getResult();
+    }
+
+    public function delete(TipoDispositivo $tipoDispositivo)
+    {
+        $this->getEntityManager()
+            ->createQuery('DELETE AppBundle:Dispositivo d WHERE d.tipo = :tipoDispositivo')
+            ->setParameter('tipoDispositivo', $tipoDispositivo)
+            ->execute();
     }
 }
