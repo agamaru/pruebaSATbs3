@@ -63,12 +63,16 @@ class TipoDispositivoController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             try {
-                $em->flush();
-                $this->addFlash('info', 'Cambios guardados');
+                    $em->flush();
+                    $this->addFlash('info', 'Cambios guardados');
             } catch (\Exception $e) {
-                $this->addFlash('error', 'No se han podido guardar los cambios');
+                    $this->addFlash('error', 'No se han podido guardar los cambios');
             }
-            return $this->redirectToRoute('tipo_dispositivo_listar');
+                return $this->redirectToRoute('tipo_dispositivo_listar');
+
+        }
+        else {
+            $em->refresh($tipoDispositivo);
         }
 
         return $this->render('tipo_dispositivo/form.html.twig', [
@@ -97,11 +101,11 @@ class TipoDispositivoController extends Controller
                 $em->remove($tipoDispositivo);
                 $em->flush();
                 $this->addFlash('info', 'El tipo de dispositivo ha sido eliminado');
-                return $this->redirectToRoute('tipo_dispositivo_listar');
+
             } catch (\Exception $e) {
                 $this->addFlash('error', 'No se ha podido eliminar el tipo de dispositivo');
             }
-
+            return $this->redirectToRoute('tipo_dispositivo_listar');
         }
 
         return $this->render('tipo_dispositivo/eliminar.html.twig', [

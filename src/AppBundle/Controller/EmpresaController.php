@@ -97,11 +97,12 @@ class EmpresaController extends Controller
                 $em->flush();
 
                 $this->addFlash('info', 'Empresa eliminada');
-                return $this->redirectToRoute('empresa_listar');
+
             }
             catch (\Exception $e) {
                 $this->addFlash('error', 'No se ha podido eliminar la empresa');
             }
+            return $this->redirectToRoute('empresa_listar');
         }
 
         return $this->render('empresa/eliminar.html.twig', [

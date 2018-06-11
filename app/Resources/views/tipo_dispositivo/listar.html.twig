@@ -10,18 +10,18 @@
         {% endif %}
     </div>
 
-    {% if tipos is defined and tipos is not empty %}
-        <div class="list-group col-sm-3">
+    <div class="list-group col-sm-3">
+        {% if tipos is defined and tipos is not empty %}
             {% for tipo in tipos %}
                 <a class="list-group-item text-center" href="{{ path('tipo_dispositivo_mostrar', {'id': tipo.id}) }}">{{ tipo.nombre }}</a>
             {% endfor %}
-        </div>
-        <div class="col-sm-9">
-            {% block section %}{% endblock %}
-        </div>
-    {% else %}
-        <p>No hay tipos que mostrar</p>
-    {% endif %}
+        {% else %}
+            <p>No hay tipos que mostrar</p>
+        {% endif %}
+    </div>
+    <div class="col-sm-9">
+        {% block section %}{% endblock %}
+    </div>
 
 
 {% endblock %}
