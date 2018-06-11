@@ -5938,16 +5938,6 @@ main {
 .login-form {
   margin-top: 2em; }
 
-.btn + .btn {
-  margin-top: 5px; }
-
-.btn {
-  display: block; }
-
-@media (min-width: 768px) {
-  .btn {
-    display: inline; } }
-
 @media (min-width: 992px) {
   .encabezado {
     flex-direction: row;

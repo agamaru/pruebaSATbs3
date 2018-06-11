@@ -2,9 +2,11 @@
 
 {% block section %}
     <div class="encabezado">
-        <h3>Dispositivos de tipo {{ tipoDispositivo.nombre }}</h3>
+        <h3>Dispositivos de tipo <strong>{{ tipoDispositivo.nombre }}</strong></h3>
 
-        <a href="{{ path('tipo_dispositivo_editar', {'id': tipoDispositivo.id}) }}" title="Editar tipo" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
+        {% if is_granted('TIPO_DISPOSITIVO_EDITAR', tipoDispositivo) %}
+        <a href="{{ path('tipo_dispositivo_editar', {'id': tipoDispositivo.id}) }}" title="Editar tipo" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
+        {% endif %}
     </div>
 
     {% if dispositivos is not empty %}
