@@ -85,7 +85,7 @@ class TipoDispositivoController extends Controller
      */
     public function eliminarAction(Request $request, TipoDispositivo $tipoDispositivo)
     {
-        $tipos = $this->getDoctrine()->getRepository('AppBundle:TipoDispositivo')->findAllOrderedByNombre();
+        //$tipos = $this->getDoctrine()->getRepository('AppBundle:TipoDispositivo')->findAllOrderedByNombre();
 
         $dispositivos = $this->getDoctrine()->getRepository('AppBundle:DispositivoRed')->findByTipo($tipoDispositivo);
 
@@ -106,7 +106,7 @@ class TipoDispositivoController extends Controller
         }
 
         return $this->render('tipo_dispositivo/eliminar.html.twig', [
-            'tipos' => $tipos,
+            //'tipos' => $tipos,
             'tipoDispositivo' => $tipoDispositivo,
             'resultado' => $resultado
         ]);

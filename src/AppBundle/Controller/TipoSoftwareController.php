@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\TipoSoftware;
 use AppBundle\Form\Type\TipoSoftwareType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -12,6 +13,7 @@ class TipoSoftwareController extends Controller
 {
     /**
      * @Route("/tipos/software", name="tipo_software_listar")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function listarAction()
     {
@@ -24,6 +26,7 @@ class TipoSoftwareController extends Controller
 
     /**
      * @Route("/tipo/software/{id}", name="tipo_software_mostrar")
+     * @Security("is_granted('TIPO_SOFTWARE_VER', tipoSoftware)")
      */
     public function mostrarAction(TipoSoftware $tipoSoftware)
     {
@@ -41,10 +44,11 @@ class TipoSoftwareController extends Controller
     /**
      * @Route("/tipos/software/editar/nuevo", name="tipo_software_nuevo")
      * @Route("/tipos/software/editar/{id}", name="tipo_software_editar")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function crearAction(Request $request, TipoSoftware $tipoSoftware = null)
     {
-        $tipos = $this->getDoctrine()->getRepository('AppBundle:TipoSoftware')->findAllOrderedByNombre();
+        //$tipos = $this->getDoctrine()->getRepository('AppBundle:TipoSoftware')->findAllOrderedByNombre();
 
         $em = $this->getDoctrine()->getManager();
 
@@ -57,23 +61,18 @@ class TipoSoftwareController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                try {
-                    $em->flush();
-                    $this->addFlash('info', 'Cambios guardados');
-                } catch (\Exception $e) {
-                    $this->addFlash('error', 'No se han podido guardar los cambios');
-                }
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                $em->flush();
+                $this->addFlash('info', 'Cambios guardados');
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'No se han podido guardar los cambios');
+            }
                 return $this->redirectToRoute('tipo_software_listar');
-            }
-            else {
-                $em->refresh($tipoSoftware);
-            }
         }
 
         return $this->render('tipo_software/form.html.twig', [
-            'tipos' => $tipos,
+            //'tipos' => $tipos,
             'tipoSoftware' => $tipoSoftware,
             'formulario' => $form->createView()
         ]);
@@ -81,12 +80,18 @@ class TipoSoftwareController extends Controller
 
     /**
      * @Route("/tipos/software/eliminar/{id}", name="tipo_software_eliminar")
+     * @Security("is_granted('TIPO_SOFTWARE_ELIMINAR', tipoSoftware)")
      */
     public function eliminarAction(Request $request, TipoSoftware $tipoSoftware)
     {
+        $softwares = $this->getDoctrine()->getRepository('AppBundle:Software')->findByTipo($tipoSoftware);
+
+        $resultado = count($softwares);
+
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
             try {
+                $this->getDoctrine()->getRepository('AppBundle:TipoSoftware')->delete($tipoSoftware);
                 $em->remove($tipoSoftware);
                 $em->flush();
                 $this->addFlash('info', 'El tipo de software ha sido eliminado');
@@ -97,7 +102,8 @@ class TipoSoftwareController extends Controller
         }
 
         return $this->render('tipo_software/eliminar.html.twig', [
-            'tipoSoftware' => $tipoSoftware
+            'tipoSoftware' => $tipoSoftware,
+            'resultado' => $resultado
         ]);
     }
 

@@ -2,12 +2,18 @@
 
 {% block section %}
     <div class="encabezado">
-        <h3>Softwares de tipo {{ tipoSoftware.nombre }}</h3>
-
-        <a href="{{ path('tipo_software_editar', {'id': tipoSoftware.id}) }}" title="Editar tipo" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
+        <h3>Softwares de tipo <strong>{{ tipoSoftware.nombre }}</strong></h3>
+        <div>
+        {% if is_granted('TIPO_SOFTWARE_EDITAR', tipoSoftware) %}
+        <a href="{{ path('tipo_software_editar', {'id': tipoSoftware.id}) }}" title="Editar tipo" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
+        {% endif %}
+        {% if softwares|length is same as (0) and is_granted('TIPO_SOFTWARE_ELIMINAR', tipoSoftware) %}
+            <a href="{{ path('tipo_software_eliminar', {'id': tipoSoftware.id}) }}" title="Eliminar tipo" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+        {% endif %}
+        </div>
     </div>
 
-    {% if softwares is not empty %}
+    {% if softwares is defined and softwares is not empty %}
         <table class="table table-bordered table-hover table-striped table-responsive-sm">
             <thead>
             <tr>
@@ -27,6 +33,6 @@
             </tbody>
         </table>
     {% else %}
-        <p>No se han encontrado dispositivos de este tipo</p>
+        <p>No se han encontrado softwares de este tipo</p>
     {% endif %}
 {% endblock %}

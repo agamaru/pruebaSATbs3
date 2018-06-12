@@ -1,16 +1,22 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Eliminar{% endblock %}
+{% block title %}Eliminar tipo de software{% endblock %}
 
 {% block content %}
-    <h1>Tipo de software {{ tipoSoftware.nombre }}</h1>
+    <h1>Eliminar el tipo de software <strong>{{ tipoSoftware.nombre }}</strong></h1>
 
     <div class="alert alert-warning">
-            ¿Seguro que desea eliminar este tipo? La operación no se podrá deshacer.
+        {% if resultado > 0 %}
+            <p><strong>¡Atención!</strong> Existen softwares asociados a este tipo. Por favor, asegúrese de que no existe ningún software de este tipo antes de eliminarlo.</p>
+        {% else %}
+            <p>¿Seguro que desea eliminar este tipo de software? La operación no se podrá deshacer.</p>
+        {% endif %}
     </div>
     <form method="post">
-        <a href="{{ path('tipo_software_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado de tipos de software</a>
+        <a href="{{ path('tipo_software_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado</a>
+        {% if resultado is same as (0) %}
         <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar tipo</button>
+        {% endif %}
     </form>
 {% endblock %}
 
