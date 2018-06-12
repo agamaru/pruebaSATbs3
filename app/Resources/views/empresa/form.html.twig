@@ -5,8 +5,9 @@
 {% block title %}Empresa{% endblock %}
 
 {% block content %}
-    <h1>{{ empresa.id ? empresa.nombre : 'Nueva empresa' }}</h1>
-    {# Pendiente solucionar el tema del encabezado #}
+    <div class="col-sm-9 col-sm-offset-3">
+        <h1>{{ empresa.id ? empresa.nombre : 'Nueva empresa' }}</h1>
+    </div>
 
     {{ form_start(formulario, {'attr': {'novalidate': 'novalidate'}}) }}
     {{ form_widget(formulario) }}

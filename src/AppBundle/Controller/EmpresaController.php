@@ -68,7 +68,7 @@ class EmpresaController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             try {
                 $em->flush();
-                $this->addFlash('info', 'Cambios realizados');
+                $this->addFlash('info', 'Cambios guardados');
             }
             catch (\Exception $e) {
                 $this->addFlash('error', 'No se han podido guardar los cambios');
