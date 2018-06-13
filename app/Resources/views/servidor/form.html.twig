@@ -13,15 +13,8 @@
     <div class="form-group row">
         <div class="col-sm-10 col-sm-offset-2">
             <p>* Los campos marcados son obligatorios</p>
-            {# Lo dejo por si consigo solucionar mi problema #}
-            {% if empresa is defined and empresa is not null %}
-            <a href="{{ path('empresa_servicios_mostrar', {'id': empresa.id}) }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado de servicios de la empresa</a>
-            {% else %}
-                <a href="{{ path('servidor_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado de servidores</a>
-            {% endif %}
-            {% if is_granted('SERVIDOR_CREAR') or (servidor.id and is_granted("SERVIDOR_EDITAR", servidor))%}
-            <button type="submit" class="btn btn-success">Guardar cambios</button>
-            {% endif %}
+            <a href="{{ path('servidor_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado</a>
+            <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Guardar cambios</button>
             {% if servidor.id and is_granted('SERVIDOR_ELIMINAR', servidor)%}
                 <a href="{{ path('servidor_eliminar', {'id': servidor.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
             {% endif %}

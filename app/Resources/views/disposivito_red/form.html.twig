@@ -12,7 +12,6 @@
             <h1>Nuevo dispositivo de red</h1>
         {% endif %}
     </div>
-    {# Pendiente solucionar el tema del encabezado #}
 
     {{ form_start(formulario, {'attr': {'novalidate': 'novalidate'}}) }}
     {{ form_widget(formulario) }}
@@ -20,9 +19,9 @@
     <div class="form-group row">
         <div class="col-sm-9 col-sm-offset-3">
             <p>* Los campos marcados son obligatorios</p>
-            <a href="{{ path('dispositivo_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado de dispositivos de red</a>
+            <a href="{{ path('dispositivo_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado</a>
             {% if is_granted('DISPOSITIVO_RED_CREAR') or (dispositivo.id and is_granted("DISPOSITIVO_RED_EDITAR", dispositivo))%}
-            <button type="submit" class="btn btn-success">Guardar cambios</button>
+                <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Guardar cambios</button>
             {% endif %}
             {% if dispositivo.id and is_granted("DISPOSITIVO_RED_ELIMINAR", dispositivo)%}
                 <a href="{{ path('dispositivo_eliminar', {'id': dispositivo.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>

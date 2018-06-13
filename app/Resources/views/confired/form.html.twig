@@ -1,10 +1,9 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Configuración{% endblock %}
+{% block title %}Configuración de red{% endblock %}
 
 {% block content %}
-    <h1>{{ confiRed.id ? confiRed.dominio : 'Nueva configuración de red' }}</h1>
-    {# Pendiente solucionar el tema del encabezado #}
+    <h1>{{ confiRed.id ? 'Datos de la configuración de red' : 'Nueva configuración de red' }}</h1>
 
     {{ form_start(formulario, {'attr': {'novalidate': 'novalidate'}}) }}
     {{ form_widget(formulario) }}
@@ -13,12 +12,8 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-10">
             <p>* Los campos marcados son obligatorios</p>
-            {% if empresa is defined and empresa is not null %}
-            <a href="{{ path('empresa_servicios_mostrar', {'id': empresa.id}) }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado de servicios de la empresa</a>
-            {% else %}
-                <a href="{{ path('confired_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado de configuraciones de red</a>
-            {% endif %}
-            <button type="submit" class="btn btn-success">Guardar cambios</button>
+            <a href="{{ path('confired_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado</a>
+            <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Guardar cambios</button>
             {% if confiRed.id and is_granted('CONFIRED_ELIMINAR', confiRed)%}
                 <a href="{{ path('confired_eliminar', {'id': confiRed.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
             {% endif %}

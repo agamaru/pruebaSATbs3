@@ -3,14 +3,14 @@
 {% block title %}Eliminar{% endblock %}
 
 {% block content %}
-    <h1>Dispositivo con ip {{ dispositivo.ip }}</h1>
+    <h1>Eliminar dispositivo de red</h1>
 
     <div class="alert alert-warning">
-            ¿Seguro que desea eliminar este dispositivo? La operación no se podrá deshacer.
+        <p>¿Seguro que desea eliminar este dispositivo de red? La operación no se podrá deshacer.</p>
     </div>
     <form method="post">
-        <a href="{{ path('dispositivo_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado de dispositivos</a>
-        <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar dispositivo</button>
+        <a href="{{ path('dispositivo_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado</a>
+        <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</button>
     </form>
 {% endblock %}
 
