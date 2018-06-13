@@ -6,7 +6,6 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use AppBundle\Validator\Constraints as MyAssert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\EmpresaRepository")
@@ -26,13 +25,13 @@ class Empresa
     private $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=80, unique=true)
      * @Assert\NotBlank(
      *     message = "Rellene este campo"
      * )
      * @Assert\Length(
      *     min = 3,
-     *     max = 50,
+     *     max = 80,
      *     minMessage = "El nombre debe tener al menos {{ limit }} caracteres",
      *     maxMessage = "El nombre no puede tener más de {{ limit }} caracteres"
      * )
@@ -42,15 +41,18 @@ class Empresa
     private $nombre;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=80, unique=true)
      * @Assert\NotBlank(
      *     message = "Rellene este campo"
+     * )
+     * @Assert\Regex(
+     *     pattern = "/^([A-Za-z]{1})(\d{7})([0-9A-Za-z]{1})$/",
+     *     message = "El cif introducido no tiene el formato adecuado"
      * )
      * @Assert\Length(
      *     max=9,
      *     maxMessage = "El cif no puede tener más de {{ limit }} caracteres"
      * )
-     * @MyAssert\Cif
      *
      * @var string
      */
