@@ -56,13 +56,15 @@
     </header>
     <main class="container">
         {% for mensaje in app.flashes('info') %}
-            <div class="alert alert-info">
-                {{ mensaje }}
+            <div class="alert alert-info alert-dismissable" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <p>{{ mensaje }}</p>
             </div>
         {% endfor %}
         {% for mensaje in app.flashes('error') %}
-            <div class="alert alert-danger">
-                {{ mensaje }}
+            <div class="alert alert-danger alert-dismissable" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <p>{{ mensaje }}</p>
             </div>
         {% endfor %}
         {% block content %}{% endblock %}
