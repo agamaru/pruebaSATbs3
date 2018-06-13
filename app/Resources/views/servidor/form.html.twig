@@ -13,11 +13,13 @@
     <div class="form-group row">
         <div class="col-sm-10 col-sm-offset-2">
             <p>* Los campos marcados son obligatorios</p>
-            <a href="{{ path('servidor_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado</a>
-            <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Guardar cambios</button>
-            {% if servidor.id and is_granted('SERVIDOR_ELIMINAR', servidor)%}
-                <a href="{{ path('servidor_eliminar', {'id': servidor.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
-            {% endif %}
+            <div class="botonera">
+                <a href="{{ path('servidor_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado</a>
+                <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Guardar cambios</button>
+                {% if servidor.id and is_granted('SERVIDOR_ELIMINAR', servidor)%}
+                    <a href="{{ path('servidor_eliminar', {'id': servidor.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
+                {% endif %}
+            </div>
         </div>
     </div>
     {{ form_end(formulario) }}

@@ -20,7 +20,7 @@
                 <th>Contraseña</th>
                 <th>WEP</th>
                 <th>Empresa</th>
-                <th class="no"></th>
+                <th class="no">Opciones</th>
             </tr>
         </thead>
         <tbody>
@@ -34,7 +34,7 @@
                 <td>{{ dispositivo.empresa }}</td>
                 <td>
                     {% if is_granted("DISPOSITIVO_RED_EDITAR", dispositivo) %}
-                    <a href="{{ path('dispositivo_editar', {'id': dispositivo.id}) }}" title="Editar dispositivo"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="{{ path('dispositivo_editar', {'id': dispositivo.id}) }}" title="Editar dispositivo" class="icono"><i class="fas fa-pencil-alt"></i></a>
                     {% endif %}
                 </td>
             </tr>

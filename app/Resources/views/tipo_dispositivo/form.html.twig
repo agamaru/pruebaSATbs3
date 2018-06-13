@@ -5,9 +5,9 @@
 {% block content %}
     <div class="col-sm-10 col-sm-offset-2">
         <h1>{% if tipoDispositivo.id %}
-                Datos del tipo de dispositivo <strong>{{ tipoDispositivo.nombre }}</strong>
+                Datos del tipo de dispositivo de red <strong>{{ tipoDispositivo.nombre }}</strong>
             {% else %}
-                Nuevo tipo de dispositivo
+                Nuevo tipo de dispositivo de red
             {% endif %}</h1>
     </div>
 
@@ -17,12 +17,13 @@
     <div class="form-group row">
         <div class="col-sm-10 col-sm-offset-2">
             <p>* Los campos marcados son obligatorios</p>
-
-            <a href="{{ path('tipo_dispositivo_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado</a>
-            <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Guardar cambios</button>
-            {% if tipoDispositivo.id and is_granted('TIPO_DISPOSITIVO_ELIMINAR', tipoDispositivo) %}
-                <a href="{{ path('tipo_dispositivo_eliminar', {'id': tipoDispositivo.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
-            {% endif %}
+            <div class="botonera">
+                <a href="{{ path('tipo_dispositivo_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado</a>
+                <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Guardar cambios</button>
+                {% if tipoDispositivo.id and is_granted('TIPO_DISPOSITIVO_ELIMINAR', tipoDispositivo) %}
+                    <a href="{{ path('tipo_dispositivo_eliminar', {'id': tipoDispositivo.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
+                {% endif %}
+            </div>
         </div>
     </div>
     {{ form_end(formulario) }}

@@ -6,7 +6,7 @@
     <div class="well encabezado">
         <h1>Listado de configuraciones de red</h1>
         {% if is_granted('CONFIRED_CREAR') %}
-        <a href="{{ path('confired_crear') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nueva configuración de red</a>
+            <a href="{{ path('confired_crear') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nueva configuración de red</a>
         {% endif %}
     </div>
 
@@ -20,7 +20,7 @@
                 <th>DNS1</th>
                 <th>DNS2</th>
                 <th>Empresa</th>
-                <th class="no">Editar</th>
+                <th class="no">Opciones</th>
             </tr>
         </thead>
         <tbody>
@@ -33,8 +33,8 @@
                 <td>{{ confi.dns2 }}</td>
                 <td>{{ confi.empresa }}</td>
                 <td>
-                    {% if is_granted('CONFIRED_ELIMINAR', confi) %}
-                    <a href="{{ path('confired_editar', {'id': confi.id}) }}" title="Editar configuración"><i class="fas fa-pencil-alt"></i></a>
+                    {% if is_granted('CONFIRED_EDITAR', confi) %}
+                        <a href="{{ path('confired_editar', {'id': confi.id}) }}" title="Editar configuración" class="icono"><i class="fas fa-pencil-alt"></i></a>
                     {% endif %}
                 </td>
             </tr>

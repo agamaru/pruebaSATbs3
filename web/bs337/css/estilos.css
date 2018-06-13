@@ -5928,6 +5928,28 @@ button.close {
   .my-btncolor:hover {
     background-color: #456400; }
 
+.btn {
+  margin-bottom: 5px; }
+  @media (min-width: 768px) {
+    .btn {
+      margin-right: 5px; } }
+
+.botonera {
+  display: flex;
+  flex-direction: column; }
+  @media (min-width: 768px) {
+    .botonera {
+      flex-direction: row; } }
+
+i {
+  margin-right: 5px; }
+
+.icono {
+  color: #454445; }
+
+.icono + .icono {
+  margin-left: 5px; }
+
 main {
   padding-top: 80px; }
 

@@ -9,8 +9,10 @@
         <p>¿Seguro que desea eliminar esta configuración de red? La operación no se podrá deshacer.</p>
     </div>
     <form method="post">
-        <a href="{{ path('confired_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado</a>
-        <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</button>
+        <div class="botonera">
+            <a href="{{ path('confired_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado</a>
+            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</button>
+        </div>
     </form>
 {% endblock %}
 
