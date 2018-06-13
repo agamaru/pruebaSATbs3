@@ -4,39 +4,9 @@
 
 {% block content %}
     <div class="well encabezado">
-        <h1>Servicios de la empresa {{ empresa.nombre }} </h1>
+        <h1>Servicios de la empresa <strong>{{ empresa.nombre }}</strong></h1>
         <a href="{{ path('empresa_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado de empresas</a>
     </div>
-
-    <article class="panel panel-default">
-        <div class="panel-heading">
-            <h3>Softwares</h3>
-        </div>
-            {% if softwares is defined and softwares is not empty %}
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Tipo</th>
-                        <th>Fecha de renovación</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for software in softwares %}
-                        <tr>
-                            <td>{{ software.nombre }}</td>
-                            <td>{{ software.tipo }}</td>
-                            <td>{{ software.fechaRenovacion|date('d/m/Y') }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            {% else %}
-                <div class="panel-body">
-                    <p>No dispone de softwares instalados.</p>
-                </div>
-            {% endif %}
-    </article>
 
     <article class="panel panel-default">
         <div class="panel-heading">
@@ -60,32 +30,6 @@
         {% else %}
             <div class="panel-body">
                 <p>No dispone de configuraciones de red.</p>
-            </div>
-        {% endif %}
-    </article>
-
-    <article class="panel panel-default">
-        <div class="panel-heading">
-            <h3>Servidores</h3>
-        </div>
-        {% if servidores is defined and servidores is not empty %}
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for servidor in servidores %}
-                    <tr>
-                        <td>{{ servidor.nombre }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <div class="panel-body">
-                <p>No dispone de servidores.</p>
             </div>
         {% endif %}
     </article>
@@ -117,4 +61,62 @@
             </div>
         {% endif %}
     </article>
+
+
+    <article class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Servidores</h3>
+        </div>
+        {% if servidores is defined and servidores is not empty %}
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for servidor in servidores %}
+                    <tr>
+                        <td>{{ servidor.nombre }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="panel-body">
+                <p>No dispone de servidores.</p>
+            </div>
+        {% endif %}
+    </article>
+
+    <article class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Softwares</h3>
+        </div>
+            {% if softwares is defined and softwares is not empty %}
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Fecha de renovación</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for software in softwares %}
+                        <tr>
+                            <td>{{ software.nombre }}</td>
+                            <td>{{ software.tipo }}</td>
+                            <td>{{ software.fechaRenovacion|date('d/m/Y') }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="panel-body">
+                    <p>No dispone de softwares instalados.</p>
+                </div>
+            {% endif %}
+    </article>
+
 {% endblock %}

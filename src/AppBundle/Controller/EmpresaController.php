@@ -26,7 +26,7 @@ class EmpresaController extends Controller
 
     /**
      * @Route("/empresa/servicios/{id}", name="empresa_servicios_mostrar")
-     * @Security("is_granted('ROLE_USER')")
+     * @Security("is_granted('EMPRESA_VER', empresa)")
      */
     public function mostrarAction(Empresa $empresa)
     {

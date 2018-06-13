@@ -25,7 +25,9 @@
                 <td>{{ empresa.nombre }}</td>
                 <td>{{ empresa.cif }}</td>
                 <td>
+                    {% if is_granted('EMPRESA_VER', empresa) %}
                     <a href="{{ path('empresa_servicios_mostrar', {'id': empresa.id}) }}" title="Ver servicios contratados"><i class="far fa-eye"></i> </a>
+                    {% endif %}
                     {% if is_granted('EMPRESA_EDITAR', empresa) %}
                     <a href="{{ path('empresa_editar', {'id': empresa.id}) }}" title="Editar datos de la empresa" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
                     {% endif %}

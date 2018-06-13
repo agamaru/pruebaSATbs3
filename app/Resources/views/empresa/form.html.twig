@@ -17,7 +17,7 @@
             <p>* Los campos marcados son obligatorios</p>
             <a href="{{ path('empresa_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado de empresas</a>
             {% if is_granted('EMPRESA_EDITAR', empresa) %}
-            <button type="submit" class="btn btn-success">Guardar cambios</button>
+            <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Guardar cambios</button>
             {% endif %}
             {% if empresa.id and is_granted('EMPRESA_ELIMINAR', empresa)%}
                 <a href="{{ path('empresa_eliminar', {'id': empresa.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar empresa</a>
