@@ -24,7 +24,8 @@ class EmpresaType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Empresa::class
+            'data_class' => Empresa::class,
+            'translation_domain' => false
         ]);
     }
 }

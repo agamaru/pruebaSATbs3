@@ -65,7 +65,8 @@ class DispositivoRedType extends AbstractType
         $resolver->setDefaults([
             'data_class' => DispositivoRed::class,
             'nuevo' => false,
-            'admin' => false
+            'admin' => false,
+            'translation_domain' => false
         ]);
     }
 }

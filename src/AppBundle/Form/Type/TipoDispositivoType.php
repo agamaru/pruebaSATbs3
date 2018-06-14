@@ -21,7 +21,8 @@ class TipoDispositivoType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => TipoDispositivo::class
+            'data_class' => TipoDispositivo::class,
+            'translation_domain' => false
         ]);
     }
 }

@@ -21,7 +21,8 @@ class TipoSoftwareType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => TipoSoftware::class
+            'data_class' => TipoSoftware::class,
+            'translation_domain' => false
         ]);
     }
 }

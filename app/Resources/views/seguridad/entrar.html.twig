@@ -11,7 +11,7 @@
                 </div>
                 <div class="panel-body">
                     {% if error %}
-                        <div class="alert alert-danger">{{ error.message }}</div>
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                     {% endif %}
                     <form action="{{ path('usuario_entrar') }}" method="post" class="form" role="form">
                         <div class="form-group">

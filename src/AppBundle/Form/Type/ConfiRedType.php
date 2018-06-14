@@ -57,7 +57,8 @@ class ConfiRedType extends AbstractType
         $resolver->setDefaults([
             'data_class' => ConfiRed::class,
             'nuevo' => false,
-            'admin' => false
+            'admin' => false,
+            'translation_domain' => false
         ]);
     }
 }

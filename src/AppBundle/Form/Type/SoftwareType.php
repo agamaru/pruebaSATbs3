@@ -62,7 +62,8 @@ class SoftwareType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Software::class,
             'nuevo' => false,
-            'admin' => false
+            'admin' => false,
+            'translation_domain' => false
 
         ]);
     }

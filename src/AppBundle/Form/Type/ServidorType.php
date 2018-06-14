@@ -58,7 +58,8 @@ class ServidorType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Servidor::class,
             'nuevo' => false,
-            'admin' => false
+            'admin' => false,
+            'translation_domain' => false
         ]);
     }
 }
