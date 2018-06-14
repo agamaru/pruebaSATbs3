@@ -1,11 +1,3 @@
-AppBundle\Entity\Router:
-    router_{1..15}:
-      ip: <ipv4()>
-      usuario: <userName()>
-      password: <password()>
-      wep: <word()>
-      empresa: '@empresa*'
-
 AppBundle\Entity\Empresa:
     empresa_{1..25}:
       nombre (unique): <es_ES:company()>
