@@ -63,12 +63,12 @@ class TipoDispositivoController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             try {
-                    $em->flush();
-                    $this->addFlash('info', 'Cambios guardados');
+                $em->flush();
+                $this->addFlash('info', 'Cambios guardados');
             } catch (\Exception $e) {
-                    $this->addFlash('error', 'No se han podido guardar los cambios');
+                $this->addFlash('error', 'No se han podido guardar los cambios');
             }
-                return $this->redirectToRoute('tipo_dispositivo_listar');
+            return $this->redirectToRoute('tipo_dispositivo_listar');
 
         }
 
@@ -95,7 +95,7 @@ class TipoDispositivoController extends Controller
             $em = $this->getDoctrine()->getManager();
             try {
                 $this->getDoctrine()->getRepository('AppBundle:TipoDispositivo')->delete($tipoDispositivo);
-                $em->remove($tipoDispositivo);
+                //$em->remove($tipoDispositivo);
                 $em->flush();
                 $this->addFlash('info', 'El tipo de dispositivo ha sido eliminado');
 

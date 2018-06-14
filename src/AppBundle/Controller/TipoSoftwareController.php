@@ -68,7 +68,8 @@ class TipoSoftwareController extends Controller
             } catch (\Exception $e) {
                 $this->addFlash('error', 'No se han podido guardar los cambios');
             }
-                return $this->redirectToRoute('tipo_software_listar');
+            
+            return $this->redirectToRoute('tipo_software_listar');
         }
 
         return $this->render('tipo_software/form.html.twig', [
@@ -92,7 +93,7 @@ class TipoSoftwareController extends Controller
             $em = $this->getDoctrine()->getManager();
             try {
                 $this->getDoctrine()->getRepository('AppBundle:TipoSoftware')->delete($tipoSoftware);
-                $em->remove($tipoSoftware);
+                //$em->remove($tipoSoftware);
                 $em->flush();
                 $this->addFlash('info', 'El tipo de software ha sido eliminado');
             } catch (\Exception $e) {

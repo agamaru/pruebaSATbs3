@@ -18,9 +18,14 @@ class TipoSoftwareRepository extends EntityRepository
 
     public function delete(TipoSoftware $tipoSoftware)
     {
-        $this->getEntityManager()
-            ->createQuery('DELETE AppBundle:Software s WHERE s.tipo = :tipoSoftware')
-            ->setParameter('tipoSoftware', $tipoSoftware)
-            ->execute();
+        $softwares = $this->getEntityManager()
+            ->getRepository('AppBundle:Software')
+            ->findByTipo($tipoSoftware);
+
+        foreach($softwares as $software) {
+            $this->getEntityManager()->remove($software);
+        }
+
+        $this->getEntityManager()->remove($tipoSoftware);
     }
 }

@@ -18,9 +18,14 @@ class TipoDispositivoRepository extends EntityRepository
 
     public function delete(TipoDispositivo $tipoDispositivo)
     {
-        $this->getEntityManager()
-            ->createQuery('DELETE AppBundle:DispositivoRed d WHERE d.tipo = :tipoDispositivo')
-            ->setParameter('tipoDispositivo', $tipoDispositivo)
-            ->execute();
+        $dispositivos = $this->getEntityManager()
+            ->getRepository('AppBundle:DispositivoRed')
+            ->findByTipo($tipoDispositivo);
+
+        foreach($dispositivos as $dispositivo) {
+            $this->getEntityManager()->remove($dispositivo);
+        }
+
+        $this->getEntityManager()->remove($tipoDispositivo);
     }
 }

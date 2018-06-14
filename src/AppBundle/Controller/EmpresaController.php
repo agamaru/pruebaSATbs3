@@ -93,7 +93,7 @@ class EmpresaController extends Controller
             try {
                 $this->getDoctrine()->getRepository('AppBundle:Empresa')->delete($empresa);
 
-                $em->remove($empresa);
+                //$em->remove($empresa);
                 $em->flush();
 
                 $this->addFlash('info', 'Empresa eliminada');

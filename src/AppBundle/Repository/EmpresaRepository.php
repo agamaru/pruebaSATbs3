@@ -18,27 +18,39 @@ class EmpresaRepository extends EntityRepository
 
     public function delete(Empresa $empresa)
     {
-        $confiReds = $this->getEntityManager()
-            ->getRepository('AppBundle:ConfiRed')->findByEmpresa($empresa);
+        $confiRedes = $this->getEntityManager()
+            ->getRepository('AppBundle:ConfiRed')
+            ->findByEmpresa($empresa);
 
-        foreach($confiReds as $confiRed) {
+        foreach($confiRedes as $confiRed) {
             $this->getEntityManager()->remove($confiRed);
         }
 
-        $this->getEntityManager()
-            ->createQuery('DELETE AppBundle:DispositivoRed d WHERE d.empresa = :empresa')
-            ->setParameter('empresa', $empresa)
-            ->execute();
+        $dispositivos = $this->getEntityManager()
+            ->getRepository('AppBundle:DispositivoRed')
+            ->findByEmpresa($empresa);
 
-        $this->getEntityManager()
-            ->createQuery('DELETE AppBundle:Servidor s WHERE s.empresa = :empresa')
-            ->setParameter('empresa', $empresa)
-            ->execute();
+        foreach($dispositivos as $dispositivo) {
+            $this->getEntityManager()->remove($dispositivo);
+        }
 
-        $this->getEntityManager()
-            ->createQuery('DELETE AppBundle:Software s WHERE s.empresa = :empresa')
-            ->setParameter('empresa', $empresa)
-            ->execute();
+        $servidores = $this->getEntityManager()
+            ->getRepository('AppBundle:Servidor')
+            ->findByEmpresa($empresa);
+
+        foreach($servidores as $servidor) {
+            $this->getEntityManager()->remove($servidor);
+        }
+
+        $softwares = $this->getEntityManager()
+            ->getRepository('AppBundle:Software')
+            ->findByEmpresa($empresa);
+
+        foreach($softwares as $software) {
+            $this->getEntityManager()->remove($software);
+        }
+
+        $this->getEntityManager()->remove($empresa);
 
     }
 }
