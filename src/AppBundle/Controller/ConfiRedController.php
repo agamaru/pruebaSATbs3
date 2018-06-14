@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\ConfiRed;
-use AppBundle\Entity\Empresa;
 use AppBundle\Form\Type\ConfiRedType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -26,27 +25,25 @@ class ConfiRedController extends Controller
     }
 
     /**
-     * @Route("/confired/nueva/{id}", name="confired_nueva")
-     * @Route("/confired/nueva", name="confired_crear")
+     * @Route("/confired/editar/nueva", name="confired_nueva")
+     * @Route("/confired/editar/{id}", name="confired_editar")
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function crearAction(Request $request, Empresa $empresa = null)
+    public function editarAction(Request $request, ConfiRed $confiRed = null)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $tengoEmpresa = false;
+        $nuevo = false;
 
-        $confiRed = new ConfiRed();
-
-        if (null !== $empresa) { // si tengo la empresa, se la asigno
-            $tengoEmpresa = true;
-            $confiRed->setEmpresa($empresa);
+        if (null === $confiRed) {
+            $nuevo = true;
+            $confiRed = new ConfiRed();
+            $em->persist($confiRed);
         }
 
-        $em->persist($confiRed);
-
         $form = $this->createForm(ConfiRedType::class, $confiRed, [
-            'tengoEmpresa' => $tengoEmpresa
+            'nuevo' => $nuevo,
+            'admin' => $this->isGranted('ROLE_ADMIN')
         ]);
 
         $form->handleRequest($request);
@@ -58,19 +55,11 @@ class ConfiRedController extends Controller
             } catch (\Exception $e) {
                 $this->addFlash('error', 'No se han podido guardar los cambios');
             }
-            if (true === $tengoEmpresa){
-                return $this->redirectToRoute('empresa_servicios_mostrar', [
-                    'id' => $empresa->getId()
-                ]);
-            } else {
-                return $this->redirectToRoute('confired_listar');
-                // redirige a esta y con errores, pero en realidad se guardan
-            }
+            return $this->redirectToRoute('confired_listar');
         }
 
         return $this->render('confired/form.html.twig', [
             'confiRed' => $confiRed,
-            'empresa' => $empresa,
             'formulario' => $form->createView()
         ]);
     }
@@ -97,40 +86,5 @@ class ConfiRedController extends Controller
             'confiRed' => $confiRed
         ]);
     }
-
-    /**
-     * @Route("/confired/editar/{id}", name="confired_editar")
-     * @Security("is_granted('CONFIRED_EDITAR', confiRed)")
-     */
-    public function editarAction(Request $request, ConfiRed $confiRed)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $tengoEmpresa = true;
-
-        $em->persist($confiRed);
-
-        $form = $this->createForm(ConfiRedType::class, $confiRed, [
-            'tengoEmpresa' => $tengoEmpresa
-        ]);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            try {
-                $em->flush();
-                $this->addFlash('info', 'Cambios guardados');
-            } catch (\Exception $e) {
-                $this->addFlash('error', 'No se han podido guardar los cambios');
-            }
-            return $this->redirectToRoute('confired_listar');
-        }
-
-        return $this->render('confired/form.html.twig', [
-            'confiRed' => $confiRed,
-            'formulario' => $form->createView()
-        ]);
-    }
-
 
 }

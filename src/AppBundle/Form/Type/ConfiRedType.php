@@ -15,11 +15,11 @@ class ConfiRedType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if (false !== $options['tengoEmpresa']) {
+        if (false === $options['nuevo']) {
             $builder
                 ->add('empresa', null, [
-                    'label' => 'Empresa',
-                    'disabled' => true
+                    'label' => 'Empresa *',
+                    'disabled' => !$options['admin']
                 ]);
         } else {
             $builder
@@ -31,7 +31,6 @@ class ConfiRedType extends AbstractType
                             ->orderBy('e.nombre');
                     },
                     'label' => 'Empresa *'
-
                 ]);
         }
 
@@ -57,7 +56,8 @@ class ConfiRedType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => ConfiRed::class,
-            'tengoEmpresa' => false
+            'nuevo' => false,
+            'admin' => false
         ]);
     }
 }
