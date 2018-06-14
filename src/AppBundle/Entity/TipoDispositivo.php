@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\TipoDispositivoRepository")
  * @ORM\Table(name="tipo_dispositivo")
- * @UniqueEntity("nombre", message="Ya existe un tipo de dispositivo con ese nombre")
+ * @UniqueEntity("nombre", message="Ya existe un tipo de dispositivo de red con ese nombre")
  */
 class TipoDispositivo
 {
@@ -25,7 +25,7 @@ class TipoDispositivo
     private $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=30, unique=true)
      * @Assert\NotBlank(
      *     message = "Rellene este campo"
      * )
@@ -35,11 +35,6 @@ class TipoDispositivo
      *     minMessage = "El nombre debe tener al menos {{ limit }} caracteres",
      *     maxMessage = "El nombre no puede tener más de {{ limit }} caracteres"
      * )
-     * @Assert\Regex(
-     *     pattern = "/^([a-zA-Z]){2,}/",
-     *     message = "El nombre introducido no tiene el formato adecuado"
-     * )
-     *
      * @var string
      */
     private $nombre;

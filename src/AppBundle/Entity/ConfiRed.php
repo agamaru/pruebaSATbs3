@@ -28,14 +28,8 @@ class ConfiRed
      *     message = "Rellene este campo"
      * )
      * @Assert\Length(
-     *     min = 4,
-     *     max = 60,
+     *     min = 3,
      *     minMessage = "El dominio debe tener al menos {{ limit }} caracteres",
-     *     maxMessage = "El dominio no puede tener más de {{ limit }} caracteres"
-     * )
-     * @Assert\Regex(
-     *     pattern = "/^([a-z]){1}([a-z0-9]{3,}).([a-z]{2,4})/",
-     *     message = "El dominio introducido no tiene el formato adecuado"
      * )
      *
      * @var string
@@ -47,9 +41,9 @@ class ConfiRed
      * @Assert\NotBlank(
      *     message = "Rellene este campo"
      * )
-     * @Assert\Ip(
-     *     version="all",
-     *     message="La máscara de red introducida no es válida"
+     * @Assert\Length(
+     *     min = 3,
+     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres"
      * )
      *
      * @var string
@@ -61,9 +55,9 @@ class ConfiRed
      * @Assert\NotBlank(
      *     message = "Rellene este campo"
      * )
-     * @Assert\Ip(
-     *     version="all",
-     *     message="La ip introducida no es válida"
+     * @Assert\Length(
+     *     min = 3,
+     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres"
      * )
      *
      * @var string
@@ -75,9 +69,9 @@ class ConfiRed
      * @Assert\NotBlank(
      *     message = "Rellene este campo"
      * )
-     * @Assert\Ip(
-     *     version="all",
-     *     message="El dns introducido no es válido"
+     * @Assert\Length(
+     *     min = 3,
+     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres"
      * )
      *
      * @var string
@@ -89,9 +83,9 @@ class ConfiRed
      * @Assert\NotBlank(
      *     message = "Rellene este campo"
      * )
-     * @Assert\Ip(
-     *     version="all",
-     *     message="El dns introducido no es válido"
+     * @Assert\Length(
+     *     min = 3,
+     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres"
      * )
      *
      * @var string

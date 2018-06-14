@@ -28,9 +28,7 @@ class Software
      * )
      * @Assert\Length(
      *     min = 3,
-     *     max = 50,
      *     minMessage = "El campo debe tener al menos {{ limit }} caracteres",
-     *     maxMessage = "El campo no puede tener más de {{ limit }} caracteres"
      * )
      *
      * @var string
@@ -38,7 +36,7 @@ class Software
     private $nombre;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=30)
      * @Assert\NotBlank(
      *     message = "Rellene este campo"
      * )
@@ -54,12 +52,12 @@ class Software
     private $usuario;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=30)
      * @Assert\NotBlank(
      *     message = "Rellene este campo"
      * )
      * @Assert\Length(
-     *     min = 6,
+     *     min = 3,
      *     max = 30,
      *     minMessage = "El campo debe tener al menos {{ limit }} caracteres",
      *     maxMessage = "El campo no puede tener más de {{ limit }} caracteres"
@@ -76,7 +74,7 @@ class Software
      * )
      * @Assert\GreaterThan(
      *     "today",
-     *     message="La fecha de renovación no puede ser inferior a la fecha actual"
+     *     message="La fecha de renovación no puede ser anterior a la fecha actual"
      * )
      *
      * @var \DateTime

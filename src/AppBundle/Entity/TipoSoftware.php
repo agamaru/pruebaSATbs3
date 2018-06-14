@@ -24,7 +24,7 @@ class TipoSoftware
     private $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=30, unique=true)
      * @Assert\NotBlank(
      *     message = "Rellene este campo"
      * )
@@ -33,10 +33,6 @@ class TipoSoftware
      *     max = 30,
      *     minMessage = "El nombre debe tener al menos {{ limit }} caracteres",
      *     maxMessage = "El nombre no puede tener más de {{ limit }} caracteres"
-     * )
-     * @Assert\Regex(
-     *     pattern = "/^([a-zA-Z]){2,}/",
-     *     message = "El nombre introducido no tiene el formato adecuado"
      * )
      *
      * @var string

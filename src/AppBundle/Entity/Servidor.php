@@ -28,9 +28,7 @@ class Servidor
      * )
      * @Assert\Length(
      *     min = 3,
-     *     max = 30,
-     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres",
-     *     maxMessage = "El campo no puede tener más de {{ limit }} caracteres"
+     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres"
      * )
      *
      * @var string
@@ -42,9 +40,9 @@ class Servidor
      * @Assert\NotBlank(
      *     message = "Rellene este campo"
      * )
-     * @Assert\Ip(
-     *     version="all",
-     *     message="La ip introducida no es válida"
+     * @Assert\Length(
+     *     min = 3,
+     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres"
      * )
      *
      * @var string
@@ -58,9 +56,7 @@ class Servidor
      * )
      * @Assert\Length(
      *     min = 3,
-     *     max = 30,
-     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres",
-     *     maxMessage = "El campo no puede tener más de {{ limit }} caracteres"
+     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres"
      * )
      *
      * @var string
@@ -73,10 +69,8 @@ class Servidor
      *     message = "Rellene este campo"
      * )
      * @Assert\Length(
-     *     min = 6,
-     *     max = 30,
-     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres",
-     *     maxMessage = "El campo no puede tener más de {{ limit }} caracteres"
+     *     min = 3,
+     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres"
      * )
      *
      * @var string

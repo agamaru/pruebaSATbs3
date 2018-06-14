@@ -25,15 +25,13 @@ class Empresa
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=80, unique=true)
+     * @ORM\Column(type="string", unique=true)
      * @Assert\NotBlank(
      *     message = "Rellene este campo"
      * )
      * @Assert\Length(
      *     min = 3,
-     *     max = 80,
      *     minMessage = "El nombre debe tener al menos {{ limit }} caracteres",
-     *     maxMessage = "El nombre no puede tener más de {{ limit }} caracteres"
      * )
      *
      * @var string
