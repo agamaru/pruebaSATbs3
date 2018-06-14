@@ -18,10 +18,12 @@ class EmpresaRepository extends EntityRepository
 
     public function delete(Empresa $empresa)
     {
-        $this->getEntityManager()
-            ->createQuery('DELETE AppBundle:ConfiRed c WHERE c.empresa = :empresa')
-            ->setParameter('empresa', $empresa)
-            ->execute();
+        $confiReds = $this->getEntityManager()
+            ->getRepository('AppBundle:ConfiRed')->findByEmpresa($empresa);
+
+        foreach($confiReds as $confiRed) {
+            $this->getEntityManager()->remove($confiRed);
+        }
 
         $this->getEntityManager()
             ->createQuery('DELETE AppBundle:DispositivoRed d WHERE d.empresa = :empresa')

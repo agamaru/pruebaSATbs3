@@ -18,7 +18,7 @@
                         <a href="{{ path('empresa_listar') }}">Empresas</a>
                     </li>
                     <li class="{% if app.request.attributes.get('_route') starts with 'confired' %}active{% endif %}">
-                        <a href="{{ path('confired_listar') }}">ConfiRedes</a>
+                        <a href="{{ path('confired_listar') }}">Config. redes</a>
                     </li>
                     <li class="{% if app.request.attributes.get('_route') starts with 'dispositivo' %}active{% endif %}">
                         <a href="{{ path('dispositivo_listar') }}">Dispositivos</a>
