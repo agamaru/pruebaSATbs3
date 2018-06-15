@@ -9,9 +9,18 @@ use Doctrine\ORM\EntityRepository;
 
 class DispositivoRedRepository extends EntityRepository
 {
+    public function findByQueryBuilder()
+    {
+        return $this->createQueryBuilder('d')
+            ->addSelect('e')
+            ->innerJoin('d.empresa', 'e');
+    }
+
     public function findByEmpresa(Empresa $empresa)
     {
         return $this->createQueryBuilder('d')
+            ->addSelect('t')
+            ->innerJoin('d.tipo', 't')
             ->where('d.empresa = :empresa')
             ->setParameter('empresa', $empresa)
             ->getQuery()
@@ -20,8 +29,8 @@ class DispositivoRedRepository extends EntityRepository
 
     public function findByTipo(TipoDispositivo $tipoDispositivo)
     {
-        return $this->createQueryBuilder('s')
-            ->where('s.tipo = :tipo')
+        return $this->findByQueryBuilder()
+            ->where('d.tipo = :tipo')
             ->setParameter('tipo', $tipoDispositivo)
             ->getQuery()
             ->getResult();
@@ -29,10 +38,8 @@ class DispositivoRedRepository extends EntityRepository
 
     public function findAllWithEmpresaAndTipoJoin()
     {
-        return $this->createQueryBuilder('d')
-            ->addSelect('e')
+        return $this->findByQueryBuilder()
             ->addSelect('t')
-            ->innerJoin('d.empresa', 'e')
             ->innerJoin('d.tipo', 't')
             ->getQuery()
             ->getResult();
