@@ -17,7 +17,7 @@ class SoftwareController extends Controller
      */
     public function listarAction()
     {
-        $softwares = $this->getDoctrine()->getRepository('AppBundle:Software')->findAll();
+        $softwares = $this->getDoctrine()->getRepository('AppBundle:Software')->findAllWithEmpresaAndTipoJoin();
 
         return $this->render('software/listar.html.twig', [
             'softwares' => $softwares

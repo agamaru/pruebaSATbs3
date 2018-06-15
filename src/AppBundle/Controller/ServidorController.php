@@ -17,7 +17,7 @@ class ServidorController extends Controller
      */
     public function listarAction()
     {
-        $servidores = $this->getDoctrine()->getRepository('AppBundle:Servidor')->findAll();
+        $servidores = $this->getDoctrine()->getRepository('AppBundle:Servidor')->findAllWithEmpresaJoin();
 
         return $this->render('servidor/listar.html.twig', [
             'servidores' => $servidores

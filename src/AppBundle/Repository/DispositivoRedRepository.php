@@ -26,4 +26,15 @@ class DispositivoRedRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllWithEmpresaAndTipoJoin()
+    {
+        return $this->createQueryBuilder('d')
+            ->addSelect('e')
+            ->addSelect('t')
+            ->innerJoin('d.empresa', 'e')
+            ->innerJoin('d.tipo', 't')
+            ->getQuery()
+            ->getResult();
+    }
 }

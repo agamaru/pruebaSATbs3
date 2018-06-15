@@ -16,4 +16,13 @@ class ServidorRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllWithEmpresaJoin()
+    {
+        return $this->createQueryBuilder('s')
+            ->addSelect('e')
+            ->innerJoin('s.empresa', 'e')
+            ->getQuery()
+            ->getResult();
+    }
 }

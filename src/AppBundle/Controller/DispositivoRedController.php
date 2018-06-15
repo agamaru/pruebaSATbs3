@@ -17,7 +17,7 @@ class DispositivoRedController extends Controller
      */
     public function listarAction()
     {
-        $dispositivos = $this->getDoctrine()->getRepository('AppBundle:DispositivoRed')->findAll();
+        $dispositivos = $this->getDoctrine()->getRepository('AppBundle:DispositivoRed')->findAllWithEmpresaAndTipoJoin();
 
         return $this->render('disposivito_red/listar.html.twig', [
             'dispositivos' => $dispositivos

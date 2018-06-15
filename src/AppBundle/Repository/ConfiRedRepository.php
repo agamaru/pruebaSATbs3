@@ -16,4 +16,13 @@ class ConfiRedRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllWithEmpresaJoin()
+    {
+        return $this->createQueryBuilder('c')
+            ->addSelect('e')
+            ->innerJoin('c.empresa', 'e')
+            ->getQuery()
+            ->getResult();
+    }
 }

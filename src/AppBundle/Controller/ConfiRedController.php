@@ -17,7 +17,7 @@ class ConfiRedController extends Controller
      */
     public function listarAction()
     {
-        $confiRedes = $this->getDoctrine()->getRepository('AppBundle:ConfiRed')->findAll();
+        $confiRedes = $this->getDoctrine()->getRepository('AppBundle:ConfiRed')->findAllWithEmpresaJoin();
 
         return $this->render('confired/listar.html.twig', [
             'confiRedes' => $confiRedes

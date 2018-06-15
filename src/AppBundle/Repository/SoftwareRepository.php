@@ -26,4 +26,15 @@ class SoftwareRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllWithEmpresaAndTipoJoin()
+    {
+        return $this->createQueryBuilder('s')
+            ->addSelect('e')
+            ->addSelect('t')
+            ->innerJoin('s.empresa', 'e')
+            ->innerJoin('s.tipo', 't')
+            ->getQuery()
+            ->getResult();
+    }
 }
