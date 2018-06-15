@@ -32,8 +32,8 @@
                     <li class="dropdown{% if app.request.attributes.get('_route') starts with 'tipo' %} active{% endif %}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Tipos <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ path('tipo_software_listar') }}">Tipos de software</a></li>
                             <li><a href="{{ path('tipo_dispositivo_listar') }}">Tipos de dispositivo</a></li>
+                            <li><a href="{{ path('tipo_software_listar') }}">Tipos de software</a></li>
                         </ul>
                     </li>
                 </ul>

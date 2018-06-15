@@ -43,19 +43,23 @@ class TipoSoftwareController extends Controller
 
     /**
      * @Route("/tipos/software/editar/nuevo", name="tipo_software_nuevo")
-     * @Route("/tipos/software/editar/{id}", name="tipo_software_editar")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('TIPO_SOFTWARE_CREAR')")
      */
-    public function crearAction(Request $request, TipoSoftware $tipoSoftware = null)
+    public function nuevaAction(Request $request)
     {
-        //$tipos = $this->getDoctrine()->getRepository('AppBundle:TipoSoftware')->findAllOrderedByNombre();
+        $tipoSoftware = new TipoSoftware();
+        $this->getDoctrine()->getManager()->persist($tipoSoftware);
 
+        return $this->editarAction($request, $tipoSoftware);
+    }
+
+    /**
+     * @Route("/tipos/software/editar/{id}", name="tipo_software_editar")
+     * @Security("is_granted('TIPO_SOFTWARE_EDITAR', tipoSoftware)")
+     */
+    public function editarAction(Request $request, TipoSoftware $tipoSoftware)
+    {
         $em = $this->getDoctrine()->getManager();
-
-        if (null === $tipoSoftware) {
-            $tipoSoftware = new TipoSoftware();
-            $em->persist($tipoSoftware);
-        }
 
         $form = $this->createForm(TipoSoftwareType::class, $tipoSoftware);
 
@@ -73,7 +77,6 @@ class TipoSoftwareController extends Controller
         }
 
         return $this->render('tipo_software/form.html.twig', [
-            //'tipos' => $tipos,
             'tipoSoftware' => $tipoSoftware,
             'formulario' => $form->createView()
         ]);

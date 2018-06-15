@@ -43,19 +43,23 @@ class TipoDispositivoController extends Controller
 
     /**
      * @Route("/tipos/dispositivo/editar/nuevo", name="tipo_dispositivo_nuevo")
-     * @Route("/tipos/dispositivo/editar/{id}", name="tipo_dispositivo_editar")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('TIPO_DISPOSITIVO_CREAR')")
      */
-    public function editarAction(Request $request, TipoDispositivo $tipoDispositivo = null)
+    public function nuevaAction(Request $request)
     {
-        //$tipos = $this->getDoctrine()->getRepository('AppBundle:TipoDispositivo')->findAllOrderedByNombre();
+        $tipoDispositivo = new TipoDispositivo();
+        $this->getDoctrine()->getManager()->persist($tipoDispositivo);
 
+        return $this->editarAction($request, $tipoDispositivo);
+    }
+
+    /**
+     * @Route("/tipos/dispositivo/editar/{id}", name="tipo_dispositivo_editar")
+     * @Security("is_granted('TIPO_DISPOSITIVO_EDITAR', tipoDispositivo)")
+     */
+    public function editarAction(Request $request, TipoDispositivo $tipoDispositivo)
+    {
         $em = $this->getDoctrine()->getManager();
-
-        if (null === $tipoDispositivo) {
-            $tipoDispositivo = new TipoDispositivo();
-            $em->persist($tipoDispositivo);
-        }
 
         $form = $this->createForm(TipoDispositivoType::class, $tipoDispositivo);
 
@@ -73,7 +77,6 @@ class TipoDispositivoController extends Controller
         }
 
         return $this->render('tipo_dispositivo/form.html.twig', [
-            //'tipos' => $tipos,
             'tipoDispositivo' => $tipoDispositivo,
             'formulario' => $form->createView()
         ]);

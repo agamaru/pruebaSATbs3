@@ -28,7 +28,7 @@ class EmpresaController extends Controller
      * @Route("/empresa/servicios/{id}", name="empresa_servicios_mostrar")
      * @Security("is_granted('EMPRESA_VER', empresa)")
      */
-    public function mostrarAction(Empresa $empresa)
+    public function mostrarServiciosAction(Empresa $empresa)
     {
         $softwares = $this->getDoctrine()->getRepository('AppBundle:Software')->findByEmpresa($empresa);
 
@@ -49,17 +49,23 @@ class EmpresaController extends Controller
 
     /**
      * @Route("/empresa/editar/nueva", name="empresa_nueva")
-     * @Route("/empresa/editar/{id}", name="empresa_editar")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('EMPRESA_CREAR')")
      */
-    public function editarAction(Request $request, Empresa $empresa = null)
+    public function nuevaAction(Request $request)
+    {
+        $empresa = new Empresa();
+        $this->getDoctrine()->getManager()->persist($empresa);
+
+        return $this->editarAction($request, $empresa);
+    }
+
+    /**
+     * @Route("/empresa/editar/{id}", name="empresa_editar")
+     * @Security("is_granted('EMPRESA_EDITAR', empresa)")
+     */
+    public function editarAction(Request $request, Empresa $empresa)
     {
         $em = $this->getDoctrine()->getManager();
-
-        if (null === $empresa) {
-            $empresa = new Empresa();
-            $em->persist($empresa);
-        }
 
         $form = $this->createForm(EmpresaType::class, $empresa);
 
