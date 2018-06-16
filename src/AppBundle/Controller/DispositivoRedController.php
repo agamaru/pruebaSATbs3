@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\DispositivoRed;
+use AppBundle\Entity\Empresa;
 use AppBundle\Form\Type\DispositivoRedType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -25,25 +26,62 @@ class DispositivoRedController extends Controller
     }
 
     /**
-     * @Route("/dispositivo/editar/nuevo", name="dispositivo_nuevo")
-     * @Route("/dispositivo/editar/{id}", name="dispositivo_editar")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Route("/dispositivo/nuevo", name="dispositivo_nuevo")
+     * @Route("servicios/dispositivo/nuevo/{id}", name="dispositivo_servicio_nuevo")
+     * @Security("is_granted('DISPOSITIVO_RED_CREAR')")
      */
-    public function crearAction(Request $request, DispositivoRed $dispositivo = null)
+    public function nuevaAction(Request $request, Empresa $empresa = null)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $nuevo = false;
-
-        if (null === $dispositivo) {
-            $nuevo = true;
-            $dispositivo = new DispositivoRed();
-            $em->persist($dispositivo);
+        $nuevo = true;
+        $dispositivoRed = new DispositivoRed();
+        if (null !== $empresa) {
+            $nuevo = false;
+            $dispositivoRed->setEmpresa($empresa);
         }
 
-        $form = $this->createForm(DispositivoRedType::class, $dispositivo, [
+        $em->persist($dispositivoRed);
+
+        return $this->formularioAction($request, $dispositivoRed, $nuevo);
+    }
+
+    /**
+     * @Route("/dispositivo/editar/{id}", name="dispositivo_editar")
+     * @Route("servicios/dispositivo/editar/{id}", name="dispositivo_servicio_editar")
+     * @Security("is_granted('DISPOSITIVO_RED_EDITAR', dispositivo)")
+     */
+    public function editarAction(Request $request, DispositivoRed $dispositivo)
+    {
+        return $this->formularioAction($request, $dispositivo);
+    }
+
+    /**
+     * @Route("/dispositivo/detalles/{id}", name="dispositivo_detalles")
+     * @Route("servicios/dispositivo/detalles/{id}", name="dispositivo_servicio_detalles")
+     * @Security("is_granted('DISPOSITIVO_RED_VER', dispositivo)")
+     */
+    public function detallesAction(Request $request, DispositivoRed $dispositivo)
+    {
+        return $this->formularioAction($request, $dispositivo, $nuevo = false, $soloLectura = true);
+    }
+
+    public function formularioAction(Request $request, DispositivoRed $dispositivoRed, $nuevo = false, $soloLectura = false)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $vengoDeEmpresa = false;
+
+        $ruta = $request->get('_route');
+
+        if (false !== strpos($ruta, 'servicio')) {
+            $vengoDeEmpresa = true;
+        }
+
+        $form = $this->createForm(DispositivoRedType::class, $dispositivoRed, [
             'nuevo' => $nuevo,
-            'admin' => $this->isGranted('ROLE_ADMIN')
+            'admin' => $this->isGranted('ROLE_ADMIN'),
+            'permiso' => $soloLectura
         ]);
 
         $form->handleRequest($request);
@@ -52,24 +90,46 @@ class DispositivoRedController extends Controller
             try {
                 $em->flush();
                 $this->addFlash('info', 'Cambios guardados');
+
+                if (false !== $vengoDeEmpresa){
+                    return $this->redirectToRoute('empresa_servicios_mostrar', array(
+                        'id' => $dispositivoRed->getEmpresa()->getId()
+                    ));
+                }
+                else {
+                    return $this->redirectToRoute('dispositivo_listar');
+                }
+
             } catch (\Exception $e) {
                 $this->addFlash('error', 'No se han podido guardar los cambios');
             }
-            return $this->redirectToRoute('dispositivo_listar');
         }
 
         return $this->render('disposivito_red/form.html.twig', [
-            'dispositivo' => $dispositivo,
+            'soloLectura' => $soloLectura,
+            'vengoDeEmpresa' => $vengoDeEmpresa,
+            'nuevo' => $nuevo,
+            'dispositivo' => $dispositivoRed,
             'formulario' => $form->createView()
         ]);
     }
 
+
     /**
      * @Route("/dispositivo/eliminar/{id}", name="dispositivo_eliminar")
+     * @Route("/servicios/dispositivo/eliminar/{id}", name="dispositivo_servicio_eliminar")
      * @Security("is_granted('DISPOSITIVO_RED_ELIMINAR', dispositivo)")
      */
     public function eliminarAction(Request $request, DispositivoRed $dispositivo)
     {
+        $vengoDeEmpresa = false;
+
+        $ruta = $request->get('_route');
+
+        if (false !== strpos($ruta, 'servicio')) {
+            $vengoDeEmpresa = true;
+        }
+
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
             try {
@@ -79,11 +139,21 @@ class DispositivoRedController extends Controller
             } catch (\Exception $e) {
                 $this->addFlash('error', 'No se ha podido eliminar el dispositivo de red');
             }
-            return $this->redirectToRoute('dispositivo_listar');
+
+            if (false !== $vengoDeEmpresa){
+                return $this->redirectToRoute('empresa_servicios_mostrar', array(
+                    'id' => $dispositivo->getEmpresa()->getId()
+                ));
+            }
+            else {
+
+                return $this->redirectToRoute('dispositivo_listar');
+            }
         }
 
         return $this->render('disposivito_red/eliminar.html.twig', [
-            'dispositivo' => $dispositivo
+            'dispositivo' => $dispositivo,
+            'vengoDeEmpresa' => $vengoDeEmpresa
         ]);
     }
 }

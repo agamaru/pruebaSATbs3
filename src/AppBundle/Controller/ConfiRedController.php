@@ -49,11 +49,11 @@ class ConfiRedController extends Controller
     /**
      * @Route("/confired/editar/{id}", name="confired_editar")
      * @Route("servicios/confired/editar/{id}", name="confired_servicio_editar")
-     * @Security("is_granted('CONFIRED_EDITAR', confiRed) or is_granted('CONFIRED_VER', confiRed)")
+     * @Security("is_granted('CONFIRED_EDITAR', confiRed)")
      */
     public function editarAction(Request $request, ConfiRed $confiRed)
     {
-        return $this->formularioAction($request, $confiRed, $nuevo = false, $soloLectura = false);
+        return $this->formularioAction($request, $confiRed);
     }
 
     /**
@@ -63,10 +63,10 @@ class ConfiRedController extends Controller
      */
     public function detallesAction(Request $request, ConfiRed $confiRed)
     {
-        return $this->formularioAction($request, $confiRed);
+        return $this->formularioAction($request, $confiRed, $nuevo = false, $soloLectura = true);
     }
 
-    public function formularioAction(Request $request, ConfiRed $confiRed, $nuevo = false, $soloLectura = true)
+    public function formularioAction(Request $request, ConfiRed $confiRed, $nuevo = false, $soloLectura = false)
     {
         $em = $this->getDoctrine()->getManager();
 

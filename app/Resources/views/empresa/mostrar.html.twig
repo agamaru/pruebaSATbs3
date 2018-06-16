@@ -24,7 +24,7 @@
                     <th>IP fija externa</th>
                     <th>DNS1</th>
                     <th>DNS2</th>
-                    <th class="no">Opciones</th>
+                    <th>Opciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -58,8 +58,11 @@
     </article>
 
     <article class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading encabezado">
             <h3>Dispositivos de red</h3>
+            {% if is_granted("EMPRESA_CREAR") %}
+                <a href="{{ path('dispositivo_servicio_nuevo', {'id': empresa.id}) }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo dispositivo de red</a>
+            {% endif %}
         </div>
         {% if dispositivos is defined and dispositivos is not empty %}
             <table class="table table-bordered">
@@ -67,6 +70,7 @@
                 <tr>
                     <th>Tipo</th>
                     <th>IP</th>
+                    <th>Opciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -74,6 +78,17 @@
                     <tr>
                         <td>{{ dispositivo.tipo }}</td>
                         <td>{{ dispositivo.ip }}</td>
+                        <td>
+                            {% if is_granted('DISPOSITIVO_RED_VER', dispositivo) %}
+                                <a href="{{ path('dispositivo_servicio_detalles', {'id': dispositivo.id}) }}" title="Ver detalles" class="icono"><i class="far fa-eye"></i> </a>
+                            {% endif %}
+                            {% if is_granted("DISPOSITIVO_RED_EDITAR", dispositivo) %}
+                                <a href="{{ path('dispositivo_servicio_editar', {'id': dispositivo.id}) }}" title="Editar dispositivo" class="icono"><i class="fas fa-pencil-alt"></i></a>
+                            {% endif %}
+                            {% if is_granted('ROLE_ADMIN')%}
+                                <a href="{{ path('dispositivo_servicio_eliminar', {'id': dispositivo.id}) }}" title="Eliminar dispositivo" class="icono"><i class="fa fa-trash"></i></a>
+                            {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>

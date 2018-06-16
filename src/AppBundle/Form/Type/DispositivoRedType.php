@@ -44,19 +44,24 @@ class DispositivoRedType extends AbstractType
                         ->orderBy('t.nombre');
                 },
                 'label' => 'Tipo *',
+                'disabled' => $options['permiso']
             ])
             ->add('ip', null, [
-                'label' => 'IP *'
+                'label' => 'IP *',
+                'disabled' => $options['permiso']
             ])
 
             ->add('usuario', null, [
-                'label' => 'Usuario *'
+                'label' => 'Usuario *',
+                'disabled' => $options['permiso']
             ])
             ->add('password', null, [
-                'label' => 'Contraseña *'
+                'label' => 'Contraseña *',
+                'disabled' => $options['permiso']
             ])
             ->add('wep', null, [
-                'label' => 'Clave de encriptación *'
+                'label' => 'Clave de encriptación *',
+                'disabled' => $options['permiso']
             ]);
     }
 
@@ -66,6 +71,7 @@ class DispositivoRedType extends AbstractType
             'data_class' => DispositivoRed::class,
             'nuevo' => false,
             'admin' => false,
+            'permiso' => false,
             'translation_domain' => false
         ]);
     }
