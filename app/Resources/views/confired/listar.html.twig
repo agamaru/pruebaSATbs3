@@ -33,6 +33,9 @@
                 <td>{{ confi.dns2 }}</td>
                 <td>{{ confi.empresa }}</td>
                 <td>
+                    {% if is_granted('CONFIRED_VER', confi) %}
+                        <a href="{{ path('confired_detalles', {'id': confi.id}) }}" title="Ver detalles" class="icono"><i class="far fa-eye"></i> </a>
+                    {% endif %}
                     {% if is_granted('CONFIRED_EDITAR', confi) %}
                         <a href="{{ path('confired_editar', {'id': confi.id}) }}" title="Editar configuración" class="icono"><i class="fas fa-pencil-alt"></i></a>
                     {% endif %}

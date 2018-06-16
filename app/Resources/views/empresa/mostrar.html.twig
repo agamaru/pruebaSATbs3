@@ -11,9 +11,6 @@
     <article class="panel panel-default">
         <div class="panel-heading">
             <h3>Configuraciones de red</h3>
-            {% if is_granted ('CONFIRED_CREAR') %}
-                <a href="{{ path('confired_servicio_nueva', {'id': empresa.id}) }}" class="btn btn-success"><i class="fa fa-plus"></i> Nueva configuración de red</a>
-            {% endif %}
         </div>
         {% if confiRedes is defined and confiRedes is not empty %}
             <table class="table table-bordered">

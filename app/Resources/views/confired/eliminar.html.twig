@@ -10,11 +10,7 @@
     </div>
     <form method="post">
         <div class="botonera">
-            {% if vengoDeEmpresa %}
-                <a href="{{ path('empresa_servicios_mostrar', {'id': confiRed.empresa.id}) }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado</a>
-            {% else %}
-                <a href="{{ path('confired_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado</a>
-            {% endif %}
+            <a href="{{ path('confired_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado</a>
             <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</button>
         </div>
     </form>

@@ -19,7 +19,8 @@ class ConfiRedType extends AbstractType
             $builder
                 ->add('empresa', null, [
                     'label' => 'Empresa *',
-                    'disabled' => !$options['admin']
+                    //'disabled' => !$options['admin']
+                    'disabled' => $options['permiso']
                 ]);
         } else {
             $builder
@@ -36,19 +37,24 @@ class ConfiRedType extends AbstractType
 
         $builder
             ->add('dominio', null, [
-                'label' => 'Dominio *'
+                'label' => 'Dominio *',
+                'disabled' => $options['permiso']
             ])
             ->add('mascaraRed', null, [
-                'label' => 'Máscara de red *'
+                'label' => 'Máscara de red *',
+                'disabled' => $options['permiso']
             ])
             ->add('ipFijaExt', null, [
-                'label' => 'IP fija externa *'
+                'label' => 'IP fija externa *',
+                'disabled' => $options['permiso']
             ])
             ->add('dns1', null, [
-                'label' => 'DNS1 *'
+                'label' => 'DNS1 *',
+                'disabled' => $options['permiso']
             ])
             ->add('dns2', null, [
-                'label' => 'DNS2 *'
+                'label' => 'DNS2 *',
+                'disabled' => $options['permiso']
             ]);
     }
 
@@ -58,6 +64,7 @@ class ConfiRedType extends AbstractType
             'data_class' => ConfiRed::class,
             'nuevo' => false,
             'admin' => false,
+            'permiso' => false,
             'translation_domain' => false
         ]);
     }
