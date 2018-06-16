@@ -19,8 +19,7 @@ class ConfiRedType extends AbstractType
             $builder
                 ->add('empresa', null, [
                     'label' => 'Empresa *',
-                    //'disabled' => !$options['admin']
-                    'disabled' => $options['permiso']
+                    'disabled' => !$options['admin']
                 ]);
         } else {
             $builder

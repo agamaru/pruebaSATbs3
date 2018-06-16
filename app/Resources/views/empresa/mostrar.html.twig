@@ -9,20 +9,43 @@
     </div>
 
     <article class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading encabezado">
             <h3>Configuraciones de red</h3>
+            {% if is_granted ('CONFIRED_CREAR') %}
+                <a href="{{ path('confired_servicio_nueva', {'id': empresa.id}) }}" class="btn btn-success"><i class="fa fa-plus"></i> Nueva configuración de red</a>
+            {% endif %}
         </div>
         {% if confiRedes is defined and confiRedes is not empty %}
             <table class="table table-bordered">
                 <thead>
                 <tr>
                     <th>Dominio</th>
+                    <th>Máscara de red</th>
+                    <th>IP fija externa</th>
+                    <th>DNS1</th>
+                    <th>DNS2</th>
+                    <th class="no">Opciones</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for confiRed in confiRedes %}
                     <tr>
                         <td>{{ confiRed.dominio }}</td>
+                        <td>{{ confiRed.mascaraRed }}</td>
+                        <td>{{ confiRed.ipFijaExt }}</td>
+                        <td>{{ confiRed.dns1 }}</td>
+                        <td>{{ confiRed.dns2 }}</td>
+                        <td>
+                            {% if is_granted('CONFIRED_VER', confiRed) %}
+                                <a href="{{ path('confired_servicio_detalles', {'id': confiRed.id}) }}" title="Ver detalles" class="icono"><i class="far fa-eye"></i> </a>
+                            {% endif %}
+                            {% if is_granted('CONFIRED_EDITAR', confiRed) %}
+                                <a href="{{ path('confired_servicio_editar', {'id': confiRed.id}) }}" title="Editar configuración" class="icono"><i class="fas fa-pencil-alt"></i></a>
+                            {% endif %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('confired_servicio_eliminar', {'id': confiRed.id}) }}" title="Eliminar configuración" class="icono"><i class="fa fa-trash"></i></a>
+                            {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>

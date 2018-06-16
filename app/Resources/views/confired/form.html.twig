@@ -7,7 +7,7 @@
         <h1>{{ confiRed.id ? 'Datos de la configuración de red' : 'Nueva configuración de red' }}</h1>
     </div>
 
-    {{ form_start(formulario, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_start(formulario) }}
     {{ form_widget(formulario) }}
 
     <div class="form-group row">
@@ -16,7 +16,11 @@
             <p>* Los campos marcados son obligatorios</p>
             {% endif %}
             <div class="botonera">
-                <a href="{{ path('confired_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado</a>
+                {% if vengoDeEmpresa and not nuevo %}
+                    <a href="{{ path('empresa_servicios_mostrar', {'id': confiRed.empresa.id}) }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado</a>
+                {% else %}
+                    <a href="{{ path('confired_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado</a>
+                {% endif %}
                 {% if not soloLectura %}
                     <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Guardar cambios</button>
                     {% if confiRed.id and is_granted('CONFIRED_ELIMINAR', confiRed)%}
