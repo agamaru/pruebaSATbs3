@@ -9,7 +9,7 @@
         <h1>{{ empresa.id ? empresa.nombre : 'Nueva empresa' }}</h1>
     </div>
 
-    {{ form_start(formulario, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_start(formulario) }}
     {{ form_widget(formulario) }}
 
     <div class="form-group row">

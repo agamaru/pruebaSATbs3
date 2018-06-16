@@ -48,7 +48,7 @@ class EmpresaController extends Controller
     }
 
     /**
-     * @Route("/empresa/editar/nueva", name="empresa_nueva")
+     * @Route("/empresa/nueva", name="empresa_nueva")
      * @Security("is_granted('EMPRESA_CREAR')")
      */
     public function nuevaAction(Request $request)
@@ -56,7 +56,7 @@ class EmpresaController extends Controller
         $empresa = new Empresa();
         $this->getDoctrine()->getManager()->persist($empresa);
 
-        return $this->editarAction($request, $empresa);
+        return $this->formularioAction($request, $empresa);
     }
 
     /**
@@ -64,6 +64,12 @@ class EmpresaController extends Controller
      * @Security("is_granted('EMPRESA_EDITAR', empresa)")
      */
     public function editarAction(Request $request, Empresa $empresa)
+    {
+        return $this->formularioAction($request, $empresa);
+    }
+
+
+    public function formularioAction(Request $request, Empresa $empresa)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -98,8 +104,6 @@ class EmpresaController extends Controller
             $em = $this->getDoctrine()->getManager();
             try {
                 $this->getDoctrine()->getRepository('AppBundle:Empresa')->delete($empresa);
-
-                //$em->remove($empresa);
                 $em->flush();
 
                 $this->addFlash('info', 'Empresa eliminada');
