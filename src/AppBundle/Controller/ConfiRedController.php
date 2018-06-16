@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\ConfiRed;
+use AppBundle\Entity\Empresa;
 use AppBundle\Form\Type\ConfiRedType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -25,21 +26,48 @@ class ConfiRedController extends Controller
     }
 
     /**
-     * @Route("/confired/editar/nueva", name="confired_nueva")
-     * @Route("/confired/editar/{id}", name="confired_editar")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Route("/confired/nueva", name="confired_nueva")
+     * @Route("servicios/confired/nueva/{id}", name="confired_servicio_nueva")
+     * @Security("is_granted('CONFIRED_CREAR')")
      */
-    public function editarAction(Request $request, ConfiRed $confiRed = null)
+    public function nuevaAction(Request $request, Empresa $empresa = null)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $nuevo = false;
-
-        if (null === $confiRed) {
-            $nuevo = true;
-            $confiRed = new ConfiRed();
-            $em->persist($confiRed);
+        $nuevo = true;
+        $confiRed = new ConfiRed();
+        if (null !== $empresa) {
+            $nuevo = false;
+            $confiRed->setEmpresa($empresa);
         }
+
+        $em->persist($confiRed);
+
+        return $this->formularioAction($request, $confiRed, $nuevo);
+    }
+
+    /**
+     * @Route("/confired/editar/{id}", name="confired_editar")
+     * @Route("servicios/confired/editar/{id}", name="confired_servicios_editar")
+     * @Security("is_granted('CONFIRED_EDITAR', confiRed)")
+     */
+    public function editarAction(Request $request, ConfiRed $confiRed)
+    {
+        return $this->formularioAction($request, $confiRed);
+    }
+
+
+    public function formularioAction(Request $request, ConfiRed $confiRed, $nuevo = false)
+    {
+        $vengoDeEmpresa = false;
+
+        $ruta = $request->get('_route');
+
+        if (false !== strpos($ruta, 'servicio')) {
+            $vengoDeEmpresa = true;
+        }
+
+        $em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(ConfiRedType::class, $confiRed, [
             'nuevo' => $nuevo,
@@ -52,13 +80,24 @@ class ConfiRedController extends Controller
             try {
                 $em->flush();
                 $this->addFlash('info', 'Cambios guardados');
+
+                if (false === $vengoDeEmpresa){
+                    return $this->redirectToRoute('confired_listar');
+                }
+                else {
+                    return $this->redirectToRoute('empresa_servicios_mostrar', array(
+                        'id' => $confiRed->getEmpresa()->getId()
+                    ));
+                }
+
             } catch (\Exception $e) {
                 $this->addFlash('error', 'No se han podido guardar los cambios');
             }
-            return $this->redirectToRoute('confired_listar');
         }
 
         return $this->render('confired/form.html.twig', [
+            'vengoDeEmpresa' => $vengoDeEmpresa,
+            'nuevo' => $nuevo,
             'confiRed' => $confiRed,
             'formulario' => $form->createView()
         ]);
@@ -66,24 +105,41 @@ class ConfiRedController extends Controller
 
     /**
      * @Route("/confired/eliminar/{id}", name="confired_eliminar")
+     * @Route("servicios/confired/eliminar/{id}", name="confired_servicio_eliminar")
      * @Security("is_granted('CONFIRED_ELIMINAR', confiRed)")
      */
     public function eliminarAction(Request $request, ConfiRed $confiRed)
     {
+        $vengoDeEmpresa = false;
+
+        $ruta = $request->get('_route');
+
+        if (false !== strpos($ruta, 'servicio')) {
+            $vengoDeEmpresa = true;
+        }
+
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
             try {
                 $em->remove($confiRed);
                 $em->flush();
-                $this->addFlash('info', 'Configuración eliminada');
+                $this->addFlash('info', 'Configuración de red eliminada');
             } catch (\Exception $e) {
-                $this->addFlash('error', 'No se ha podido eliminar la configuración');
+                $this->addFlash('error', 'No se ha podido eliminar la configuración de red');
             }
-            return $this->redirectToRoute('confired_listar');
+            if (false === $vengoDeEmpresa){
+                return $this->redirectToRoute('confired_listar');
+            }
+            else {
+                return $this->redirectToRoute('empresa_servicios_mostrar', array(
+                    'id' => $confiRed->getEmpresa()->getId()
+                ));
+            }
         }
 
         return $this->render('confired/eliminar.html.twig', [
-            'confiRed' => $confiRed
+            'confiRed' => $confiRed,
+            'vengoDeEmpresa' => $vengoDeEmpresa
         ]);
     }
 
