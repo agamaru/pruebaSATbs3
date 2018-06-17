@@ -16,10 +16,7 @@
             <tr>
                 <th>Nombre</th>
                 <th>Tipo</th>
-                <th>Usuario</th>
-                <th>Contraseña</th>
                 <th>Fecha de renovación</th>
-                <th>Notas</th>
                 <th>Empresa</th>
                 <th class="no">Opciones</th>
             </tr>
@@ -29,14 +26,17 @@
             <tr>
                 <td>{{ software.nombre }}</td>
                 <td>{{ software.tipo }}</td>
-                <td>{{ software.usuario }}</td>
-                <td>{{ software.password }}</td>
                 <td>{{ software.fechaRenovacion|date('d/m/Y') }}</td>
-                <td>{% if software.notas %} {{ software.notas }} {% endif %}</td>
                 <td>{{ software.empresa }}</td>
                 <td>
+                    {% if is_granted('SOFTWARE_VER', software) %}
+                        <a href="{{ path('software_detalles', {'id': software.id}) }}" title="Ver detalles" class="icono"><i class="far fa-eye"></i> </a>
+                    {% endif %}
                     {% if is_granted('SOFTWARE_EDITAR', software) %}
                     <a href="{{ path('software_editar', {'id': software.id}) }}" title="Editar software" class="icono"><i class="fas fa-pencil-alt"></i></a>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMIN')%}
+                        <a href="{{ path('software_eliminar', {'id': software.id}) }}" title="Eliminar software" class="icono"><i class="fa fa-trash"></i></a>
                     {% endif %}
                 </td>
             </tr>

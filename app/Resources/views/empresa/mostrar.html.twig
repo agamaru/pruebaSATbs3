@@ -22,8 +22,6 @@
                     <th>Dominio</th>
                     <th>Máscara de red</th>
                     <th>IP fija externa</th>
-                    <th>DNS1</th>
-                    <th>DNS2</th>
                     <th>Opciones</th>
                 </tr>
                 </thead>
@@ -33,8 +31,6 @@
                         <td>{{ confiRed.dominio }}</td>
                         <td>{{ confiRed.mascaraRed }}</td>
                         <td>{{ confiRed.ipFijaExt }}</td>
-                        <td>{{ confiRed.dns1 }}</td>
-                        <td>{{ confiRed.dns2 }}</td>
                         <td>
                             {% if is_granted('CONFIRED_VER', confiRed) %}
                                 <a href="{{ path('confired_servicio_detalles', {'id': confiRed.id}) }}" title="Ver detalles" class="icono"><i class="far fa-eye"></i> </a>
@@ -145,8 +141,11 @@
     </article>
 
     <article class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading encabezado">
             <h3>Softwares</h3>
+            {% if is_granted('SOFTWARE_CREAR') %}
+                <a href="{{ path('software_servicio_nuevo', {'id': empresa.id}) }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo software</a>
+            {% endif %}
         </div>
             {% if softwares is defined and softwares is not empty %}
                 <table class="table table-bordered">
@@ -155,6 +154,7 @@
                         <th>Nombre</th>
                         <th>Tipo</th>
                         <th>Fecha de renovación</th>
+                        <th>Opciones</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -163,6 +163,17 @@
                             <td>{{ software.nombre }}</td>
                             <td>{{ software.tipo }}</td>
                             <td>{{ software.fechaRenovacion|date('d/m/Y') }}</td>
+                            <td>
+                                {% if is_granted('SOFTWARE_VER', software) %}
+                                    <a href="{{ path('software_servicio_detalles', {'id': software.id}) }}" title="Ver detalles" class="icono"><i class="far fa-eye"></i> </a>
+                                {% endif %}
+                                {% if is_granted('SOFTWARE_EDITAR', software) %}
+                                    <a href="{{ path('software_servicio_editar', {'id': software.id}) }}" title="Editar software" class="icono"><i class="fas fa-pencil-alt"></i></a>
+                                {% endif %}
+                                {% if is_granted('ROLE_ADMIN')%}
+                                    <a href="{{ path('software_servicio_eliminar', {'id': software.id}) }}" title="Eliminar software" class="icono"><i class="fa fa-trash"></i></a>
+                                {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>

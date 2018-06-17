@@ -36,24 +36,30 @@ class SoftwareType extends AbstractType
 
         $builder
             ->add('nombre', null, [
-                'label' => 'Nombre del software *'
+                'label' => 'Nombre del software *',
+                'disabled' => $options['permiso']
             ])
             ->add('tipo', null, [
                 'label' => 'Tipo *',
-                'placeholder' => 'Seleccione un tipo'
+                'placeholder' => 'Seleccione un tipo',
+                'disabled' => $options['permiso']
             ])
             ->add('usuario', null, [
-                'label' => 'Usuario *'
+                'label' => 'Usuario *',
+                'disabled' => $options['permiso']
             ])
             ->add('password', null, [
-                'label' => 'Contraseña *'
+                'label' => 'Contraseña *',
+                'disabled' => $options['permiso']
             ])
             ->add('notas', null, [
-                'label' => 'Notas'
+                'label' => 'Notas',
+                'disabled' => $options['permiso']
             ])
             ->add('fechaRenovacion', null, [
                 'label' => 'Fecha de renovación *',
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'disabled' => $options['permiso']
             ]);
     }
 
@@ -63,8 +69,8 @@ class SoftwareType extends AbstractType
             'data_class' => Software::class,
             'nuevo' => false,
             'admin' => false,
+            'permiso' => false,
             'translation_domain' => false
-
         ]);
     }
 }

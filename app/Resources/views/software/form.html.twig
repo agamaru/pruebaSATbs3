@@ -9,17 +9,29 @@
         <h1>{{ software.id ? 'Datos del software' : 'Nuevo software' }}</h1>
     </div>
 
-    {{ form_start(formulario, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_start(formulario) }}
     {{ form_widget(formulario) }}
 
     <div class="form-group row">
         <div class="col-sm-9 col-sm-offset-3">
-            <p>* Los campos marcados son obligatorios</p>
+            {% if not soloLectura %}
+                <p>* Los campos marcados son obligatorios</p>
+            {% endif %}
             <div class="botonera">
-                <a href="{{ path('software_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado</a>
-                <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Guardar cambios</button>
-                {% if software.id and is_granted('SOFTWARE_ELIMINAR', software) %}
-                    <a href="{{ path('software_eliminar', {'id': software.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
+                {% if vengoDeEmpresa and not nuevo %}
+                    <a href="{{ path('empresa_servicios_mostrar', {'id': software.empresa.id}) }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado</a>
+                {% else %}
+                    <a href="{{ path('software_listar') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Volver al listado</a>
+                {% endif %}
+                {% if not soloLectura %}
+                    <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Guardar cambios</button>
+                    {% if software.id and is_granted('SOFTWARE_ELIMINAR', software) %}
+                        {% if vengoDeEmpresa %}
+                            <a href="{{ path('software_servicio_eliminar', {'id': software.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
+                        {% else %}
+                            <a href="{{ path('software_eliminar', {'id': software.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
+                        {% endif %}
+                    {% endif %}
                 {% endif %}
             </div>
         </div>
