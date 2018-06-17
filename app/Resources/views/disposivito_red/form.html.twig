@@ -26,7 +26,12 @@
                 {% if not soloLectura %}
                     <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Guardar cambios</button>
                     {% if dispositivo.id and is_granted("DISPOSITIVO_RED_ELIMINAR", dispositivo)%}
-                        <a href="{{ path('dispositivo_eliminar', {'id': dispositivo.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
+                        {% if vengoDeEmpresa %}
+                            <a href="{{ path('dispositivo_servicio_eliminar', {'id': dispositivo.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
+                        {% else %}
+                            <a href="{{ path('dispositivo_eliminar', {'id': dispositivo.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
+                        {% endif %}
+
                     {% endif %}
                 {% endif %}
             </div>

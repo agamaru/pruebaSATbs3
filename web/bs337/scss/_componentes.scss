@@ -168,10 +168,28 @@ i {
 
 .icono {
     color: $gris;
+    :hover {
+        //color: #C9501A;
+        color: $azul;
+    }
 }
 
 .icono + .icono {
     margin-left: 5px;
 }
 
+thead {
+    color: $blanco;
+    background-color: $gris;
+}
+
+th:last-child, tr:last-child {
+    max-width: 150px;
+}
+
+//td > a {
+//    :hover{
+//        color: darken($naranja, 10%);
+//    }
+//}
 

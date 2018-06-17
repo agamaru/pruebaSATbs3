@@ -145,7 +145,6 @@ class ConfiRedController extends Controller
                 ));
             }
             else {
-
                 return $this->redirectToRoute('confired_listar');
             }
 

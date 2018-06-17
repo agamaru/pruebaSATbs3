@@ -30,26 +30,31 @@ class ServidorType extends AbstractType
                         return $er->createQueryBuilder('e')
                             ->orderBy('e.nombre');
                     },
-                    'label' => 'Empresa *'
+                    'label' => 'Empresa *',
                 ]);
         }
 
         $builder
             ->add('nombre', null, [
-                'label' => 'Nombre *'
+                'label' => 'Nombre *',
+                'disabled' => $options['permiso']
             ])
             ->add('ip', null, [
-                'label' => 'IP *'
+                'label' => 'IP *',
+                'disabled' => $options['permiso']
             ])
 
             ->add('usuario', null, [
-                'label' => 'Usuario *'
+                'label' => 'Usuario *',
+                'disabled' => $options['permiso']
             ])
             ->add('pass', null, [
-                'label' => 'Contraseña *'
+                'label' => 'Contraseña *',
+                'disabled' => $options['permiso']
             ])
             ->add('detalles', null, [
-                'label' => 'Recursos de red y directivas *'
+                'label' => 'Recursos de red y directivas *',
+                'disabled' => $options['permiso']
             ]);
     }
 
@@ -59,6 +64,7 @@ class ServidorType extends AbstractType
             'data_class' => Servidor::class,
             'nuevo' => false,
             'admin' => false,
+            'permiso' => false,
             'translation_domain' => false
         ]);
     }

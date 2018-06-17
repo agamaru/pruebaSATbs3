@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Empresa;
 use AppBundle\Entity\Servidor;
 use AppBundle\Form\Type\ServidorType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -25,25 +26,62 @@ class ServidorController extends Controller
     }
 
     /**
-     * @Route("/servidor/editar/nuevo", name="servidor_nuevo")
-     * @Route("/servidor/editar/{id}", name="servidor_editar")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Route("/servidor/nuevo", name="servidor_nuevo")
+     * @Route("servicios/servidor/nuevo/{id}", name="servidor_servicio_nuevo")
+     * @Security("is_granted('SERVIDOR_CREAR')")
      */
-    public function crearAction(Request $request, Servidor $servidor = null)
+    public function nuevaAction(Request $request, Empresa $empresa = null)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $nuevo = false;
+        $nuevo = true;
+        $servidor = new Servidor();
+        if (null !== $empresa) {
+            $nuevo = false;
+            $servidor->setEmpresa($empresa);
+        }
 
-        if (null === $servidor) {
-            $nuevo = true;
-            $servidor = new Servidor();
-            $em->persist($servidor);
+        $em->persist($servidor);
+
+        return $this->formularioAction($request, $servidor, $nuevo, false);
+    }
+
+    /**
+     * @Route("/servidor/editar/{id}", name="servidor_editar")
+     * @Route("servicios/servidor/editar/{id}", name="servidor_servicio_editar")
+     * @Security("is_granted('SERVIDOR_EDITAR', servidor)")
+     */
+    public function editarAction(Request $request, Servidor $servidor)
+    {
+        return $this->formularioAction($request, $servidor, false, false);
+    }
+
+    /**
+     * @Route("/servidor/detalles/{id}", name="servidor_detalles")
+     * @Route("servicios/servidor/detalles/{id}", name="servidor_servicio_detalles")
+     * @Security("is_granted('SERVIDOR_VER', servidor)")
+     */
+    public function detallesAction(Request $request, Servidor $servidor)
+    {
+        return $this->formularioAction($request, $servidor);
+    }
+
+    public function formularioAction(Request $request, Servidor $servidor, $nuevo = false, $soloLectura = true)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $vengoDeEmpresa = false;
+
+        $ruta = $request->get('_route');
+
+        if (false !== strpos($ruta, 'servicio')) {
+            $vengoDeEmpresa = true;
         }
 
         $form = $this->createForm(ServidorType::class, $servidor, [
             'nuevo' => $nuevo,
-            'admin' => $this->isGranted('ROLE_ADMIN')
+            'admin' => $this->isGranted('ROLE_ADMIN'),
+            'permiso' => $soloLectura
         ]);
 
         $form->handleRequest($request);
@@ -52,13 +90,25 @@ class ServidorController extends Controller
             try {
                 $em->flush();
                 $this->addFlash('info', 'Cambios guardados');
+
+                if (false !== $vengoDeEmpresa){
+                    return $this->redirectToRoute('empresa_servicios_mostrar', array(
+                        'id' => $servidor->getEmpresa()->getId()
+                    ));
+                }
+                else {
+                    return $this->redirectToRoute('servidor_listar');
+                }
+
             } catch (\Exception $e) {
                 $this->addFlash('error', 'No se han podido guardar los cambios');
             }
-            return $this->redirectToRoute('servidor_listar');
         }
 
         return $this->render('servidor/form.html.twig', [
+            'soloLectura' => $soloLectura,
+            'vengoDeEmpresa' => $vengoDeEmpresa,
+            'nuevo' => $nuevo,
             'servidor' => $servidor,
             'formulario' => $form->createView()
         ]);
@@ -66,10 +116,19 @@ class ServidorController extends Controller
 
     /**
      * @Route("/servidor/eliminar/{id}", name="servidor_eliminar")
+     * @Route("servicios/servidor/eliminar/{id}", name="servidor_servicio_eliminar")
      * @Security("is_granted('SERVIDOR_ELIMINAR', servidor)")
      */
     public function eliminarAction(Request $request, Servidor $servidor)
     {
+        $vengoDeEmpresa = false;
+
+        $ruta = $request->get('_route');
+
+        if (false !== strpos($ruta, 'servicio')) {
+            $vengoDeEmpresa = true;
+        }
+
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
             try {
@@ -79,11 +138,19 @@ class ServidorController extends Controller
             } catch (\Exception $e) {
                 $this->addFlash('error', 'No se ha podido eliminar el servidor');
             }
-            return $this->redirectToRoute('servidor_listar');
+            if (false !== $vengoDeEmpresa){
+                return $this->redirectToRoute('empresa_servicios_mostrar', array(
+                    'id' => $servidor->getEmpresa()->getId()
+                ));
+            }
+            else {
+                return $this->redirectToRoute('servidor_listar');
+            }
         }
 
         return $this->render('servidor/eliminar.html.twig', [
-            'servidor' => $servidor
+            'servidor' => $servidor,
+            'vengoDeEmpresa' => $vengoDeEmpresa
         ]);
     }
 }

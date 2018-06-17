@@ -80,9 +80,13 @@ $state-info-text:                $brand-primary !default;
 $state-info-bg:                  lighten($brand-info, 35%) !default;
 $state-info-border:              $brand-primary !default;
 
-$state-warning-text:             $brand-warning !default;
-$state-warning-bg:               lighten($brand-warning, 35%) !default;
-$state-warning-border:           $brand-warning !default;
+//$state-warning-text:             $brand-warning !default;
+//$state-warning-bg:               lighten($brand-warning, 35%) !default;
+//$state-warning-border:           $brand-warning !default;
+
+$state-warning-text:             #C9501A !default;
+$state-warning-bg:               lighten(#EF9A48, 25%) !default;
+$state-warning-border:           #C9501A !default;
 
 $state-danger-text:              $brand-danger !default;
 $state-danger-bg:                lighten($brand-danger, 35%) !default;

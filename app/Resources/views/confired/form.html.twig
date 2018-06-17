@@ -24,7 +24,11 @@
                 {% if not soloLectura %}
                     <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Guardar cambios</button>
                     {% if confiRed.id and is_granted('CONFIRED_ELIMINAR', confiRed)%}
-                        <a href="{{ path('confired_eliminar', {'id': confiRed.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
+                        {% if vengoDeEmpresa %}
+                            <a href="{{ path('confired_servicio_eliminar', {'id': confiRed.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
+                        {% else %}
+                            <a href="{{ path('confired_eliminar', {'id': confiRed.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
+                        {% endif %}
                     {% endif %}
                 {% endif %}
             </div>
