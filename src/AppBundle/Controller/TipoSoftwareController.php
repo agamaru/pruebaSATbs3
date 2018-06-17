@@ -50,7 +50,7 @@ class TipoSoftwareController extends Controller
         $tipoSoftware = new TipoSoftware();
         $this->getDoctrine()->getManager()->persist($tipoSoftware);
 
-        return $this->editarAction($request, $tipoSoftware);
+        return $this->formularioAction($request, $tipoSoftware);
     }
 
     /**
@@ -58,6 +58,12 @@ class TipoSoftwareController extends Controller
      * @Security("is_granted('TIPO_SOFTWARE_EDITAR', tipoSoftware)")
      */
     public function editarAction(Request $request, TipoSoftware $tipoSoftware)
+    {
+        return $this->formularioAction($request, $tipoSoftware);
+    }
+
+
+    public function formularioAction(Request $request, TipoSoftware $tipoSoftware)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -96,7 +102,6 @@ class TipoSoftwareController extends Controller
             $em = $this->getDoctrine()->getManager();
             try {
                 $this->getDoctrine()->getRepository('AppBundle:TipoSoftware')->delete($tipoSoftware);
-                //$em->remove($tipoSoftware);
                 $em->flush();
                 $this->addFlash('info', 'El tipo de software ha sido eliminado');
             } catch (\Exception $e) {

@@ -3,7 +3,7 @@
 {% block title %}Tipo de software{% endblock %}
 
 {% block content %}
-    <div class="encabezado">
+    <div class="well encabezado">
         <h1>Tipos de software</h1>
         {% if is_granted('TIPO_SOFTWARE_CREAR') %}
         <a href="{{ path('tipo_software_nuevo') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo tipo</a>
@@ -14,7 +14,11 @@
     {% if tipos is defined and tipos is not empty %}
         <div class="list-group col-sm-3">
             {% for tipo in tipos %}
-                <a class="list-group-item text-center" href="{{ path('tipo_software_mostrar', {'id': tipo.id}) }}">{{ tipo.nombre }}</a>
+                {% if is_granted('TIPO_SOFTWARE_VER', tipo) %}
+                    <a class="list-group-item text-center {% if tipoSoftware is defined and tipo.id == tipoSoftware.id %}active{% endif %}" href="{{ path('tipo_software_mostrar', {'id': tipo.id}) }}">{{ tipo.nombre }}</a>
+                {% else %}
+                    <a class="list-group-item text-center" href="#">{{ tipo.nombre }}</a>
+                {% endif %}
             {% endfor %}
         </div>
         <div class="col-sm-9">

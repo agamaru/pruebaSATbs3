@@ -50,7 +50,7 @@ class TipoDispositivoController extends Controller
         $tipoDispositivo = new TipoDispositivo();
         $this->getDoctrine()->getManager()->persist($tipoDispositivo);
 
-        return $this->editarAction($request, $tipoDispositivo);
+        return $this->formularioAction($request, $tipoDispositivo);
     }
 
     /**
@@ -58,6 +58,12 @@ class TipoDispositivoController extends Controller
      * @Security("is_granted('TIPO_DISPOSITIVO_EDITAR', tipoDispositivo)")
      */
     public function editarAction(Request $request, TipoDispositivo $tipoDispositivo)
+    {
+        return $this->formularioAction($request, $tipoDispositivo);
+    }
+
+
+    public function formularioAction(Request $request, TipoDispositivo $tipoDispositivo)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -82,14 +88,13 @@ class TipoDispositivoController extends Controller
         ]);
     }
 
+
     /**
      * @Route("/tipos/dispositivo/eliminar/{id}", name="tipo_dispositivo_eliminar")
      * @Security("is_granted('TIPO_DISPOSITIVO_ELIMINAR', tipoDispositivo)")
      */
     public function eliminarAction(Request $request, TipoDispositivo $tipoDispositivo)
     {
-        //$tipos = $this->getDoctrine()->getRepository('AppBundle:TipoDispositivo')->findAllOrderedByNombre();
-
         $dispositivos = $this->getDoctrine()->getRepository('AppBundle:DispositivoRed')->findByTipo($tipoDispositivo);
 
         $resultado = count($dispositivos);
@@ -98,7 +103,6 @@ class TipoDispositivoController extends Controller
             $em = $this->getDoctrine()->getManager();
             try {
                 $this->getDoctrine()->getRepository('AppBundle:TipoDispositivo')->delete($tipoDispositivo);
-                //$em->remove($tipoDispositivo);
                 $em->flush();
                 $this->addFlash('info', 'El tipo de dispositivo ha sido eliminado');
 
@@ -109,7 +113,6 @@ class TipoDispositivoController extends Controller
         }
 
         return $this->render('tipo_dispositivo/eliminar.html.twig', [
-            //'tipos' => $tipos,
             'tipoDispositivo' => $tipoDispositivo,
             'resultado' => $resultado
         ]);
