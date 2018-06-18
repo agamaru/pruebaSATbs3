@@ -19,7 +19,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         {% if app.user %}
                             <li class="dropdown text-right">
-                            <a href="#"><i class="fas fa-user"></i> Conectado como {{ app.user }}</a>
+                            <a href="#"><i class="fas fa-user"></i> Conectado como <strong>{{ app.user }}</strong></a>
                             </li>
                         {% endif %}
                     </ul>
@@ -27,7 +27,7 @@
             </div>
         </header>
         <main class="container">
-            <h1>Bienvenido</h1>
+            <h1>Bienvenido{% if is_granted('ROLE_ADMIN') %}, administrador{% endif %}.</h1>
 
             <article class="card">
                 <a href="{{ path('empresa_listar') }}">
