@@ -15,10 +15,10 @@
 
         <!-- Bootstrap -->
         <link href="{{ asset('fontawesome/css/fontawesome-all.css') }}" rel="stylesheet">
-        <link href="{{ asset('bs337/css/estilos.css') }}" rel="stylesheet">
-        <link href="{{ asset('select2/dist/css/select2.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('select2-bootstrap-theme/dist/select2-bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('datatables/css/dataTables.bootstrap.css') }}" rel="stylesheet" >
+        <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/select2-bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/dataTables.bootstrap.css') }}" rel="stylesheet" >
 
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -33,13 +33,13 @@
         {% block javascripts %}
             <!-- Optional JavaScript -->
             <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-            <script src="{{ asset('bs337/jquery/jquery.min.js') }}"></script>
-            <script src="{{ asset('bs337/js/bootstrap.min.js') }}"></script>
-            <script src="{{ asset('select2/dist/js/select2.js') }}"></script>
-            <script src="{{ asset('select2/dist/js/i18n/es.js') }}"></script>
+            <script src="{{ asset('js/jquery/jquery.min.js') }}"></script>
+            <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('js/select2/select2.js') }}"></script>
+            <script src="{{ asset('js/select2/i18n/es.js') }}"></script>
             <!-- JS DataTables -->
-            <script src="{{ asset('datatables/js/jquery.dataTables.js') }}"></script>
-            <script src="{{ asset('datatables/js/dataTables.bootstrap.js') }}"></script>
+            <script src="{{ asset('js/datatables/jquery.dataTables.js') }}"></script>
+            <script src="{{ asset('js/datatables/dataTables.bootstrap.js') }}"></script>
             <script src="{{ asset('js/main.js') }}"></script>
         {% endblock %}
     </body>

@@ -40,7 +40,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     {% if app.user %}
                         <li class="dropdown">
-                            <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> Conectado como {{ app.user }}
+                            <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> Conectado como <strong>{{ app.user }}</strong>
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="{{ path('usuario_salir') }}"><i class="fa fa-sign-out-alt"></i> Salir</a></li>

@@ -15,10 +15,8 @@
         <thead>
             <tr>
                 <th>Dominio</th>
-                <th>Máscara de red</th>
-                <th>IP fija externa</th>
-                <th>DNS1</th>
-                <th>DNS2</th>
+                <th class="no">Máscara de red</th>
+                <th class="no">IP fija externa</th>
                 <th>Empresa</th>
                 <th class="no">Opciones</th>
             </tr>
@@ -29,8 +27,6 @@
                 <td>{{ confiRed.dominio }}</td>
                 <td>{{ confiRed.mascaraRed }}</td>
                 <td>{{ confiRed.ipFijaExt }}</td>
-                <td>{{ confiRed.dns1 }}</td>
-                <td>{{ confiRed.dns2 }}</td>
                 <td>{{ confiRed.empresa }}</td>
                 <td>
                     {% if is_granted('CONFIRED_VER', confiRed) %}
