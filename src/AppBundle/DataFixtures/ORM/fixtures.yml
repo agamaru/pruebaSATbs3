@@ -61,7 +61,3 @@ AppBundle\Entity\Usuario:
       nombreUsuario: usuario2
       password: usuario2
       administrador: false
-    usuario_{1..5}:
-      nombreUsuario (unique): <es_ES:userName()>
-      password: <password()>
-      administrador: false
