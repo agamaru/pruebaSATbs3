@@ -5967,6 +5967,10 @@ main {
 
 .login-form {
   margin-top: 2em; }
+  @media (min-width: 992px) {
+    .login-form {
+      margin-top: 4em;
+      box-shadow: 5px 10px 8px #888888; } }
 
 @media (min-width: 992px) {
   .encabezado {
