@@ -5,9 +5,11 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Empresa;
 use AppBundle\Entity\Servidor;
 use AppBundle\Form\Type\ServidorType;
+use AppBundle\Service\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 
 class ServidorController extends Controller
@@ -30,7 +32,7 @@ class ServidorController extends Controller
      * @Route("servicios/servidor/nuevo/{id}", name="servidor_servicio_nuevo")
      * @Security("is_granted('SERVIDOR_CREAR')")
      */
-    public function nuevaAction(Request $request, Empresa $empresa = null)
+    public function nuevaAction(Request $request, FileUploader $fileUploader, Empresa $empresa = null)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -43,7 +45,7 @@ class ServidorController extends Controller
 
         $em->persist($servidor);
 
-        return $this->formularioAction($request, $servidor, $nuevo, false);
+        return $this->formularioAction($request, $fileUploader, $servidor, $nuevo, false);
     }
 
     /**
@@ -51,9 +53,13 @@ class ServidorController extends Controller
      * @Route("servicios/servidor/editar/{id}", name="servidor_servicio_editar")
      * @Security("is_granted('SERVIDOR_EDITAR', servidor)")
      */
-    public function editarAction(Request $request, Servidor $servidor)
+    public function editarAction(Request $request, Servidor $servidor,FileUploader $fileUploader)
     {
-        return $this->formularioAction($request, $servidor, false, false);
+        $servidor->setPass(
+            new File($this->getParameter('serpass_directory').'/'.$servidor->getPass())
+        );
+
+        return $this->formularioAction($request, $fileUploader, $servidor, false, false);
     }
 
     /**
@@ -63,10 +69,10 @@ class ServidorController extends Controller
      */
     public function detallesAction(Request $request, Servidor $servidor)
     {
-        return $this->formularioAction($request, $servidor);
+        //return $this->formularioAction($request, $servidor);
     }
 
-    public function formularioAction(Request $request, Servidor $servidor, $nuevo = false, $soloLectura = true)
+    public function formularioAction(Request $request, FileUploader $fileUploader, Servidor $servidor, $nuevo = false, $soloLectura = true)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -88,6 +94,20 @@ class ServidorController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             try {
+
+                // vengo de nuevo (problema si vengo de detalles)
+                if (false !== strpos($ruta, 'nuevo')) {
+                    $file = $servidor->getPass();
+                    $fileName = $fileUploader->upload($file);
+
+                    // updates the 'pass' property to store the file name
+                    // instead of its contents
+                    $servidor->setPass($fileName);
+                }
+
+
+
+
                 $em->flush();
                 $this->addFlash('info', 'Cambios guardados');
 
@@ -153,4 +173,5 @@ class ServidorController extends Controller
             'vengoDeEmpresa' => $vengoDeEmpresa
         ]);
     }
+
 }

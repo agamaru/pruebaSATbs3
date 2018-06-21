@@ -7,8 +7,17 @@
         <h1>{{ servidor.id ? 'Datos del servidor' : 'Nuevo servidor' }}</h1>
     </div>
 
+    <div class="col-sm-10 col-sm-offset-2">
+        {% if servidor.id %}
+            {{ dump(servidor.pass) }}
+        {% endif %}
+    </div>
+
+
     {{ form_start(formulario) }}
     {{ form_widget(formulario) }}
+    {# sobreescribir el renderizando del campo del form #}
+
 
     <div class="form-group row">
         <div class="col-sm-10 col-sm-offset-2">

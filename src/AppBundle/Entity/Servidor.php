@@ -68,10 +68,7 @@ class Servidor
      * @Assert\NotBlank(
      *     message = "Rellene este campo"
      * )
-     * @Assert\Length(
-     *     min = 3,
-     *     minMessage = "El campo debe tener al menos {{ limit }} caracteres"
-     * )
+     * @Assert\File(mimeTypes={"application/zip"})
      *
      * @var string
      */
