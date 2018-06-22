@@ -51,13 +51,13 @@ AppBundle\Entity\DispositivoRed:
 AppBundle\Entity\Usuario:
     admin:
       nombreUsuario: admin
-      password: admin
+      password: <codificaPassword('admin')>
       administrador: true
     usuario1:
       nombreUsuario: usuario1
-      password: usuario1
+      password: <codificaPassword('usuario1')>
       administrador: false
     usuario2:
       nombreUsuario: usuario2
-      password: usuario2
+      password: <codificaPassword('usuario2')>
       administrador: false
